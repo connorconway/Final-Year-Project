@@ -8,7 +8,7 @@ namespace Final_Year_Project.GameStates
     public abstract partial class BaseGameState : GameState
     {
         #region Variables
-        protected Game1 gameReference;
+        protected readonly Game1 gameReference;
         protected ControlManager controlManager;
         protected PlayerIndex playerIndexInControl;
 

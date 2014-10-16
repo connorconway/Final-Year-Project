@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Final_Year_Project.Networking;
+
 
 namespace Server
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             try
             {
-                Server server = new Server(false, 4444);
-                Server.Start();
-                Server.Stop();
+                ServerMain server = new ServerMain(false, 4444);
+                ServerMain.Start();
+                ServerMain.Stop();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.Write("The server can not start. Possible port clash. \n");
-            }  
+                Console.Write("Error occured. Possible port clash");
+            }
         }
     }
 }

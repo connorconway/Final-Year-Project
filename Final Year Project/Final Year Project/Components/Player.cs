@@ -78,6 +78,7 @@ namespace Final_Year_Project.Components
                 animatedSprite.LockToMap();
                 if (camera.cameraMode == CameraMode.Follow)
                     camera.LockToSprite(animatedSprite);
+
             }
             else
             {

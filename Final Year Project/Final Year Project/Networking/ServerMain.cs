@@ -8,15 +8,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 
-namespace Server
+namespace Final_Year_Project.Networking
 {
-    class Server
+    public class ServerMain
     {
         static readonly List<Socket> connectedSockets = new List<Socket>();
         static readonly Dictionary<string, User> users = new Dictionary<string, User>();
         static TcpListener tcpListener;
 
-        public Server(bool UseLoopback, int port)
+        public ServerMain(bool UseLoopback, int port)
         {
             IPAddress ipAddress = UseLoopback ? IPAddress.Loopback : LocalIPAddress();
             tcpListener = new TcpListener(ipAddress, port);
@@ -51,8 +51,11 @@ namespace Server
             Socket socket = socketObject as Socket;
             if (socket == null)
                 return;
+            while (true)
+            {
+                receiveData(socket);
 
-            receiveData(socket);
+            }
         }
 
         private static void receiveData(Socket socket)
@@ -67,7 +70,7 @@ namespace Server
 
                 while (receivedMessage != null)
                 {
-                    foreach (var so in connectedSockets)
+                    foreach (var so in connectedSockets.Where(so => so != socket))
                     {
                         Console.WriteLine(connectedSockets.Count);
                         Console.WriteLine("Sending Message: " + receivedMessage + "\n to " + so.RemoteEndPoint);
@@ -75,14 +78,14 @@ namespace Server
                         stream = new NetworkStream(so, true);
                         StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
 
-                        writer.Write(receivedMessage);
+                        writer.WriteLine(receivedMessage);
                         writer.Flush();
 
                         Console.WriteLine("Message sent to the the client");
                     }
 
                     receivedMessage = null;
-                }        
+                }
             }
             catch
             {

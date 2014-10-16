@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Server
+namespace Final_Year_Project.Networking
 {
     static class UserActions
     {
         public const String disconnect = "\\disconnect";
-        public const String kick = "\\kick";
-        public const String poke = "\\poke";
+        public const String createPlayer = "\\createPlayer";
     }
 }

@@ -66,6 +66,7 @@
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -100,6 +101,9 @@
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="Items\BaseItem.cs" />
     <Compile Include="Networking\Client.cs" />
+    <Compile Include="Networking\ServerMain.cs" />
+    <Compile Include="Networking\User.cs" />
+    <Compile Include="Networking\UserActions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="TileEngine\Camera.cs" />

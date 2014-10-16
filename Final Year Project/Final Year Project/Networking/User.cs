@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Server
+namespace Final_Year_Project.Networking
 {
     class User
     {

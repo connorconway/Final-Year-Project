@@ -45,7 +45,6 @@
         public int attack { get; set; }
         public int damage { get; set; }
         public int defense { get; set; }
-
         public int level { get; set; }
         public long experience { get; set; }
         #endregion
