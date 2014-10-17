@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using Final_Year_Project.Components;
@@ -28,7 +29,6 @@ namespace Final_Year_Project.Networking
     {
         private static TcpClient tcpClient;
         private static NetworkStream stream;
-        private Vector2 position;
         protected static Game1 gameReference;
 
 
@@ -73,9 +73,18 @@ namespace Final_Year_Project.Networking
 
         private static void writeToServer(StreamWriter streamWriter)
         {
-            Console.Write("Writing to server");
-            streamWriter.WriteLine(GamePlayScreen.player.camera.Position);
-            streamWriter.Flush();
+            if (BaseGameState.performAction.Equals("initialise_player"))
+            {
+                
+            }
+
+            Console.Write("Players online: " + ServerMain.playersInServer.Count);
+
+            foreach (var onlinePlayers in ServerMain.playersInServer.Where(onlinePlayers => onlinePlayers.Key == BaseGameState.clientID))
+            {
+                streamWriter.WriteLine(onlinePlayers.Value.camera.Position);
+                streamWriter.Flush();
+            }
         }
 
         private static void responseFromServer(StreamReader streamReader)
@@ -85,7 +94,7 @@ namespace Final_Year_Project.Networking
                 string sentFromClient;
                 while ((sentFromClient = streamReader.ReadLine()) != null)
                 {
-                    Console.Write("Received from server: " + sentFromClient);
+                  //  Console.Write("Received from server: " + sentFromClient);
 
                     int startInd = sentFromClient.IndexOf("X:") + 2;
                     float aXPosition =
@@ -94,7 +103,7 @@ namespace Final_Year_Project.Networking
                     float aYPosition =
                         float.Parse(sentFromClient.Substring(startInd, sentFromClient.IndexOf("}") - startInd));
 
-                    Console.Write("After conversion, X: " + aXPosition + ", Y: " + aYPosition);
+                 //   Console.Write("After conversion, X: " + aXPosition + ", Y: " + aYPosition);
 
                     Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
                     Animation animation = new Animation(3, 32, 32, 0, 0);
@@ -111,22 +120,20 @@ namespace Final_Year_Project.Networking
 
                     try
                     {
-                        GamePlayScreen.playersInServer.Add(new Player(gameReference, sprite));
-                        Console.Write(GamePlayScreen.playersInServer.Count);
+                        ServerMain.playersInServer.Add(ServerMain.playersInServer.Count, new Player(gameReference, sprite));
+                        Console.Write("New list size: " + ServerMain.playersInServer.Count);
                     }
                     catch (Exception e)
                     {
                         Console.Write("ERROR: " + e);
                     }
-
                 }
-
             }
             catch (NullReferenceException e)
             {
                 Console.Write("Error: " + e);
             }
-            catch (Exception e)
+            catch
             {
                 //
             }

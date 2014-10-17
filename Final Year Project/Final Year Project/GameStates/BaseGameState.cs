@@ -1,4 +1,6 @@
-﻿using Final_Year_Project.Controls;
+﻿using System;
+using Final_Year_Project.Controls;
+using Final_Year_Project.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +10,12 @@ namespace Final_Year_Project.GameStates
     public abstract partial class BaseGameState : GameState
     {
         #region Variables
+        protected const string hostname = "192.168.0.11";
+        protected const int port = 4444;
+        protected Client client;
+        public static int clientID;
+        public static string performAction = "";
+
         protected readonly Game1 gameReference;
         protected ControlManager controlManager;
         protected PlayerIndex playerIndexInControl;

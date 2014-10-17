@@ -76,6 +76,7 @@
     <Compile Include="CharacterClasses\AttibutePair.cs" />
     <Compile Include="CharacterClasses\Entity.cs" />
     <Compile Include="CharacterClasses\EntityData.cs" />
+    <Compile Include="CharacterClasses\EntityDataManager.cs" />
     <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\Animation.cs" />
     <Compile Include="Components\Player.cs" />
@@ -120,7 +121,6 @@
     <Compile Include="TileEngine\Tile.cs" />
     <Compile Include="TileEngine\TileMap.cs" />
     <Compile Include="TileEngine\TileSet.cs" />
-    <Compile Include="CharacterClasses\EntityDataManager.cs" />
     <Compile Include="WorldClasses\Level.cs" />
     <Compile Include="WorldClasses\World.cs" />
   </ItemGroup>

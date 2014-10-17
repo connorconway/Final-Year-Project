@@ -131,7 +131,7 @@ namespace Final_Year_Project.GameStates
             animations.Add(AnimationKey.Up, animation);
             AnimatedSprite sprite =
                 new AnimatedSprite(gameReference.Content.Load<Texture2D>(@"Graphics\Sprites\malefighter"), animations);
-            GamePlayScreen.player = new Player(gameReference, sprite);
+            //GamePlayScreen.player = new Player(gameReference, sprite);
         }
 
         private void CreateWorld()

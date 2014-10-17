@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Final_Year_Project.Components;
@@ -17,14 +18,13 @@ namespace Final_Year_Project.GameStates
     {
         #region Variables
         private Engine engine = new Engine(32, 32);
-        public static Player player { get; set; }
-        public static List<Player> playersInServer { get; set; } 
         public static World world { get; set; }
-        private Client client;
-        private const string hostname = "192.168.0.11";
-        private const int port = 4444;
+        
+        
         [DllImport("kernel32.dll", EntryPoint = "AllocConsole", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern int AllocConsole();
+
+        
         #endregion
 
         #region Constructor(s)
@@ -39,26 +39,7 @@ namespace Final_Year_Project.GameStates
         #region Override Methods
         public override void Initialize()
         {
-            try
-            {
-                client = new Client(gameReference);
-                if (!client.Connect(hostname, port))
-                {
-                    Console.WriteLine("Could not connect. Ensure the server is running");                              //TODO: Lobby, Connection GameState
-                    stateManager.PopState();
-                }
-                else
-                {
-                    playersInServer = new List<Player>();
-                    Thread clientThread = new Thread(Client.Run);
-                    clientThread.Start();
-                }  
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("An error has occured.");
-                stateManager.PopState();
-            }
+            
             base.Initialize();
         }
 
@@ -76,25 +57,25 @@ namespace Final_Year_Project.GameStates
 
             
             world.Update(gameTime);
-            player.Update(gameTime);
-            foreach (var onlinePlayers in playersInServer)
+            foreach (var onlinePlayers in ServerMain.playersInServer.Where(onlinePlayers => onlinePlayers.Key == clientID))
             {
-                //onlinePlayers.Update(gameTime);
+                onlinePlayers.Value.Update(gameTime);
             }
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            gameReference.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp,
-                null, null, null, player.camera.Transformation);
-
-            world.DrawLevel(gameReference.spriteBatch, player.camera);
-            player.Draw(gameTime, gameReference.spriteBatch);
-            foreach (var onlinePlayers in playersInServer)
+            foreach (var onlinePlayers in ServerMain.playersInServer)
             {
-                Console.Write("online players: " + onlinePlayers.ToString());
-                onlinePlayers.Draw(gameTime, gameReference.spriteBatch);
+                if (onlinePlayers.Key == clientID)
+                {
+                    gameReference.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp,
+                    null, null, null, onlinePlayers.Value.camera.Transformation);
+                }
+
+                world.DrawLevel(gameReference.spriteBatch, onlinePlayers.Value.camera);
+                    onlinePlayers.Value.Draw(gameTime, gameReference.spriteBatch);
             }
             base.Draw(gameTime);
             gameReference.spriteBatch.End();

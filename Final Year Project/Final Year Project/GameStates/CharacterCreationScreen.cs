@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Final_Year_Project.Components;
 using Final_Year_Project.Controls;
 using Final_Year_Project.Handlers;
+using Final_Year_Project.Networking;
 using Final_Year_Project.TileEngine;
 using Final_Year_Project.WorldClasses;
 using Microsoft.Xna.Framework;
@@ -37,6 +39,27 @@ namespace Final_Year_Project.GameStates
         #region Override Methods
         public override void Initialize()
         {
+            try
+            {
+                client = new Client(gameReference);
+                if (!client.Connect(hostname, port))
+                {
+                    Console.WriteLine("Could not connect. Ensure the server is running");                              //TODO: Lobby, Connection GameState
+                    stateManager.PopState();
+
+                }
+                else
+                {
+                    clientID = ServerMain.playersInServer.Count;
+                    Thread clientThread = new Thread(Client.Run);
+                    clientThread.Start();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error has occured. " + e);
+                stateManager.PopState();
+            }
             base.Initialize();
         }
 
@@ -129,6 +152,8 @@ namespace Final_Year_Project.GameStates
 
         private void CreatePlayer()
         {
+            Console.Write("STarting amount: " + ServerMain.playersInServer.Count);
+
             Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
             Animation animation = new Animation(3, 32, 32, 0, 0);
             animations.Add(AnimationKey.Down, animation);
@@ -138,9 +163,12 @@ namespace Final_Year_Project.GameStates
             animations.Add(AnimationKey.Right, animation);
             animation = new Animation(3, 32, 32, 0, 96);
             animations.Add(AnimationKey.Up, animation);
+
             AnimatedSprite sprite =
                 new AnimatedSprite(characterImages[selectGender.SelectedIndex, selectClass.SelectedIndex], animations);
-            GamePlayScreen.player = new Player(gameReference, sprite);
+
+            performAction = "initialise_player";
+            Player localPlayer = new Player(gameReference, sprite);
         }
 
         private void CreateWorld()

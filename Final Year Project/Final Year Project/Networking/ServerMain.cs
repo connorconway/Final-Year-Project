@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using Final_Year_Project.Components;
 
 namespace Final_Year_Project.Networking
 {
@@ -15,6 +15,8 @@ namespace Final_Year_Project.Networking
         static readonly List<Socket> connectedSockets = new List<Socket>();
         static readonly Dictionary<string, User> users = new Dictionary<string, User>();
         static TcpListener tcpListener;
+        public static readonly Dictionary<int, Player> playersInServer = new Dictionary<int, Player>();
+
 
         public ServerMain(bool UseLoopback, int port)
         {
@@ -60,7 +62,6 @@ namespace Final_Year_Project.Networking
 
         private static void receiveData(Socket socket)
         {
-            Console.Write("Client Connected");
 
             try
             {
