@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 using Final_Year_Project.Components;
 using Final_Year_Project.Controls;
 using Final_Year_Project.Handlers;
@@ -9,6 +12,9 @@ using Final_Year_Project.TileEngine;
 using Final_Year_Project.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Label = Final_Year_Project.Controls.Label;
+using LinkLabel = Final_Year_Project.Controls.LinkLabel;
+using PictureBox = Final_Year_Project.Controls.PictureBox;
 
 namespace Final_Year_Project.GameStates
 {
@@ -38,28 +44,7 @@ namespace Final_Year_Project.GameStates
 
         #region Override Methods
         public override void Initialize()
-        {
-            try
-            {
-                client = new Client(gameReference);
-                if (!client.Connect(hostname, port))
-                {
-                    Console.WriteLine("Could not connect. Ensure the server is running");                              //TODO: Lobby, Connection GameState
-                    stateManager.PopState();
-
-                }
-                else
-                {
-                    clientID = ServerMain.playersInServer.Count;
-                    Thread clientThread = new Thread(Client.Run);
-                    clientThread.Start();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An error has occured. " + e);
-                stateManager.PopState();
-            }
+        {    
             base.Initialize();
         }
 
@@ -75,6 +60,8 @@ namespace Final_Year_Project.GameStates
             controlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
         }
+
+        
 
         public override void Draw(GameTime gameTime)
         {
@@ -123,7 +110,6 @@ namespace Final_Year_Project.GameStates
                 linkLabel1.position.Y + 50);
             linkLabel2.selected += linkLabel2_Selected;
 
-
             characterImage = new PictureBox(characterImages[0, 0],
                 new Rectangle(((Game1._systemOptions.resolutionWidth - 96) >> 1),
                     ((Game1._systemOptions.resolutionHeight + 120 ) >> 2), 96, 96), new Rectangle(0, 0, 32, 32));
@@ -152,8 +138,6 @@ namespace Final_Year_Project.GameStates
 
         private void CreatePlayer()
         {
-            Console.Write("STarting amount: " + ServerMain.playersInServer.Count);
-
             Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
             Animation animation = new Animation(3, 32, 32, 0, 0);
             animations.Add(AnimationKey.Down, animation);
@@ -167,8 +151,8 @@ namespace Final_Year_Project.GameStates
             AnimatedSprite sprite =
                 new AnimatedSprite(characterImages[selectGender.SelectedIndex, selectClass.SelectedIndex], animations);
 
-            performAction = "initialise_player";
-            Player localPlayer = new Player(gameReference, sprite);
+            player1 = new Player(gameReference, sprite);
+            player1.animatedSprite.textTexture = selectGender.SelectedItem + selectClass.SelectedItem;
         }
 
         private void CreateWorld()

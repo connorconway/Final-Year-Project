@@ -11,10 +11,11 @@ namespace Final_Year_Project.Components
         private Dictionary<AnimationKey, Animation> animations;
         public AnimationKey currentAnimation { get; set; }
         public bool isAnimating { get; set; }
-        private Texture2D sprite;
+        public Texture2D sprite;
         Vector2 position;
         private Vector2 velocity;
         private float speed = 2.0f;
+        public string textTexture { get; set; }
         #endregion
 
         #region Getter(s) and Setter(s)

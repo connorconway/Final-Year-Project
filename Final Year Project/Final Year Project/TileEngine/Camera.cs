@@ -24,8 +24,7 @@ namespace Final_Year_Project.TileEngine
         #region Getter(s) and Setter(s)
         public Vector2 Position
         {
-            get { return position; }
-            private set { position = value; }
+            get { return position; } set { position = value; }
         }
 
         public float Speed

@@ -11,7 +11,8 @@ namespace Final_Year_Project.Components
         #region Variables
         public Camera camera { get; private set; }
         Game1 gameReference;
-        AnimatedSprite animatedSprite { get; set; }
+        public AnimatedSprite animatedSprite { get; set; }
+        public Vector2 motion;
         #endregion
 
         #region Constructor(s)
@@ -45,7 +46,7 @@ namespace Final_Year_Project.Components
                 if (camera.cameraMode == CameraMode.Follow)
                     camera.LockToSprite(animatedSprite);
             }
-            Vector2 motion = new Vector2();
+            motion = new Vector2();
             if (InputHandler.KeyDown(Keys.W) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
@@ -78,7 +79,6 @@ namespace Final_Year_Project.Components
                 animatedSprite.LockToMap();
                 if (camera.cameraMode == CameraMode.Follow)
                     camera.LockToSprite(animatedSprite);
-
             }
             else
             {
