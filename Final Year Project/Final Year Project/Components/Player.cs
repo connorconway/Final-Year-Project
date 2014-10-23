@@ -1,4 +1,6 @@
-﻿using Final_Year_Project.Handlers;
+﻿using System;
+using System.Collections.Generic;
+using Final_Year_Project.Handlers;
 using Final_Year_Project.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,14 +15,26 @@ namespace Final_Year_Project.Components
         Game1 gameReference;
         public AnimatedSprite animatedSprite { get; set; }
         public Vector2 motion;
+        public List<Bullet> bullets;
+
+        private Texture2D bulletSprite;
+        private TimeSpan bulletTimer;
+        private float shotSeconds;
+        public Boolean createBullet;
+        public Vector2 playerOrigin;
         #endregion
 
         #region Constructor(s)
-        public Player(Game gameReference, AnimatedSprite animatedSprite)
+        public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite)
         {
             this.gameReference = (Game1)gameReference;
             camera = new Camera(this.gameReference.screenRectangle);
             this.animatedSprite = animatedSprite;
+            bullets = new List<Bullet>(10);
+            shotSeconds = 5;
+            bulletTimer = TimeSpan.FromSeconds(shotSeconds);
+            this.bulletSprite = bulletSprite;     
+   
         }
         #endregion
 
@@ -28,9 +42,11 @@ namespace Final_Year_Project.Components
 
         public void Update(GameTime gameTime)
         {
+            createBullet = false;
+            playerOrigin = new Vector2(animatedSprite.Position.X + animatedSprite.Width / 2, animatedSprite.Position.Y + animatedSprite.Height / 2);
             camera.Update(gameTime);
             animatedSprite.Update(gameTime);
-
+            
             if (InputHandler.KeyReleased(Keys.Z) || InputHandler.scrollUp(Mouse.GetState()) == 1 ||
                 InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
             {
@@ -84,12 +100,26 @@ namespace Final_Year_Project.Components
             {
                 animatedSprite.isAnimating = false;
             }
+            if (InputHandler.KeyPressed(Keys.Space) ||
+                     InputHandler.ButtonDown(Buttons.A, PlayerIndex.One))
+            {
+                bullets.Add(new Bullet(bulletSprite, playerOrigin, animatedSprite.currentAnimation.ToString(), motion));
+                createBullet = true;
+            }
+
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Update(gameTime);
+            }
         }
-  
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             animatedSprite.Draw(gameTime, spriteBatch, camera);
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Draw(gameTime, spriteBatch);
+            }
         }
         #endregion
     }

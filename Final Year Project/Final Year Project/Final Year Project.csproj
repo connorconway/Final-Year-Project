@@ -80,7 +80,9 @@
     <Compile Include="CharacterClasses\EntityDataManager.cs" />
     <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\Animation.cs" />
+    <Compile Include="Components\Bullet.cs" />
     <Compile Include="Components\Player.cs" />
+    <Compile Include="Components\Sprite.cs" />
     <Compile Include="Controls\ListBox.cs" />
     <Compile Include="GameData\Constants.cs" />
     <Compile Include="GameData\SaveData.cs" />
@@ -103,9 +105,8 @@
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="Items\BaseItem.cs" />
     <Compile Include="Networking\Delegates.cs" />
+    <Compile Include="Networking\NetworkHelper.cs" />
     <Compile Include="Networking\Protocols.cs" />
-    <Compile Include="Networking\User.cs" />
-    <Compile Include="Networking\UserActions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">

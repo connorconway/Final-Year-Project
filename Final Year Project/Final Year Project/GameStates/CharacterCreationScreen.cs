@@ -151,7 +151,7 @@ namespace Final_Year_Project.GameStates
             AnimatedSprite sprite =
                 new AnimatedSprite(characterImages[selectGender.SelectedIndex, selectClass.SelectedIndex], animations);
 
-            player1 = new Player(gameReference, sprite);
+            player1 = new Player(gameReference, sprite, bulletSprite);
             player1.animatedSprite.textTexture = selectGender.SelectedItem + selectClass.SelectedItem;
         }
 

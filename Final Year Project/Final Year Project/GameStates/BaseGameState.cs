@@ -22,10 +22,9 @@ namespace Final_Year_Project.GameStates
         protected static Player player1;
         protected static Player player2;
 
-
         protected MemoryStream readStream;
         protected BinaryReader reader;
-        protected MemoryStream writeStream;
+        public MemoryStream writeStream;
         protected BinaryWriter writer;
 
         public static int clientID;
@@ -41,6 +40,8 @@ namespace Final_Year_Project.GameStates
         private const float AlphaTime = 3500f;                                          // total animate time (at milliseconds)
         static float AlphaTimeSubtract = 500.0f;                                        // at milliseconds
         static private bool increaseAlpha;
+
+        protected Texture2D bulletSprite;
 
         #endregion
 
@@ -59,6 +60,8 @@ namespace Final_Year_Project.GameStates
             SpriteFont menuFont = Content.Load<SpriteFont>(@"Fonts\ControlFont");
             backgroundImage = Content.Load<Texture2D>(@"Graphics/Menus/titlescreen3");
             backgroundBorder = Content.Load<Texture2D>(@"Graphics/Menus/border");
+            bulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/normalbullet");
+
             controlManager = new ControlManager(menuFont);
             base.LoadContent();
         }
@@ -163,7 +166,7 @@ namespace Final_Year_Project.GameStates
                             AnimatedSprite sprite =
                                   new AnimatedSprite(Game.Content.Load<Texture2D>(@"Graphics\Sprites\" + textTexture), animations);
 
-                            player2 = new Player(gameReference, sprite);
+                            player2 = new Player(gameReference, sprite, bulletSprite);
                             player2.animatedSprite.Position = new Vector2(posX, posY);
 
                             writeStream.Position = 0;
@@ -220,6 +223,24 @@ namespace Final_Year_Project.GameStates
                         player2.motion.Normalize();
                         player2.animatedSprite.Position += motion * player2.animatedSprite.Speed;
                         player2.animatedSprite.LockToMap();
+                    }
+                }
+                if (protocol == Protocol.BulletCreated)
+                {
+                    float posX = reader.ReadSingle();
+                    float posY = reader.ReadSingle();
+                    string spriteFacing = reader.ReadString();
+                    float motionX = reader.ReadSingle();
+                    float motionY = reader.ReadSingle();
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+
+                    Vector2 position = new Vector2(posX, posY);
+                    Vector2 motion = new Vector2(motionX, motionY);
+
+                    if (player2 != null)
+                    {
+                        player2.bullets.Add(new Bullet(bulletSprite, position, spriteFacing, motion));
                     }
                 }
             }

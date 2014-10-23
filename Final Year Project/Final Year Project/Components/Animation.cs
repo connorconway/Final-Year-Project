@@ -84,11 +84,10 @@ namespace Final_Year_Project.Components
         public void Update(GameTime gameTime)
         {
             frameTimer += gameTime.ElapsedGameTime;
-            if (frameTimer >= frameLength)
-            {
-                frameTimer = TimeSpan.Zero;
-                currentFrame = (currentFrame + 1) % frames.Length;
-            }
+            if (frameTimer < frameLength)
+                return;
+            frameTimer = TimeSpan.Zero;
+            currentFrame = (currentFrame + 1) % frames.Length;
         }
 
         private void Reset()

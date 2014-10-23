@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using System.Threading;
 using Final_Year_Project.Components;
 using Final_Year_Project.Handlers;
 using Final_Year_Project.Networking;
@@ -11,7 +9,6 @@ using Final_Year_Project.TileEngine;
 using Final_Year_Project.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Microsoft.Xna.Framework.Input;
 
 namespace Final_Year_Project.GameStates
@@ -22,7 +19,7 @@ namespace Final_Year_Project.GameStates
         private Engine engine = new Engine(32, 32);
         public static World world { get; set; }
         private bool secondPlayerAnimating;
-        
+            
         [DllImport("kernel32.dll", EntryPoint = "AllocConsole", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern int AllocConsole();        
         #endregion
@@ -60,6 +57,7 @@ namespace Final_Year_Project.GameStates
             SendData(GetDataFromMemoryStream(writeStream));
             writer.Flush();
 
+
             base.Initialize();
         }
 
@@ -76,6 +74,27 @@ namespace Final_Year_Project.GameStates
             }
 
             world.Update(gameTime);
+
+            foreach (Bullet bullet in player1.bullets)
+            {
+                if (bullet.boundingBox.Intersects(player2.animatedSprite.boundingBox))
+                {
+                    Console.WriteLine("COLLISION OCCUREDDD!!!");
+                }
+            }
+
+            if (player1.createBullet)
+            {
+                writeStream.Position = 0;
+                writer.Write((byte)Protocol.BulletCreated);
+                writer.Write(player1.playerOrigin.X);
+                writer.Write(player1.playerOrigin.Y);
+                writer.Write(player1.animatedSprite.currentAnimation.ToString());
+                writer.Write(player1.motion.X);
+                writer.Write(player1.motion.Y);
+                SendData(GetDataFromMemoryStream(writeStream));
+                writer.Flush();
+            }
 
             if (player1.motion != Vector2.Zero)
             {
@@ -99,11 +118,17 @@ namespace Final_Year_Project.GameStates
                 SendData(GetDataFromMemoryStream(writeStream));
                 writer.Flush();
             }
-
+            
             if (player1 != null)
                 player1.Update(gameTime);
             if (player2 != null)
+            {
                 player2.animatedSprite.Update(gameTime);
+                foreach (Bullet bullet in player2.bullets)
+                {
+                    bullet.Update(gameTime);
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -123,6 +148,11 @@ namespace Final_Year_Project.GameStates
 
             base.Draw(gameTime);
             gameReference.spriteBatch.End();
+        }
+
+        public void sendDataToServer()
+        {
+            
         }
         #endregion
     }

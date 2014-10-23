@@ -5,17 +5,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Year_Project.Components
 {
-    public class AnimatedSprite
+    public class AnimatedSprite : Sprite
     {
         #region Variables
         private Dictionary<AnimationKey, Animation> animations;
         public AnimationKey currentAnimation { get; set; }
         public bool isAnimating { get; set; }
-        public Texture2D sprite;
-        Vector2 position;
-        private Vector2 velocity;
-        private float speed = 2.0f;
-        public string textTexture { get; set; }
         #endregion
 
         #region Getter(s) and Setter(s)
@@ -28,32 +23,6 @@ namespace Final_Year_Project.Components
         {
             get { return animations[currentAnimation].frameHeight; }
         }
-
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = MathHelper.Clamp(speed, 1.0f, 16.0f); }
-        }
-
-        public Vector2 Position
-        {
-            get { return position; }
-            set
-            {
-                position = value;
-            }
-        }
-
-        public Vector2 Velocity
-        {
-            get { return velocity; }
-            set
-            {
-                velocity = value;
-                if (velocity != Vector2.Zero)
-                    velocity.Normalize();
-            }
-        }
         #endregion
 
         #region Constructor(s)
@@ -64,14 +33,20 @@ namespace Final_Year_Project.Components
 
             foreach (AnimationKey key in animation.Keys)
                 animations.Add(key, (Animation)animation[key].Clone());
+
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+
         }
         #endregion
 
         #region General Method(s)
         public void Update(GameTime gameTime)
         {
+            boundingBox.X = (int)position.X;
+            boundingBox.Y = (int)position.Y;
+
             if (isAnimating)
-                animations[currentAnimation].Update(gameTime);
+                animations[currentAnimation].Update(gameTime); 
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
