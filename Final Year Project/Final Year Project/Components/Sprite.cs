@@ -6,7 +6,7 @@ namespace Final_Year_Project.Components
     public class Sprite
     {
         protected Texture2D sprite;
-        protected Vector2 position;
+        public Vector2 position;
         protected Vector2 velocity;
         protected float speed = 2.0f;
         public string textTexture { get; set; }

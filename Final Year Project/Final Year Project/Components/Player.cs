@@ -22,24 +22,34 @@ namespace Final_Year_Project.Components
         private float shotSeconds;
         public Boolean createBullet;
         public Vector2 playerOrigin;
+        public HealthBar playerHealth;
         #endregion
 
         #region Constructor(s)
-        public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite)
+        public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite, Texture2D healthBarSprite, Color color)
         {
+            Random rand = new Random();
+
             this.gameReference = (Game1)gameReference;
             camera = new Camera(this.gameReference.screenRectangle);
             this.animatedSprite = animatedSprite;
             bullets = new List<Bullet>(10);
             shotSeconds = 5;
             bulletTimer = TimeSpan.FromSeconds(shotSeconds);
-            this.bulletSprite = bulletSprite;     
-   
+            this.bulletSprite = bulletSprite;
+            playerHealth = new HealthBar(healthBarSprite, animatedSprite.Position, color);
+            animatedSprite.position.X = rand.Next(50, 400); 
+            animatedSprite.position.Y = rand.Next(50, 400); 
+
         }
         #endregion
 
         #region General Methods
-
+        public void UpdateHealthBar(GameTime gameTime)
+        {
+            playerHealth.position.X = animatedSprite.Position.X - animatedSprite.Width / 2;
+            playerHealth.position.Y = animatedSprite.Position.Y - 10;
+        }
         public void Update(GameTime gameTime)
         {
             createBullet = false;
@@ -64,13 +74,13 @@ namespace Final_Year_Project.Components
             }
             motion = new Vector2();
             if (InputHandler.KeyDown(Keys.W) ||
-                InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
+            InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = AnimationKey.Up;
                 motion.Y = -1;
             }
             else if (InputHandler.KeyDown(Keys.S) ||
-                     InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
+                        InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = AnimationKey.Down;
                 motion.Y = 1;
@@ -82,11 +92,12 @@ namespace Final_Year_Project.Components
                 motion.X = -1;
             }
             if (InputHandler.KeyDown(Keys.D) ||
-                     InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
+                        InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = AnimationKey.Right;
                 motion.X = 1;
             }
+
             if (motion != Vector2.Zero)
             {
                 animatedSprite.isAnimating = true;
@@ -111,6 +122,10 @@ namespace Final_Year_Project.Components
             {
                 bullet.Update(gameTime);
             }
+
+            UpdateHealthBar(gameTime);
+
+            playerHealth.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -120,6 +135,7 @@ namespace Final_Year_Project.Components
             {
                 bullet.Draw(gameTime, spriteBatch);
             }
+            playerHealth.Draw(gameTime, spriteBatch);
         }
         #endregion
     }

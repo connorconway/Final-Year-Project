@@ -19,6 +19,8 @@ namespace Final_Year_Project.GameStates
         private Engine engine = new Engine(32, 32);
         public static World world { get; set; }
         private bool secondPlayerAnimating;
+        private int playerKills = 0;
+        
             
         [DllImport("kernel32.dll", EntryPoint = "AllocConsole", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern int AllocConsole();        
@@ -30,6 +32,7 @@ namespace Final_Year_Project.GameStates
         {
             AllocConsole();  
             world = new World(game, gameReference.screenRectangle);
+
         }
         #endregion
 
@@ -57,8 +60,17 @@ namespace Final_Year_Project.GameStates
             SendData(GetDataFromMemoryStream(writeStream));
             writer.Flush();
 
-
             base.Initialize();
+
+            textBox = new TextBox(textBoxSprite, new Vector2(player1.animatedSprite.position.X + 400, player1.animatedSprite.position.Y + 200), font,
+                "Kill the enemy player \nPress [space] to shoot \nPress [w a s d] to move \n\nPress [Enter] to close textbox", 1.0f);
+            textBox.decreaseAlpha = true;
+
+            scoreTextBox = new TextBox(textBoxSprite, new Vector2(0,0), font,
+                 "Kills: " + playerKills, 0.4f);
+            scoreTextBox.setOpacity(0.7f);
+            scoreTextBox.setAlphaTimeSubtract(0.0f);
+            scoreTextBox.decreaseAlpha = false;
         }
 
         protected override void LoadContent()
@@ -68,18 +80,48 @@ namespace Final_Year_Project.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            if (player2 == null && textBox.decreaseAlpha == false && textBox.textBoxExists == TextBox.TextBoxExists.Transparent)
+            {
+                textBox.setPosition(new Vector2(textBox.position.X - 255, textBox.Position.Y + 55));
+                textBox.setText(
+                            "\n\nWaiting for a player to join room");
+                textBox.decreaseAlpha = true;
+                waitingForPlayer = true;
+            }
             if (InputHandler.KeyReleased(Keys.P))
             {
                 stateManager.PushState(gameReference.pauseScreen);
             }
+            if (InputHandler.KeyReleased(Keys.Enter) && waitingForPlayer == false)
+            {
+                textBox.decreaseAlpha = false;
+            }
 
             world.Update(gameTime);
 
-            foreach (Bullet bullet in player1.bullets)
+            if (player2 != null)
             {
-                if (bullet.boundingBox.Intersects(player2.animatedSprite.boundingBox))
+                foreach (Bullet bullet in player1.bullets)
                 {
-                    Console.WriteLine("COLLISION OCCUREDDD!!!");
+                    if (bullet.boundingBox.Intersects(player2.animatedSprite.boundingBox))
+                    {
+                        bullet.bulletLife = BulletLife.Dead;
+                        bullet.boundingBox = new Rectangle(0,0,0,0);
+                        player2.playerHealth.currentHealth -= 8;
+                    }
+                }
+                foreach (Bullet bullet in player2.bullets)
+                {
+                    if (bullet.boundingBox.Intersects(player1.animatedSprite.boundingBox))
+                    {
+                        bullet.bulletLife = BulletLife.Dead;
+                        bullet.boundingBox = new Rectangle(0, 0, 0, 0);
+                        player1.playerHealth.currentHealth -= 8;
+
+                        textBox.setText(
+                            "You have taken damage \nProtect yourself! \n\nPress [Enter] to close textbox");
+                        textBox.decreaseAlpha = true;
+                    }
                 }
             }
 
@@ -118,17 +160,31 @@ namespace Final_Year_Project.GameStates
                 SendData(GetDataFromMemoryStream(writeStream));
                 writer.Flush();
             }
-            
-            if (player1 != null)
-                player1.Update(gameTime);
+        
             if (player2 != null)
             {
                 player2.animatedSprite.Update(gameTime);
+                player2.UpdateHealthBar(gameTime);
                 foreach (Bullet bullet in player2.bullets)
                 {
                     bullet.Update(gameTime);
                 }
+                if (player2.playerHealth.currentHealth <= 0)
+                {
+                    writeStream.Position = 0;
+                    writer.Write((byte)Protocol.GameOver);
+                    SendData(GetDataFromMemoryStream(writeStream));
+                    writer.Flush();
+                    playerKills += 1;
+                    scoreTextBox.setText("Kills: " + playerKills);
+                    scoreTextBox.decreaseAlpha = true;
+                }
             }
+
+            player1.Update(gameTime);
+            textBox.Update(gameTime);
+            scoreTextBox.Update(gameTime);
+            scoreTextBox.setPosition(new Vector2(player1.camera.Position.X + Game1._systemOptions.resolutionWidth - (textBoxSprite.Width * 0.4f), player1.camera.Position.Y));
 
             base.Update(gameTime);
         }
@@ -144,16 +200,15 @@ namespace Final_Year_Project.GameStates
                 player1.Draw(gameTime, gameReference.spriteBatch);
 
             if (player2 != null)
-                player2.Draw(gameTime, gameReference.spriteBatch);               
+                player2.Draw(gameTime, gameReference.spriteBatch);
+
+            textBox.Draw(gameTime, gameReference.spriteBatch);
+            scoreTextBox.Draw(gameTime, gameReference.spriteBatch);
 
             base.Draw(gameTime);
             gameReference.spriteBatch.End();
         }
 
-        public void sendDataToServer()
-        {
-            
-        }
         #endregion
     }
 }

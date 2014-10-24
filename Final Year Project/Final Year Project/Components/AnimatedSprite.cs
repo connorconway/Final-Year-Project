@@ -34,7 +34,7 @@ namespace Final_Year_Project.Components
             foreach (AnimationKey key in animation.Keys)
                 animations.Add(key, (Animation)animation[key].Clone());
 
-            boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width/3, sprite.Height/4);
 
         }
         #endregion

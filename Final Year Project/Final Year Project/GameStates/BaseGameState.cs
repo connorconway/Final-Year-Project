@@ -42,6 +42,13 @@ namespace Final_Year_Project.GameStates
         static private bool increaseAlpha;
 
         protected Texture2D bulletSprite;
+        protected Texture2D healthBarSprite;
+        protected Texture2D textBoxSprite;
+        protected SpriteFont font;
+
+        protected static TextBox textBox;
+        protected static TextBox scoreTextBox;
+        protected bool waitingForPlayer = false;
 
         #endregion
 
@@ -61,6 +68,9 @@ namespace Final_Year_Project.GameStates
             backgroundImage = Content.Load<Texture2D>(@"Graphics/Menus/titlescreen3");
             backgroundBorder = Content.Load<Texture2D>(@"Graphics/Menus/border");
             bulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/normalbullet");
+            healthBarSprite = Content.Load<Texture2D>(@"Graphics/Sprites/healthBarOutline");
+            textBoxSprite = Content.Load<Texture2D>(@"Graphics/GUI/textBox");
+            font = Content.Load<SpriteFont>(@"Fonts/ControlFont");
 
             controlManager = new ControlManager(menuFont);
             base.LoadContent();
@@ -166,8 +176,11 @@ namespace Final_Year_Project.GameStates
                             AnimatedSprite sprite =
                                   new AnimatedSprite(Game.Content.Load<Texture2D>(@"Graphics\Sprites\" + textTexture), animations);
 
-                            player2 = new Player(gameReference, sprite, bulletSprite);
+                            player2 = new Player(gameReference, sprite, bulletSprite, healthBarSprite, Color.Red);
                             player2.animatedSprite.Position = new Vector2(posX, posY);
+
+                            waitingForPlayer = false;
+                            textBox.decreaseAlpha = false;
 
                             writeStream.Position = 0;
                             writer.Write((byte)Protocol.Connected);
@@ -242,6 +255,17 @@ namespace Final_Year_Project.GameStates
                     {
                         player2.bullets.Add(new Bullet(bulletSprite, position, spriteFacing, motion));
                     }
+                }
+                if (protocol == Protocol.GameOver)
+                {
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    writeStream.Position = 0;
+                    writer.Write((byte)Protocol.Disconnected);
+                    SendData(GetDataFromMemoryStream(writeStream));
+                    writer.Flush();
+
+                    stateManager.PushState(gameReference.gameLoseScreen);
                 }
             }
             catch (Exception e)

@@ -1,7 +1,7 @@
 namespace Final_Year_Project
 {
 #if WINDOWS || XBOX
-    static class Program
+    public static class Program
     {
         static void Main(string[] args)
         {

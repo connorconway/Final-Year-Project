@@ -24,6 +24,8 @@ namespace Final_Year_Project
         public PauseScreen pauseScreen;
         public OptionsScreen optionsScreen;
         public LoadGameScreen loadGameScreen;
+        public GameLoseScreen gameLoseScreen;
+        public GameWinScreen gameWinScreen;
         #endregion
 
         #region Constructor(s)
@@ -55,6 +57,8 @@ namespace Final_Year_Project
             pauseScreen = new PauseScreen(this, stateManager);
             optionsScreen = new OptionsScreen(this, stateManager);
             loadGameScreen = new LoadGameScreen(this, stateManager);
+            gameLoseScreen = new GameLoseScreen(this, stateManager);
+            gameWinScreen = new GameWinScreen(this, stateManager);
 
             stateManager.ChangeState(startMenuScreen);
         }

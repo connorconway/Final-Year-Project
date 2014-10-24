@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Sockets;
-using System.Threading;
-using System.Windows.Forms;
 using Final_Year_Project.Components;
 using Final_Year_Project.Controls;
 using Final_Year_Project.Handlers;
-using Final_Year_Project.Networking;
 using Final_Year_Project.TileEngine;
 using Final_Year_Project.WorldClasses;
 using Microsoft.Xna.Framework;
@@ -60,8 +55,6 @@ namespace Final_Year_Project.GameStates
             controlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
         }
-
-        
 
         public override void Draw(GameTime gameTime)
         {
@@ -151,7 +144,7 @@ namespace Final_Year_Project.GameStates
             AnimatedSprite sprite =
                 new AnimatedSprite(characterImages[selectGender.SelectedIndex, selectClass.SelectedIndex], animations);
 
-            player1 = new Player(gameReference, sprite, bulletSprite);
+            player1 = new Player(gameReference, sprite, bulletSprite, healthBarSprite, Color.Green);
             player1.animatedSprite.textTexture = selectGender.SelectedItem + selectClass.SelectedItem;
         }
 
@@ -178,18 +171,23 @@ namespace Final_Year_Project.GameStates
 
             MapLayer splatter = new MapLayer(100, 100);
             Random random = new Random();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 70; i++)
             {
-                int x = random.Next(0, 100);
-                int y = random.Next(0, 100);
-                int index = random.Next(229, 230);
+                int x = random.Next(0, 90);
+                int y = random.Next(0, 70);
+                int[] choices = { 53, 34, 120, 229, 34, 34, 34, 229, 34, 34, 34, 34, 229, 34, 120, 53, 229, 229, 34, 229, 34, 34, 34, 34, 229, 229, 34 };
+                int index = choices[random.Next(choices.Length)];
                 Tile tile = new Tile(index, 0);
                 splatter.SetTile(x, y, tile);
             }
 
-            splatter.SetTile(1, 0, new Tile(0, 1));
-            splatter.SetTile(2, 0, new Tile(2, 1));
-            splatter.SetTile(3, 0, new Tile(0, 1));
+            //TODO: 53  : Full Health
+            //TODO: 34  : Random Rocks
+            //TODO: 120 : Chest (Shoot to open)
+
+            //            splatter.SetTile(1, 0, new Tile(0, 1));
+//            splatter.SetTile(2, 0, new Tile(2, 1));
+//            splatter.SetTile(3, 0, new Tile(0, 1));
 
             List<MapLayer> mapLayers = new List<MapLayer> {mapLayer, splatter};
 

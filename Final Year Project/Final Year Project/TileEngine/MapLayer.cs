@@ -21,7 +21,14 @@
             {
                 for (int x = 0; x < width; x++)
                 {
-                    map[y, x] = new Tile(33, 0);
+                    if (x < width / 1.2 && y < height / 1.7)
+                    {
+                        map[y, x] = new Tile(33, 0);
+                    }
+                    else
+                    {
+                        map[y, x] = new Tile(62, 0);
+                    }
                 }
             }
 

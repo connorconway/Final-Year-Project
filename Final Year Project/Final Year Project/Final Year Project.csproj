@@ -81,8 +81,10 @@
     <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\Animation.cs" />
     <Compile Include="Components\Bullet.cs" />
+    <Compile Include="Components\HealthBar.cs" />
     <Compile Include="Components\Player.cs" />
     <Compile Include="Components\Sprite.cs" />
+    <Compile Include="Components\TextBox.cs" />
     <Compile Include="Controls\ListBox.cs" />
     <Compile Include="GameData\Constants.cs" />
     <Compile Include="GameData\SaveData.cs" />
@@ -95,7 +97,10 @@
     <Compile Include="Controls\PictureBox.cs" />
     <Compile Include="GameStates\BaseGameState.cs" />
     <Compile Include="GameStates\CharacterCreationScreen.cs" />
+    <Compile Include="GameStates\GameLoseScreen.cs" />
+    <Compile Include="GameStates\GameWinScreen.cs" />
     <Compile Include="GameStates\LoadGameScreen.cs" />
+    <Compile Include="GameStates\LobbyScreen.cs" />
     <Compile Include="GameStates\OptionsScreen.cs" />
     <Compile Include="GameStates\PauseScreen.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
@@ -108,7 +113,6 @@
     <Compile Include="Networking\NetworkHelper.cs" />
     <Compile Include="Networking\Protocols.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="RolePlayingGame.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

@@ -5,6 +5,7 @@
         Disconnected = 0,
         Connected = 2,
         PlayerMoved = 3,
-        BulletCreated = 4 
+        BulletCreated = 4,
+        GameOver = 5
     }
 }
