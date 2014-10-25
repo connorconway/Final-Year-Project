@@ -6,9 +6,7 @@ namespace Server
     public class Server
     {
         Listener listener { get; set; }
-
         readonly Client[] client;
-
         int connectedClients;
 
         MemoryStream readStream;

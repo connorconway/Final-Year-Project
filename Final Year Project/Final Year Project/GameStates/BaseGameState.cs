@@ -42,6 +42,9 @@ namespace Final_Year_Project.GameStates
         static private bool increaseAlpha;
 
         protected Texture2D bulletSprite;
+        protected Texture2D fireBallBulletSprite;
+        protected Texture2D shurikenBulletSprite;
+        protected Texture2D healthBulletSprite;
         protected Texture2D healthBarSprite;
         protected Texture2D textBoxSprite;
         protected SpriteFont font;
@@ -68,6 +71,9 @@ namespace Final_Year_Project.GameStates
             backgroundImage = Content.Load<Texture2D>(@"Graphics/Menus/titlescreen3");
             backgroundBorder = Content.Load<Texture2D>(@"Graphics/Menus/border");
             bulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/normalbullet");
+            fireBallBulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/fireballbullet");
+            healthBulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/healthbullet");
+            shurikenBulletSprite = Content.Load<Texture2D>(@"Graphics/Sprites/shurikenBullet");
             healthBarSprite = Content.Load<Texture2D>(@"Graphics/Sprites/healthBarOutline");
             textBoxSprite = Content.Load<Texture2D>(@"Graphics/GUI/textBox");
             font = Content.Load<SpriteFont>(@"Fonts/ControlFont");
@@ -176,7 +182,17 @@ namespace Final_Year_Project.GameStates
                             AnimatedSprite sprite =
                                   new AnimatedSprite(Game.Content.Load<Texture2D>(@"Graphics\Sprites\" + textTexture), animations);
 
-                            player2 = new Player(gameReference, sprite, bulletSprite, healthBarSprite, Color.Red);
+                            Texture2D spriteToUse;
+                            if (textTexture.Contains("Fighter"))
+                                spriteToUse = bulletSprite;
+                            else if (textTexture.Contains("Rogue"))
+                                spriteToUse = shurikenBulletSprite;
+                            else if (textTexture.Contains("Priest"))
+                                spriteToUse = healthBulletSprite;
+                            else
+                                spriteToUse = fireBallBulletSprite;
+
+                            player2 = new Player(gameReference, sprite, spriteToUse, healthBarSprite, Color.Red);
                             player2.animatedSprite.Position = new Vector2(posX, posY);
 
                             waitingForPlayer = false;
@@ -253,7 +269,7 @@ namespace Final_Year_Project.GameStates
 
                     if (player2 != null)
                     {
-                        player2.bullets.Add(new Bullet(bulletSprite, position, spriteFacing, motion));
+                        player2.bullets.Add(new Bullet(player2.bulletSprite, position, spriteFacing, motion));
                     }
                 }
                 if (protocol == Protocol.GameOver)
@@ -270,7 +286,7 @@ namespace Final_Year_Project.GameStates
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -292,7 +308,6 @@ namespace Final_Year_Project.GameStates
 
         public void SendData(byte[] b)
         {
-            //Try to send the data.  If an exception is thrown, disconnect the client
             try
             {
                 lock (client.GetStream())
