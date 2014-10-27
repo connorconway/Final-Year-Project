@@ -57,7 +57,7 @@ namespace Server
 
         private void StreamReceived(IAsyncResult ar)
         {
-            int bytesRead = 0;
+            var bytesRead = 0;
             try
             {
                 lock (client.GetStream())
@@ -67,7 +67,7 @@ namespace Server
             }
             catch (Exception e)
             {
-
+                Console.WriteLine("Error occured: " + e);
             }
 
             if (bytesRead == 0)
@@ -76,7 +76,7 @@ namespace Server
                 return;
             }
 
-            byte[] data = new byte[bytesRead];
+            var data = new byte[bytesRead];
 
             for (int i = 0; i < bytesRead; i++)
                 data[i] = readBuffer[i];
@@ -106,8 +106,8 @@ namespace Server
         {
             lock (ms)
             {
-                int bytesWritten = (int)ms.Position;
-                byte[] result = new byte[bytesWritten];
+                var bytesWritten = (int)ms.Position;
+                var result = new byte[bytesWritten];
 
                 ms.Position = 0;
                 ms.Read(result, 0, bytesWritten);
