@@ -79,8 +79,8 @@ namespace Final_Year_Project.GameStates
             int padding = 0;
             foreach (LinkLabel c in controlManager.OfType<LinkLabel>())
             {
-                Vector2 position = new Vector2((int)(Game1._systemOptions.resolutionWidth - c.size.X) >> 1,
-                    (Game1._systemOptions.resolutionHeight >> 1) + padding);
+                Vector2 position = new Vector2((int)(Game1.systemOptions.resolutionWidth - c.size.X) >> 1,
+                    (Game1.systemOptions.resolutionHeight >> 1) + padding);
 
                 if (c.size.X > maxItemWidth)
                     maxItemWidth = c.size.X;

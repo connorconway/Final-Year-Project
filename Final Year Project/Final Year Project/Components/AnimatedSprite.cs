@@ -7,13 +7,10 @@ namespace Final_Year_Project.Components
 {
     public class AnimatedSprite : Sprite
     {
-        #region Variables
-        private Dictionary<AnimationKey, Animation> animations;
-        public AnimationKey currentAnimation { get; set; }
-        public bool isAnimating { get; set; }
-        #endregion
+        private readonly Dictionary<AnimationKey, Animation> animations;
+        public           AnimationKey                        currentAnimation { get; set; }
+        public           bool                                isAnimating      { get; set; }
 
-        #region Getter(s) and Setter(s)
         public int Width
         {
             get { return animations[currentAnimation].frameWidth; }
@@ -23,23 +20,18 @@ namespace Final_Year_Project.Components
         {
             get { return animations[currentAnimation].frameHeight; }
         }
-        #endregion
 
-        #region Constructor(s)
         public AnimatedSprite(Texture2D sprite, Dictionary<AnimationKey, Animation> animation)
         {
             this.sprite = sprite;
-            animations = new Dictionary<AnimationKey, Animation>();
+            animations  = new Dictionary<AnimationKey, Animation>();
 
-            foreach (AnimationKey key in animation.Keys)
+            foreach (var key in animation.Keys)
                 animations.Add(key, (Animation)animation[key].Clone());
 
             boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width/3, sprite.Height/4);
-
         }
-        #endregion
 
-        #region General Method(s)
         public void Update(GameTime gameTime)
         {
             boundingBox.X = (int)position.X;
@@ -49,7 +41,7 @@ namespace Final_Year_Project.Components
                 animations[currentAnimation].Update(gameTime); 
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
                 sprite,
@@ -63,7 +55,5 @@ namespace Final_Year_Project.Components
             position.X = MathHelper.Clamp(position.X, 0, TileMap.MapWidth - Width);
             position.Y = MathHelper.Clamp(position.Y, 0, TileMap.MapHeight - Height);
         }
-
-        #endregion
     }
 }

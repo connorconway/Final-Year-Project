@@ -2,17 +2,13 @@
 {
     public class Tile
     {
-        #region Variables
         public int tileIndex { get; private set; }
-        public int tileSet { get; private set; }
-        #endregion
+        public int tileSet   { get; private set; }
 
-        #region Constructor(s)
         public Tile(int tileIndex, int tileSet)
         {
             this.tileIndex = tileIndex;
-            this.tileSet = tileSet;
+            this.tileSet   = tileSet;
         }
-        #endregion
     }
 }

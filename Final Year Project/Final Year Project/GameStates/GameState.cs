@@ -23,11 +23,6 @@ namespace Final_Year_Project.GameStates
         #endregion
 
         #region Override Methods
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         public override void Update(GameTime gameTime)
         {
             foreach (GameComponent component in childComponents.Where(component => component.Enabled))

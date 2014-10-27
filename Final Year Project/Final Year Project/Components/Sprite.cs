@@ -16,7 +16,6 @@ namespace Final_Year_Project.Components
 
         public Rectangle boundingBox;
 
-
         public float Speed
         {
             get { return speed; }

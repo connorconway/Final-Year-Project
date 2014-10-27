@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using Final_Year_Project.Components;
 using Final_Year_Project.Handlers;
 using Final_Year_Project.Networking;
@@ -19,18 +17,13 @@ namespace Final_Year_Project.GameStates
         private Engine engine = new Engine(32, 32);
         public static World world { get; set; }
         private bool secondPlayerAnimating;
-        private int playerKills = 0;
-        
-            
-        [DllImport("kernel32.dll", EntryPoint = "AllocConsole", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        private static extern int AllocConsole();        
+        private int playerKills = 0;    
         #endregion
 
         #region Constructor(s)
         public GamePlayScreen(Game game, GameStateManager stateManager)
             : base(game, stateManager)
         {
-            AllocConsole();  
             world = new World(game, gameReference.screenRectangle);
 
         }
@@ -40,11 +33,11 @@ namespace Final_Year_Project.GameStates
         public override void Initialize()
         {
             client = new TcpClient {NoDelay = true};
-            client.Connect(hostname, port);
+            client.Connect(NetworkConstants.hostname, NetworkConstants.port);
 
-            readBuffer = new byte[bufferSize];
+            readBuffer = new byte[NetworkConstants.bufferSize];
 
-            client.GetStream().BeginRead(readBuffer, 0, bufferSize, StreamReceived, null);
+            client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
 
             readStream = new MemoryStream();
             reader = new BinaryReader(readStream);
@@ -62,11 +55,11 @@ namespace Final_Year_Project.GameStates
 
             base.Initialize();
 
-            textBox = new TextBox(textBoxSprite, new Vector2(player1.animatedSprite.position.X + 400, player1.animatedSprite.position.Y + 200), font,
+            textBox = new TextBox(textBoxSprite, new Vector2(player1.animatedSprite.position.X + 400, player1.animatedSprite.position.Y + 200), fontSprite,
                 "Kill the enemy player \nPress [space] to shoot \nPress [w a s d] to move \n\nPress [Enter] to close textbox", 1.0f);
             textBox.decreaseAlpha = true;
 
-            scoreTextBox = new TextBox(textBoxSprite, new Vector2(0,0), font,
+            scoreTextBox = new TextBox(textBoxSprite, new Vector2(0, 0), fontSprite,
                  "Kills: " + playerKills, 0.4f);
             scoreTextBox.setOpacity(0.7f);
             scoreTextBox.setAlphaTimeSubtract(0.0f);
@@ -184,7 +177,7 @@ namespace Final_Year_Project.GameStates
             player1.Update(gameTime);
             textBox.Update(gameTime);
             scoreTextBox.Update(gameTime);
-            scoreTextBox.setPosition(new Vector2(player1.camera.Position.X + Game1._systemOptions.resolutionWidth - (textBoxSprite.Width * 0.4f), player1.camera.Position.Y));
+            scoreTextBox.setPosition(new Vector2(player1.camera.position.X + Game1.systemOptions.resolutionWidth - (textBoxSprite.Width * 0.4f), player1.camera.position.Y));
 
             base.Update(gameTime);
         }

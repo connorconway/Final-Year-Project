@@ -36,17 +36,17 @@ namespace Final_Year_Project.GameStates
             mainMenuLinkLabel = new LinkLabel { text = Constants._MAINMENU };
 
             loadGameLinkLabel.size = loadGameLinkLabel.spriteFont.MeasureString(loadGameLinkLabel.text);
-            loadGameLinkLabel.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - loadGameLinkLabel.size.X) >> 1,
-                (Game1._systemOptions.resolutionHeight >> 1));
+            loadGameLinkLabel.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - loadGameLinkLabel.size.X) >> 1,
+                (Game1.systemOptions.resolutionHeight >> 1));
 
             mainMenuLinkLabel.size = mainMenuLinkLabel.spriteFont.MeasureString(mainMenuLinkLabel.text);
-            mainMenuLinkLabel.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - mainMenuLinkLabel.size.X) >> 1,
-                (Game1._systemOptions.resolutionHeight >> 1) + 40);
+            mainMenuLinkLabel.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - mainMenuLinkLabel.size.X) >> 1,
+                (Game1.systemOptions.resolutionHeight >> 1) + 40);
 
             loadGameListBox = new ListBox(Content.Load<Texture2D>(@"Graphics\GUI\listBoxImage2"),
                 Content.Load<Texture2D>(@"Graphics\GUI\rightarrowUp"));
-            loadGameListBox.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - loadGameListBox.size.X) >> 1,
-                (Game1._systemOptions.resolutionHeight >> 1) + 110);
+            loadGameListBox.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - loadGameListBox.size.X) >> 1,
+                (Game1.systemOptions.resolutionHeight >> 1) + 110);
 
             for (int i = 0; i < 10; i++)
                 loadGameListBox.Items.Add("Game number: " + (i + 1));
@@ -171,8 +171,8 @@ namespace Final_Year_Project.GameStates
             TileMap map = new TileMap(tilesets, mapLayers);
             Level level = new Level(map);
             World world = new World(gameReference, gameReference.screenRectangle);
-            world.Levels.Add(level);
-            world.CurrentLevel = 0;
+            World.levels.Add(level);
+            world.currentLevel = 0;
             GamePlayScreen.world = world;
         }
         #endregion

@@ -97,39 +97,39 @@ namespace Final_Year_Project.GameStates
 
             Label label1 = new Label { text = "Changes will take effect after restarting the game" };
             label1.size = label1.spriteFont.MeasureString(label1.text);
-            label1.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - label1.size.X) >> 1, Game1._systemOptions.resolutionHeight >> 1);
+            label1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - label1.size.X) >> 1, Game1.systemOptions.resolutionHeight >> 1);
 
             selectFullScreen = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectFullScreen.SetItems(fullScreenItems, 125);
-            selectFullScreen.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1, label1.position.Y + 50);
-            selectFullScreen.SelectedIndex = Game1._systemOptions.fullScreen ? 0 : 1;
+            selectFullScreen.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1, label1.position.Y + 50);
+            selectFullScreen.SelectedIndex = Game1.systemOptions.fullScreen ? 0 : 1;
 
             selectDifficulty = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectDifficulty.SetItems(difficultyItems, 125);
-            selectDifficulty.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1, selectFullScreen.position.Y + 50);
-            selectDifficulty.SelectedIndex = (int)Game1._systemOptions.difficultyLevel ;
+            selectDifficulty.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1, selectFullScreen.position.Y + 50);
+            selectDifficulty.SelectedIndex = (int)Game1.systemOptions.difficultyLevel ;
 
             selectSoundLevel = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectSoundLevel.SetItems(soundLevelItems, 125);
-            selectSoundLevel.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1, selectDifficulty.position.Y + 50);
-            selectSoundLevel.SelectedIndex = (int)Game1._systemOptions.soundLevel;
+            selectSoundLevel.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1, selectDifficulty.position.Y + 50);
+            selectSoundLevel.SelectedIndex = (int)Game1.systemOptions.soundLevel;
 
             selectMusicLevel = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectMusicLevel.SetItems(musicLevelItems, 125);
-            selectMusicLevel.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1, selectSoundLevel.position.Y + 50);
-            selectMusicLevel.SelectedIndex = (int)Game1._systemOptions.musicLevel;
+            selectMusicLevel.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1, selectSoundLevel.position.Y + 50);
+            selectMusicLevel.SelectedIndex = (int)Game1.systemOptions.musicLevel;
 
             selectResolution = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectResolution.SetItems(resolutionItems, 125);
-            selectResolution.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1, selectMusicLevel.position.Y + 50);
-            selectResolution.SelectedIndex = Array.IndexOf(resolutionItems, Game1._systemOptions.resolutionWidth + "x" + Game1._systemOptions.resolutionHeight);
+            selectResolution.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1, selectMusicLevel.position.Y + 50);
+            selectResolution.SelectedIndex = Array.IndexOf(resolutionItems, Game1.systemOptions.resolutionWidth + "x" + Game1.systemOptions.resolutionHeight);
 
             LinkLabel linkLabel1 = new LinkLabel
             {
                 text = "Accept these changes"
             };
             linkLabel1.size = linkLabel1.spriteFont.MeasureString(linkLabel1.text);
-            linkLabel1.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
+            linkLabel1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
                 selectResolution.position.Y + 75);
             linkLabel1.selected += linkLabel1_Selected;
 
@@ -138,7 +138,7 @@ namespace Final_Year_Project.GameStates
                 text = "Dismiss these changes"
             };
             linkLabel2.size = linkLabel2.spriteFont.MeasureString(linkLabel2.text);
-            linkLabel2.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
+            linkLabel2.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
                 linkLabel1.position.Y + 50);
             linkLabel2.selected += linkLabel2_Selected;
 
@@ -155,23 +155,23 @@ namespace Final_Year_Project.GameStates
 
         void linkLabel1_Selected(object sender, EventArgs e)
         {
-            Game1._systemOptions.soundLevel = (Sound) selectSoundLevel.SelectedIndex;
-            Game1._systemOptions.musicLevel = (Music) selectMusicLevel.SelectedIndex;
-            Game1._systemOptions.difficultyLevel = (Difficulty) selectDifficulty.SelectedIndex;
+            Game1.systemOptions.soundLevel = (Sound) selectSoundLevel.SelectedIndex;
+            Game1.systemOptions.musicLevel = (Music) selectMusicLevel.SelectedIndex;
+            Game1.systemOptions.difficultyLevel = (Difficulty) selectDifficulty.SelectedIndex;
             try
             {
-                Game1._systemOptions.resolutionHeight = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(5, 4));
+                Game1.systemOptions.resolutionHeight = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(5, 4));
 
             }
             catch (Exception)
             {
-                Game1._systemOptions.resolutionHeight = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(5, 3));
+                Game1.systemOptions.resolutionHeight = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(5, 3));
             }
 
-            Game1._systemOptions.resolutionWidth = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(0, 4));
-            Game1._systemOptions.fullScreen = Boolean.Parse(fullScreenItems[selectFullScreen.SelectedIndex]);
+            Game1.systemOptions.resolutionWidth = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(0, 4));
+            Game1.systemOptions.fullScreen = Boolean.Parse(fullScreenItems[selectFullScreen.SelectedIndex]);
 
-            FileHandler.writeToFile(Game1._systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)), true);
+            FileHandler.writeToFile(Game1.systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)), true);
             stateManager.PopState();
         }
 

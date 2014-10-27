@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using System.Xml.Serialization;
 using Final_Year_Project.GameData;
 using Microsoft.Xna.Framework;
@@ -12,87 +10,71 @@ namespace Final_Year_Project
 {
     public class Game1 : Game
     {
-        #region Variables
-        public static SystemOptions _systemOptions = new SystemOptions();
-        GraphicsDeviceManager graphics;
-        public SpriteBatch spriteBatch;
-        GameStateManager stateManager;
-        public StartMenuScreen startMenuScreen;
-        public Rectangle screenRectangle { get; private set; }
-        public GamePlayScreen gamePlayScreen;
-        public CharacterCreationScreen characterCreationScreen;
-        public PauseScreen pauseScreen;
-        public OptionsScreen optionsScreen;
-        public LoadGameScreen loadGameScreen;
-        public GameLoseScreen gameLoseScreen;
-        public GameWinScreen gameWinScreen;
-        #endregion
+        public static   SystemOptions           systemOptions                = new SystemOptions();
+        public          SpriteBatch             spriteBatch;
+        public readonly StartMenuScreen         startMenuScreen;
+        public          Rectangle               screenRectangle              { get; private set; }
+        public readonly GamePlayScreen          gamePlayScreen;
+        public readonly CharacterCreationScreen characterCreationScreen;
+        public readonly PauseScreen             pauseScreen;
+        public readonly OptionsScreen           optionsScreen;
+        public readonly LoadGameScreen          loadGameScreen;
+        public readonly GameLoseScreen          gameLoseScreen;
+        public readonly LobbyScreen             lobbyScreen;
+        private         GameStateManager        stateManager;
 
-        #region Constructor(s)
         public Game1()
         {
-           //TODO: Use relative path and not absolute
-            FileHandler.writeToFile(_systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
-            _systemOptions = FileHandler.readFromFile(Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
+            FileHandler.writeToFile(systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
+            systemOptions = FileHandler.readFromFile(Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
 
-            graphics = new GraphicsDeviceManager(this)
+            new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = _systemOptions.resolutionWidth,
-                PreferredBackBufferHeight = _systemOptions.resolutionHeight,
-                IsFullScreen = _systemOptions.fullScreen
+                PreferredBackBufferWidth    = systemOptions.resolutionWidth,
+                PreferredBackBufferHeight   = systemOptions.resolutionHeight,
+                IsFullScreen                = systemOptions.fullScreen
             };
 
-            screenRectangle = new Rectangle(0, 0, _systemOptions.resolutionWidth, _systemOptions.resolutionHeight);
-
-            Content.RootDirectory = "Content";
-
             Components.Add(new InputHandler(this));
-
             stateManager = new GameStateManager(this);
             Components.Add(stateManager);
 
-            startMenuScreen = new StartMenuScreen(this, stateManager);
-            gamePlayScreen = new GamePlayScreen(this, stateManager);
+            screenRectangle         = new Rectangle(0, 0, systemOptions.resolutionWidth, systemOptions.resolutionHeight);
+            startMenuScreen         = new StartMenuScreen(this, stateManager);
+            gamePlayScreen          = new GamePlayScreen(this, stateManager);
             characterCreationScreen = new CharacterCreationScreen(this, stateManager);
-            pauseScreen = new PauseScreen(this, stateManager);
-            optionsScreen = new OptionsScreen(this, stateManager);
-            loadGameScreen = new LoadGameScreen(this, stateManager);
-            gameLoseScreen = new GameLoseScreen(this, stateManager);
-            gameWinScreen = new GameWinScreen(this, stateManager);
+            pauseScreen             = new PauseScreen(this, stateManager);
+            optionsScreen           = new OptionsScreen(this, stateManager);
+            loadGameScreen          = new LoadGameScreen(this, stateManager);
+            gameLoseScreen          = new GameLoseScreen(this, stateManager);
+            lobbyScreen             = new LobbyScreen(this, stateManager);
 
             stateManager.ChangeState(startMenuScreen);
         }
-        #endregion
 
-        #region Override Methods
         protected override void Initialize()
         {
+            Content.RootDirectory = "Content"; 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);                                                                                                           
-        }
-
-        protected override void UnloadContent()
-        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);      
+            base.LoadContent();                                                                                         
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)                                                                               
                 Exit();
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             base.Draw(gameTime);
         }
-        #endregion
     }
 }

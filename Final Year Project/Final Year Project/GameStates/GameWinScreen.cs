@@ -37,24 +37,24 @@ namespace Final_Year_Project.GameStates
         {
             Label label1 = new Label { text = "You Win!" };
             label1.size = label1.spriteFont.MeasureString(label1.text);
-            label1.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - label1.size.X) >> 1,
-                Game1._systemOptions.resolutionHeight >> 1);
+            label1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - label1.size.X) >> 1,
+                Game1.systemOptions.resolutionHeight >> 1);
 
             LinkLabel linkLabel1 = new LinkLabel { text = "Create New Lobby" };
             linkLabel1.size = linkLabel1.spriteFont.MeasureString(linkLabel1.text);
-            linkLabel1.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
+            linkLabel1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
                 label1.position.Y + 100);
             linkLabel1.selected += linkLabel1_Selected;
 
             LinkLabel linkLabel2 = new LinkLabel { text = "Join A Lobby" };
             linkLabel2.size = linkLabel2.spriteFont.MeasureString(linkLabel2.text);
-            linkLabel2.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
+            linkLabel2.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
                 linkLabel1.position.Y + 50);
             linkLabel2.selected += linkLabel2_Selected;
 
             LinkLabel exitGame = new LinkLabel { text = "Quit Game" };
             exitGame.size = exitGame.spriteFont.MeasureString(exitGame.text);
-            exitGame.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - exitGame.size.X) >> 1,
+            exitGame.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - exitGame.size.X) >> 1,
                 linkLabel2.position.Y + 50);
             exitGame.selected += exitGame_selected;
 

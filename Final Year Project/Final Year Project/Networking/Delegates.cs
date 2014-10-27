@@ -2,6 +2,6 @@
 
 namespace Final_Year_Project.Networking
 {
-    public delegate void ConnectionEvent(object sender, TcpClient user);
-    public delegate void DataReceivedEvent(TcpClient sender, byte[] data);
+     public delegate void ConnectionEvent(object sender, TcpClient user);
+     public delegate void DataReceivedEvent(TcpClient sender, byte[] data);
 }

@@ -11,22 +11,18 @@ namespace Final_Year_Project.Components
         Up
     }
 
-    public class Animation : ICloneable
+    public class Animation
     {
-        #region Variables
-        private Rectangle[] frames;
-        private int framesPerSecond;
-        private TimeSpan frameLength;
-        private TimeSpan frameTimer;
-        private int currentFrame;
-        public int frameWidth { get; private set; }
-        public int frameHeight { get; private set; }
-        #endregion
+        private readonly Rectangle[] frames;
+        private          int framesPerSecond;
+        private          TimeSpan frameLength;
+        private          TimeSpan frameTimer;
+        private          int currentFrame;
+        public           int frameWidth         { get; private set; }
+        public           int frameHeight        { get; private set; }
 
-        #region Getter(s) and Setter(s)
         private int FramesPerSecond
         {
-            get { return framesPerSecond; }
             set
             {
                 if (value < 1)
@@ -44,24 +40,13 @@ namespace Final_Year_Project.Components
             get { return frames[currentFrame]; }
         }
 
-        public int CurrentFrame
-        {
-            get { return currentFrame; }
-            set
-            {
-                currentFrame = (int)MathHelper.Clamp(value, 0, frames.Length - 1);
-            }
-        }
-        #endregion
-
-        #region Constructor(s)
         public Animation(int frameCount, int frameWidth, int frameHeight, int xOffSet, int yOffSet)
         {
-            frames = new Rectangle[frameCount];
-            this.frameWidth = frameWidth;
+            frames           = new Rectangle[frameCount];
+            this.frameWidth  = frameWidth;
             this.frameHeight = frameHeight;
 
-            for (int i = 0; i < frameCount; i++)
+            for (var i = 0; i < frameCount; i++)
             {
                 frames[i] = new Rectangle(
                     xOffSet + (frameWidth * i),
@@ -75,38 +60,35 @@ namespace Final_Year_Project.Components
 
         private Animation(Animation animation)
         {
-            frames = animation.frames;
+            frames          = animation.frames;
             FramesPerSecond = 5;
         }
-        #endregion
 
-        #region General Method(s)
         public void Update(GameTime gameTime)
         {
-            frameTimer += gameTime.ElapsedGameTime;
+            frameTimer  += gameTime.ElapsedGameTime;
             if (frameTimer < frameLength)
                 return;
-            frameTimer = TimeSpan.Zero;
+            frameTimer   = TimeSpan.Zero;
             currentFrame = (currentFrame + 1) % frames.Length;
         }
 
         private void Reset()
         {
             currentFrame = 0;
-            frameTimer = TimeSpan.Zero;
+            frameTimer   = TimeSpan.Zero;
         }
 
         public object Clone()
         {
-            Animation animationClone = new Animation(this)
+            var animationClone = new Animation(this)
             {
-                frameWidth = frameWidth,
+                frameWidth  = frameWidth,
                 frameHeight = frameHeight
             };
             animationClone.Reset();
 
             return animationClone;
         }
-        #endregion 
     }
 }

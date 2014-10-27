@@ -1,124 +1,37 @@
 ﻿using Final_Year_Project.Components;
-using Final_Year_Project.Handlers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 
 namespace Final_Year_Project.TileEngine
 {
-    public enum CameraMode
-    {
-        Free,
-        Follow
-    }
-
     public class Camera
     {
-        #region Variables
-        Vector2 position;
-        float speed;
-        public float zoom { get; set; }
-        Rectangle viewportRectangle;
-        public CameraMode cameraMode { get; set; }
-        #endregion
-
-        #region Getter(s) and Setter(s)
-        public Vector2 Position
-        {
-            get { return position; } set { position = value; }
-        }
-
-        public float Speed
-        {
-            get { return speed; }
-            set
-            {
-                speed = MathHelper.Clamp(speed, 1f, 16f);
-            }
-        }
+        public      Vector2       position;
+        private     float         speed                 { get; set; }
+        public      float         zoom                  { get; private set; }
+        public      Rectangle     viewportRectangle     { get; private set; }
 
         public Matrix Transformation
         {
-            get
-            {
-                return Matrix.CreateScale(zoom) *
-                    Matrix.CreateTranslation(new Vector3(-Position, 0f));
-            }
+            get { return Matrix.CreateScale(zoom) * Matrix.CreateTranslation(new Vector3(-position, 0f)); }
         }
-        public Rectangle ViewportRectangle
-        {
-            get
-            {
-                return new Rectangle(
-                    viewportRectangle.X,
-                    viewportRectangle.Y,
-                    viewportRectangle.Width,
-                    viewportRectangle.Height);
-            }
-        }
-        #endregion
 
-        #region Constructor(s)
         public Camera(Rectangle viewportRectangle)
         {
-            speed = 4f;
-            zoom = 1f;
-            this.viewportRectangle = viewportRectangle;
-            cameraMode = CameraMode.Follow;
+            speed                   = 4f;
+            zoom                    = 1f;
+            this.viewportRectangle  = viewportRectangle;
         }
 
-        public Camera(Rectangle viewportRectangle, Vector2 position)
+        public void Zoom(float amount)
         {
-            speed = 4f;
-            zoom = 1f;
-            this.viewportRectangle = viewportRectangle;
-            this.position = position;
-            cameraMode = CameraMode.Follow;
-        }
-        #endregion
+            zoom += amount;
 
-        #region General Methods
-        public void Update(GameTime gameTime)
-        {
-            if (cameraMode == CameraMode.Follow)
-                return;
-
-            Vector2 motion = Vector2.Zero;
-
-            if (InputHandler.KeyDown(Keys.Left) || InputHandler.ButtonDown(Buttons.RightThumbstickLeft, PlayerIndex.One))
-                motion.X -= speed;
-            else if (InputHandler.KeyDown(Keys.Right) || InputHandler.ButtonDown(Buttons.RightThumbstickRight, PlayerIndex.One))
-                motion.X += speed;
-
-            if (InputHandler.KeyDown(Keys.Up) || InputHandler.ButtonDown(Buttons.RightThumbstickUp, PlayerIndex.One))
-                motion.Y -= speed;
-            else if (InputHandler.KeyDown(Keys.Down) || InputHandler.ButtonDown(Buttons.RightThumbstickDown, PlayerIndex.One))
-                motion.Y += speed;
-
-            if (motion != Vector2.Zero)
-            {
-                motion.Normalize();                                                                                                  //Turns the motion into a unit vector. The result is a vector one unit in length pointing in the same direction as the motion
-                position += motion*speed;
-                LockCamera();
-            }
-        }
-
-        public void ZoomIn()
-        {
-            zoom += .25f;
             if (zoom > 2.5f)
                 zoom = 2.5f;
+            else if (zoom < 0.5f)
+                zoom = 0.5f;
 
-            Vector2 newPosition = Position*zoom;
-            SnapToPosition(newPosition);
-        }
-
-        public void ZoomOut()
-        {
-            zoom -= .25f;
-            if (zoom < .5f)
-                zoom = .5f;
-
-            Vector2 newPosition = Position * zoom;
+            var newPosition = position * zoom;
             SnapToPosition(newPosition);
         }
 
@@ -140,20 +53,6 @@ namespace Final_Year_Project.TileEngine
             position.X = (sprite.Position.X + sprite.Width / 2f)*zoom - (viewportRectangle.Width / 2f);
             position.Y = (sprite.Position.Y + sprite.Height / 2f)*zoom - (viewportRectangle.Height / 2f);
             LockCamera();
-        }
-
-        public void ToggleCameraMode()
-        {
-            switch (cameraMode)
-            {
-                case CameraMode.Follow:
-                    cameraMode = CameraMode.Free;
-                    break;
-                case CameraMode.Free:
-                    cameraMode = CameraMode.Follow;
-                    break;
-            }
-        }
-        #endregion
+        } 
     }
 }

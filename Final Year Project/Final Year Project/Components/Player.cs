@@ -17,12 +17,13 @@ namespace Final_Year_Project.Components
         public Vector2 motion;
         public List<Bullet> bullets;
 
-        private Texture2D bulletSprite;
+        public Texture2D bulletSprite;
         private TimeSpan bulletTimer;
         private float shotSeconds;
         public Boolean createBullet;
         public Vector2 playerOrigin;
         public HealthBar playerHealth;
+        private bool isHost;
         #endregion
 
         #region Constructor(s)
@@ -39,8 +40,8 @@ namespace Final_Year_Project.Components
             this.bulletSprite = bulletSprite;
             playerHealth = new HealthBar(healthBarSprite, animatedSprite.Position, color);
             animatedSprite.position.X = rand.Next(50, 400); 
-            animatedSprite.position.Y = rand.Next(50, 400); 
-
+            animatedSprite.position.Y = rand.Next(50, 400);
+            isHost = false;
         }
         #endregion
 
@@ -54,23 +55,20 @@ namespace Final_Year_Project.Components
         {
             createBullet = false;
             playerOrigin = new Vector2(animatedSprite.Position.X + animatedSprite.Width / 2, animatedSprite.Position.Y + animatedSprite.Height / 2);
-            camera.Update(gameTime);
             animatedSprite.Update(gameTime);
             
-            if (InputHandler.KeyReleased(Keys.Z) || InputHandler.scrollUp(Mouse.GetState()) == 1 ||
+            if (InputHandler.KeyReleased(Keys.Z) || InputHandler.Scroll(Mouse.GetState()) == 1 ||
                 InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
             {
-                camera.ZoomIn();
-                if (camera.cameraMode == CameraMode.Follow)
-                    camera.LockToSprite(animatedSprite);
+                camera.Zoom(0.25f);
+                camera.LockToSprite(animatedSprite);
             }
 
-            else if (InputHandler.KeyReleased(Keys.X) || InputHandler.scrollUp(Mouse.GetState()) == -1 ||
+            else if (InputHandler.KeyReleased(Keys.X) || InputHandler.Scroll(Mouse.GetState()) == -1 ||
                      InputHandler.ButtonReleased(Buttons.RightShoulder, PlayerIndex.One))
             {
-                camera.ZoomOut();
-                if (camera.cameraMode == CameraMode.Follow)
-                    camera.LockToSprite(animatedSprite);
+                camera.Zoom(-0.25f);
+                camera.LockToSprite(animatedSprite);
             }
             motion = new Vector2();
             if (InputHandler.KeyDown(Keys.W) ||
@@ -104,8 +102,7 @@ namespace Final_Year_Project.Components
                 motion.Normalize();
                 animatedSprite.Position += motion * animatedSprite.Speed;
                 animatedSprite.LockToMap();
-                if (camera.cameraMode == CameraMode.Follow)
-                    camera.LockToSprite(animatedSprite);
+                camera.LockToSprite(animatedSprite);
             }
             else
             {
@@ -130,12 +127,21 @@ namespace Final_Year_Project.Components
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            animatedSprite.Draw(gameTime, spriteBatch, camera);
+            animatedSprite.Draw(spriteBatch);
             foreach (Bullet bullet in bullets)
             {
                 bullet.Draw(gameTime, spriteBatch);
             }
             playerHealth.Draw(gameTime, spriteBatch);
+        }
+
+        public bool getHost()
+        {
+            return isHost;
+        }
+        public void setHost(bool host)
+        {
+            isHost = host;
         }
         #endregion
     }

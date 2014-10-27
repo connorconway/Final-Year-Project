@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 using Final_Year_Project.Components;
 using Final_Year_Project.Controls;
 using Final_Year_Project.Handlers;
@@ -77,42 +76,42 @@ namespace Final_Year_Project.GameStates
 
             Label label1 = new Label {text = "Who will you fight as?"};
             label1.size = label1.spriteFont.MeasureString(label1.text);
-            label1.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - label1.size.X) >> 1,
-                Game1._systemOptions.resolutionHeight >> 1);
+            label1.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - label1.size.X) >> 1,
+                Game1.systemOptions.resolutionHeight >> 1);
 
             selectGender = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectGender.SetItems(genderItems, 125);
-            selectGender.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1,
+            selectGender.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1,
                 label1.position.Y + 50);
             selectGender.selectionChanged += selectionChanged;
 
             selectClass = new LeftRightSelector(leftTexture, rightTexture, stopTexture);
             selectClass.SetItems(classItems, 125);
-            selectClass.position = new Vector2((Game1._systemOptions.resolutionWidth - 125 - 96) >> 1,
+            selectClass.position = new Vector2((Game1.systemOptions.resolutionWidth - 125 - 96) >> 1,
                 selectGender.position.Y + 50);
             selectClass.selectionChanged += selectionChanged;
 
             LinkLabel linkLabel1 = new LinkLabel {text = "Create New Lobby"};
             linkLabel1.size = linkLabel1.spriteFont.MeasureString(linkLabel1.text);
-            linkLabel1.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
+            linkLabel1.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
                 selectClass.position.Y + 75);
             linkLabel1.selected += linkLabel1_Selected;
 
             LinkLabel joinLobby = new LinkLabel { text = "Join a lobby" };
             joinLobby.size = linkLabel1.spriteFont.MeasureString(joinLobby.text);
-            joinLobby.position = new Vector2((int)(Game1._systemOptions.resolutionWidth - joinLobby.size.X) >> 1,
+            joinLobby.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - joinLobby.size.X) >> 1,
                 linkLabel1.position.Y + 50);
             joinLobby.selected += joinLobby_Selected;
 
             LinkLabel linkLabel2 = new LinkLabel {text = "Back to menu"};
             linkLabel2.size = linkLabel2.spriteFont.MeasureString(linkLabel2.text);
-            linkLabel2.position = new Vector2((int) (Game1._systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
+            linkLabel2.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
                 joinLobby.position.Y + 75);
             linkLabel2.selected += linkLabel2_Selected;
 
             characterImage = new PictureBox(characterImages[0, 0],
-                new Rectangle(((Game1._systemOptions.resolutionWidth - 96) >> 1),
-                    ((Game1._systemOptions.resolutionHeight + 120 ) >> 2), 96, 96), new Rectangle(0, 0, 32, 32));
+                new Rectangle(((Game1.systemOptions.resolutionWidth - 96) >> 1),
+                    ((Game1.systemOptions.resolutionHeight + 120 ) >> 2), 96, 96), new Rectangle(0, 0, 32, 32));
 
             controlManager.Add(label1);
             controlManager.Add(selectGender);
@@ -214,7 +213,7 @@ namespace Final_Year_Project.GameStates
             Level level = new Level(map);
             World world = new World(gameReference, gameReference.screenRectangle);
             World.levels.Add(level);
-            world.CurrentLevel = 0;
+            world.currentLevel = 0;
 
             GamePlayScreen.world = world;
         }

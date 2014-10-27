@@ -74,10 +74,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterClasses\AttibutePair.cs" />
-    <Compile Include="CharacterClasses\Entity.cs" />
-    <Compile Include="CharacterClasses\EntityData.cs" />
-    <Compile Include="CharacterClasses\EntityDataManager.cs" />
     <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\Animation.cs" />
     <Compile Include="Components\Bullet.cs" />
@@ -104,14 +100,10 @@
     <Compile Include="GameStates\OptionsScreen.cs" />
     <Compile Include="GameStates\PauseScreen.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
-    <Compile Include="Items\Armor.cs" />
-    <Compile Include="Items\ItemManager.cs" />
-    <Compile Include="Items\Shield.cs" />
-    <Compile Include="Items\Weapon.cs" />
-    <Compile Include="Items\BaseItem.cs" />
     <Compile Include="Networking\Delegates.cs" />
     <Compile Include="Networking\NetworkHelper.cs" />
-    <Compile Include="Networking\Protocols.cs" />
+    <Compile Include="Networking\NetworkConstants.cs" />
+    <Compile Include="Networking\NetworkProtocols.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -170,11 +162,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings1.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

@@ -3,7 +3,8 @@
     internal static class Constants
     {
         public const string _serviceOptionsPath =
-            @"E:\Documents\Visual Studio 2013\Projects\PRG\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
+            @"C:\Users\Connor\Source\Repos\Final-Year-Project\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
+          //  @"E:\Documents\Visual Studio 2013\Projects\PRG\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
 
         public const string _NEWGAME            = "Begin Story";
         public const string _LOADGAME           = "Load Story";
