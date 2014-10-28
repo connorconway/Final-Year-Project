@@ -57,7 +57,7 @@ namespace Server
 
         private void StreamReceived(IAsyncResult ar)
         {
-            var bytesRead = 0;
+            int bytesRead = 0;
             try
             {
                 lock (client.GetStream())
@@ -67,7 +67,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error occured: " + e);
+                
             }
 
             if (bytesRead == 0)
