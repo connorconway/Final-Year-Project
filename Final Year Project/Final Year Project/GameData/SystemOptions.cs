@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Final_Year_Project.GameData
+namespace Multiplayer_Software_Game_Engineering.GameData
 {
     [Serializable]
     public class SystemOptions

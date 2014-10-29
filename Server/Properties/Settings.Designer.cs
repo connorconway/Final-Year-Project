@@ -43,7 +43,7 @@ namespace Server.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
         public int MaxNumberOfClients {
             get {
                 return ((int)(this["MaxNumberOfClients"]));

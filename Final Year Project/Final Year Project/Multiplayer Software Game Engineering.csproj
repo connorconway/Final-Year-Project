@@ -134,9 +134,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Final Year ProjectContent\Final Year ProjectContent.contentproj">
-      <Name>Final_Year_ProjectContent</Name>
+    <ProjectReference Include="..\Final Year ProjectContent\Multiplayer Software Game Engineering Content.contentproj">
+      <Name>Multiplayer Software Game Engineering Content</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{79F6D01A-1D1F-4A25-AB96-348B7937E2BD}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

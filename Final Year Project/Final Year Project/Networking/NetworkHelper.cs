@@ -2,7 +2,7 @@
 //using System.IO;
 //using System.Net.Sockets;
 //
-//namespace Final_Year_Project.Networking
+//namespace Multiplayer_Software_Game_Engineering.Networking
 //{
 //    class NetworkHelper
 //    {

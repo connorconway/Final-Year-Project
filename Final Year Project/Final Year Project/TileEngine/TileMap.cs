@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace Final_Year_Project.TileEngine
+namespace Multiplayer_Software_Game_Engineering.TileEngine
 {
     public class TileMap
     {

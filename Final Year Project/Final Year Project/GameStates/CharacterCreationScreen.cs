@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Final_Year_Project.Components;
-using Final_Year_Project.Controls;
-using Final_Year_Project.Handlers;
-using Final_Year_Project.TileEngine;
-using Final_Year_Project.WorldClasses;
+using Multiplayer_Software_Game_Engineering.Components;
+using Multiplayer_Software_Game_Engineering.Controls;
+using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.TileEngine;
+using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Label = Final_Year_Project.Controls.Label;
-using LinkLabel = Final_Year_Project.Controls.LinkLabel;
-using PictureBox = Final_Year_Project.Controls.PictureBox;
+using Label = Multiplayer_Software_Game_Engineering.Controls.Label;
+using LinkLabel = Multiplayer_Software_Game_Engineering.Controls.LinkLabel;
+using PictureBox = Multiplayer_Software_Game_Engineering.Controls.PictureBox;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class CharacterCreationScreen : BaseGameState
     {

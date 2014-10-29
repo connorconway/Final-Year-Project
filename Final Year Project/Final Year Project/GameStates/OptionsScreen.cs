@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
-using Final_Year_Project.Controls;
-using Final_Year_Project.GameData;
-using Final_Year_Project.Handlers;
+using Multiplayer_Software_Game_Engineering.Controls;
+using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.Handlers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class OptionsScreen : BaseGameState
     {

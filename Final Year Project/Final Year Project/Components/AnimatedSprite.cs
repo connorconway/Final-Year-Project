@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Final_Year_Project.TileEngine;
+using Multiplayer_Software_Game_Engineering.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.Components
+namespace Multiplayer_Software_Game_Engineering.Components
 {
     public class AnimatedSprite : Sprite
     {

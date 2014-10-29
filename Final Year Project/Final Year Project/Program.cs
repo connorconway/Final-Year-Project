@@ -1,4 +1,4 @@
-namespace Final_Year_Project
+namespace Multiplayer_Software_Game_Engineering
 {
 #if WINDOWS || XBOX
     public static class Program

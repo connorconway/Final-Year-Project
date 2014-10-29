@@ -6,14 +6,14 @@ namespace Server
 {
     public class Listener
     {
-        private readonly TcpListener listener;
-        public event ConnectionEvent userAdded;
-        private readonly bool[] usedUserID;
+        public  event    ConnectionEvent userAdded;
+        private readonly TcpListener     listener;
+        private readonly bool[]          usedUserID;
 
-        public Listener(int portNr)
+        public Listener(int port)
         {
             usedUserID = new bool[Properties.Settings.Default.MaxNumberOfClients];
-            listener = new TcpListener(IPAddress.Any, portNr);
+            listener   = new TcpListener(IPAddress.Any, port);
         }
 
         public void Start()
@@ -35,8 +35,8 @@ namespace Server
         private void AcceptClient(IAsyncResult ar)
         {
             TcpClient client = listener.EndAcceptTcpClient(ar);
+            int       id     = -1;
 
-            int id = -1;
             for (byte i = 0; i < usedUserID.Length; i++)
             {
                 if (usedUserID[i])
@@ -47,11 +47,11 @@ namespace Server
 
             if (id == -1)
             {
-                Console.WriteLine("Client " + client.Client.RemoteEndPoint + " cannot connect. ");
+                Console.WriteLine("Client {0}:  Cannot connect", client.Client.RemoteEndPoint);
                 return;
             }
 
-            usedUserID[id] = true;
+            usedUserID[id]   = true;
             Client newClient = new Client(client, (byte)id);
 
             newClient.UserDisconnected += client_UserDisconnected;
@@ -64,8 +64,7 @@ namespace Server
 
         void client_UserDisconnected(object sender, Client user)
         {
-            usedUserID[user.id] = false;
+            usedUserID[user.ID] = false;
         }
-
     }
 }

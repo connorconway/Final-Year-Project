@@ -1,32 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Server
 {
     public class Server
     {
-        Listener listener { get; set; }
-        readonly Client[] client;
-        int connectedClients;
-
-        MemoryStream readStream;
-        readonly MemoryStream writeStream;
-        BinaryReader reader;
-        readonly BinaryWriter writer;
+        private readonly MemoryStream writeStream;
+        private readonly BinaryWriter writer;
+        private          BinaryReader reader;
+        private readonly Client[]     clients;
+        private          Listener     listener { get; set; }
+        private          int          connectedClients;
 
         public Server(int port)
         {
-            client = new Client[Properties.Settings.Default.MaxNumberOfClients];
+            MemoryStream readStream = new MemoryStream();
+                         clients    = new Client[Properties.Settings.Default.MaxNumberOfClients];
+                         listener   = new Listener(port);
 
-            listener = new Listener(port);
             listener.userAdded += listener_userAdded;
             listener.Start();
 
-            readStream = new MemoryStream();
             writeStream = new MemoryStream();
-            reader = new BinaryReader(readStream);
-            writer = new BinaryWriter(writeStream);
-
+            reader      = new BinaryReader(readStream);
+            writer      = new BinaryWriter(writeStream);
         }
 
         private void listener_userAdded(object sender, Client user)
@@ -36,21 +35,19 @@ namespace Server
             if (Properties.Settings.Default.SendMessageToClientsWhenAUserIsAdded)
             {
                 writeStream.Position = 0;
-
-                //Write in the form {Protocol}{User_ID}{User_IP}
                 writer.Write(Properties.Settings.Default.NewPlayerByteProtocol);
-                writer.Write(user.id);
+                writer.Write(user.ID);
                 writer.Write(user.IP);
 
                 SendData(GetDataFromMemoryStream(writeStream), user);
             }
 
-            user.DataReceived += user_DataReceived;
+            user.DataReceived     += user_DataReceived;
             user.UserDisconnected += user_UserDisconnected;
 
-            Console.WriteLine(user + " connected\tConnected Clients:  " + connectedClients + "\n");
+            clients[user.ID] = user;
 
-            client[user.id] = user;
+            PrintClients(user, "Connected");
         }
 
         private void user_UserDisconnected(object sender, Client user)
@@ -60,25 +57,32 @@ namespace Server
             if (Properties.Settings.Default.SendMessageToClientsWhenAUserIsRemoved)
             {
                 writeStream.Position = 0;
-
-                //Write in the form {Protocol}{User_ID}{User_IP}
                 writer.Write(Properties.Settings.Default.DisconnectedPlayerByteProtocol);
-                writer.Write(user.id);
+                writer.Write(user.ID);
                 writer.Write(user.IP);
 
                 SendData(GetDataFromMemoryStream(writeStream), user);
             }
 
-            Console.WriteLine(user + " disconnected\tConnected Clients:  " + connectedClients + "\n");
+            clients[user.ID] = null;
 
-            client[user.id] = null;
+            PrintClients(user, "Disconnected");
+        }
+
+        private void PrintClients(Client user, string action)
+        {
+            Console.WriteLine("{0} {1} \tConnected Clients: {2}", user, action, connectedClients);
+
+            foreach (Client client in clients.Where(client => client != null))
+            {
+                Console.WriteLine("\t\t\t\t {0}", client);
+            }
         }
 
         private void user_DataReceived(Client sender, byte[] data)
         {
             writeStream.Position = 0;
-
-            writer.Write(sender.id);
+            writer.Write(sender.ID);
             writer.Write(sender.IP);
             data = CombineData(data, writeStream);
 
@@ -93,7 +97,6 @@ namespace Server
             {
                 int bytesWritten = (int)ms.Position;
                 result = new byte[bytesWritten];
-
                 ms.Position = 0;
                 ms.Read(result, 0, bytesWritten);
             }
@@ -101,32 +104,25 @@ namespace Server
             return result;
         }
 
-        private static byte[] CombineData(byte[] data, MemoryStream ms)
+        private static byte[] CombineData(IList<byte> data, MemoryStream ms)
         {
-            byte[] result = GetDataFromMemoryStream(ms);
-            byte[] combinedData = new byte[data.Length + result.Length];
+            byte[] result       = GetDataFromMemoryStream(ms);
+            byte[] combinedData = new byte[data.Count + result.Length];
 
-            for (int i = 0; i < data.Length; i++)
-            {
+            for (int i = 0; i < data.Count; i++)
                 combinedData[i] = data[i];
-            }
 
-            for (int j = data.Length; j < data.Length + result.Length; j++)
-            {
-                combinedData[j] = result[j - data.Length];
-            }
+            for (int j = data.Count; j < data.Count + result.Length; j++)
+                combinedData[j] = result[j - data.Count];
 
             return combinedData;
         }
 
         private void SendData(byte[] data, Client sender)
         {
-            foreach (Client c in client)
+            foreach (Client c in clients.Where(c => c != null && c != sender))
             {
-                if (c != null && c != sender)
-                {
-                    c.SendData(data);
-                }
+                c.SendData(data);
             }
 
             writeStream.Position = 0;

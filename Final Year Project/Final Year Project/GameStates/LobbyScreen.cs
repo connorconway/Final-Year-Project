@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using Final_Year_Project.Components;
-using Final_Year_Project.Controls;
-using Final_Year_Project.Handlers;
-using Final_Year_Project.Networking;
+using Multiplayer_Software_Game_Engineering.Components;
+using Multiplayer_Software_Game_Engineering.Controls;
+using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class LobbyScreen : BaseGameState
     {

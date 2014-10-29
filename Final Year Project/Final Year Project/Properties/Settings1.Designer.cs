@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Final_Year_Project.Properties {
+namespace Multiplayer_Software_Game_Engineering.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

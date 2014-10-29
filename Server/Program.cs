@@ -10,7 +10,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            WriteSettings();
+            DisplayInformation();
 
             try
             {
@@ -29,12 +29,9 @@ namespace Server
             Console.ReadKey();
         }
 
-        private static void WriteSettings()
+        private static void DisplayInformation()
         {
-            Console.WriteLine("Server Settings: ");
-            Console.WriteLine("IP Address = " + LocalIPAddress());
-            Console.WriteLine("Port = " + Properties.Settings.Default.Port);
-            Console.WriteLine("\nWaiting for connections.....");
+            Console.WriteLine("Listening for connections on {0}:{1}\n", LocalIPAddress(), Properties.Settings.Default.Port);
         }
 
         private static IPAddress LocalIPAddress()

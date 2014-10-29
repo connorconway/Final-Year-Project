@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
    public class GameStateManager : GameComponent
     {

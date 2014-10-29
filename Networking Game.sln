@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Final Year Project", "Final Year Project\Final Year Project\Final Year Project.csproj", "{74F78ABB-BB83-46AB-9FE1-1934A6C87AFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiplayer Software Game Engineering", "Final Year Project\Final Year Project\Multiplayer Software Game Engineering.csproj", "{74F78ABB-BB83-46AB-9FE1-1934A6C87AFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Final Year ProjectContent", "Final Year Project\Final Year ProjectContent\Final Year ProjectContent.contentproj", "{79F6D01A-1D1F-4A25-AB96-348B7937E2BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiplayer Software Game Engineering Content", "Final Year Project\Final Year ProjectContent\Multiplayer Software Game Engineering Content.contentproj", "{79F6D01A-1D1F-4A25-AB96-348B7937E2BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{5B72078A-DDBB-4F5E-8F80-225D22829CCC}"
 EndProject

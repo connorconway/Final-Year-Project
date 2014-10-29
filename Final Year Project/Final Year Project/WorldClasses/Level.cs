@@ -1,7 +1,7 @@
-﻿using Final_Year_Project.TileEngine;
+﻿using Multiplayer_Software_Game_Engineering.TileEngine;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.WorldClasses
+namespace Multiplayer_Software_Game_Engineering.WorldClasses
 {
     public class Level
     {

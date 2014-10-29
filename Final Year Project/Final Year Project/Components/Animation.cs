@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Final_Year_Project.Components
+namespace Multiplayer_Software_Game_Engineering.Components
 {
     public enum AnimationKey
     {

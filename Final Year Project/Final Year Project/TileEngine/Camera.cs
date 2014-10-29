@@ -1,7 +1,7 @@
-﻿using Final_Year_Project.Components;
+﻿using Multiplayer_Software_Game_Engineering.Components;
 using Microsoft.Xna.Framework;
 
-namespace Final_Year_Project.TileEngine
+namespace Multiplayer_Software_Game_Engineering.TileEngine
 {
     public class Camera
     {

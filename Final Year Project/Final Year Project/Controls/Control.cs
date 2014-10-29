@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.Controls
+namespace Multiplayer_Software_Game_Engineering.Controls
 {
     public abstract class Control
     {

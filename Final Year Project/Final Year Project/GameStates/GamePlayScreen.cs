@@ -1,15 +1,15 @@
 ﻿using System.IO;
 using System.Net.Sockets;
-using Final_Year_Project.Components;
-using Final_Year_Project.Handlers;
-using Final_Year_Project.Networking;
-using Final_Year_Project.TileEngine;
-using Final_Year_Project.WorldClasses;
+using Multiplayer_Software_Game_Engineering.Components;
+using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.Networking;
+using Multiplayer_Software_Game_Engineering.TileEngine;
+using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class GamePlayScreen : BaseGameState
     {

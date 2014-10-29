@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Final_Year_Project.Handlers
+namespace Multiplayer_Software_Game_Engineering.Handlers
 {
     class InputHandler : GameComponent
     {

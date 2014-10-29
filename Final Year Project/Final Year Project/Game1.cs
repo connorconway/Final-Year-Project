@@ -1,12 +1,12 @@
 using System.Xml.Serialization;
-using Final_Year_Project.GameData;
+using Multiplayer_Software_Game_Engineering.GameData;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Final_Year_Project.Handlers;
-using Final_Year_Project.GameStates;
+using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.GameStates;
 
-namespace Final_Year_Project
+namespace Multiplayer_Software_Game_Engineering
 {
     public class Game1 : Game
     {

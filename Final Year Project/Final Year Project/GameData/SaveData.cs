@@ -1,7 +1,7 @@
 ﻿using System;
-using Final_Year_Project.Annotations;
+using Multiplayer_Software_Game_Engineering.Properties;
 
-namespace Final_Year_Project.GameData
+namespace Multiplayer_Software_Game_Engineering.GameData
 {
     [Serializable]
     public class SaveData

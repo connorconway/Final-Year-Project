@@ -1,8 +1,8 @@
-﻿using Final_Year_Project.Annotations;
+﻿using Multiplayer_Software_Game_Engineering.Properties;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.TileEngine
+namespace Multiplayer_Software_Game_Engineering.TileEngine
 {
     public class TileSet
     {

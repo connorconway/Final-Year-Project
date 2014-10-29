@@ -1,8 +1,8 @@
 ﻿using System;
-using Final_Year_Project.Controls;
+using Multiplayer_Software_Game_Engineering.Controls;
 using Microsoft.Xna.Framework;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class GameWinScreen : BaseGameState
     {

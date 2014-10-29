@@ -68,9 +68,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Final Year Project\Final Year Project\Final Year Project.csproj">
+    <ProjectReference Include="..\Final Year Project\Final Year Project\Multiplayer Software Game Engineering.csproj">
       <Project>{74F78ABB-BB83-46AB-9FE1-1934A6C87AFD}</Project>
-      <Name>Final Year Project</Name>
+      <Name>Multiplayer Software Game Engineering</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

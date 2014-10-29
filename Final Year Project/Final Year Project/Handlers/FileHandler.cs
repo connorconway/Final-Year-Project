@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using Final_Year_Project.GameData;
+using Multiplayer_Software_Game_Engineering.GameData;
 
-namespace Final_Year_Project.Handlers
+namespace Multiplayer_Software_Game_Engineering.Handlers
 {
     static class FileHandler
     {

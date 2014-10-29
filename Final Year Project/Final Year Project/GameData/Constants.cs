@@ -1,4 +1,4 @@
-﻿namespace Final_Year_Project.GameData
+﻿namespace Multiplayer_Software_Game_Engineering.GameData
 {
     internal static class Constants
     {

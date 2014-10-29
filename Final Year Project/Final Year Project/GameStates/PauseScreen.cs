@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Final_Year_Project.Controls;
+using Multiplayer_Software_Game_Engineering.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Final_Year_Project.GameStates
+namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class PauseScreen : BaseGameState
     {

@@ -5,35 +5,21 @@ namespace Server
 {
     public class Client
     {
-        private readonly TcpClient client;
-        private readonly byte[] readBuffer;
+        public  event    DataReceivedEvent DataReceived;
+        public  event    ConnectionEvent   UserDisconnected;
+        private readonly TcpClient         client;
+        private readonly byte[]            readBuffer;
+        public  readonly string            IP;
+        public  readonly byte              ID;
+        private          bool              connected;
 
-        public event ConnectionEvent UserDisconnected;
-        public event DataReceivedEvent DataReceived;
-
-        public readonly byte id;
-        public readonly string IP;
-
-        bool connected;
-
-        public Client(TcpClient client, byte id)
+        public Client(TcpClient client, byte ID)
         {
-            readBuffer = new byte[Properties.Settings.Default.ReadBufferSize];
-            this.id = id;
-            this.client = client;
-            IP = client.Client.RemoteEndPoint.ToString();
+            readBuffer     = new byte[Properties.Settings.Default.ReadBufferSize];
+            this.ID        = ID;
+            this.client    = client;
+            IP             = client.Client.RemoteEndPoint.ToString();
             client.NoDelay = true;
-
-            StartListening();
-            connected = true;
-        }
-
-        public Client(string ip, int port)
-        {
-            readBuffer = new byte[Properties.Settings.Default.ReadBufferSize];
-            id = byte.MaxValue;
-            client = new TcpClient { NoDelay = true };
-            client.Connect(ip, port);
 
             StartListening();
             connected = true;
@@ -65,10 +51,7 @@ namespace Server
                     bytesRead = client.GetStream().EndRead(ar);
                 }
             }
-            catch (Exception e)
-            {
-                
-            }
+            catch { }
 
             if (bytesRead == 0)
             {
@@ -107,9 +90,9 @@ namespace Server
             lock (ms)
             {
                 var bytesWritten = (int)ms.Position;
-                var result = new byte[bytesWritten];
+                var result       = new byte[bytesWritten];
+                ms.Position      = 0;
 
-                ms.Position = 0;
                 ms.Read(result, 0, bytesWritten);
                 SendData(result);
             }

@@ -1,4 +1,4 @@
-﻿namespace Final_Year_Project.Networking
+﻿namespace Multiplayer_Software_Game_Engineering.Networking
 {
     public enum Protocol
     {
