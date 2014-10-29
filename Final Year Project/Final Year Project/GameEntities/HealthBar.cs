@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Multiplayer_Software_Game_Engineering.Components
+namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
     public class HealthBar : Sprite
     {

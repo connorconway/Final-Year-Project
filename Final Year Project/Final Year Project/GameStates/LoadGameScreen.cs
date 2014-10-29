@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Multiplayer_Software_Game_Engineering.Components;
 using Multiplayer_Software_Game_Engineering.Controls;
 using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
@@ -32,8 +32,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             base.LoadContent();
             ContentManager Content = Game.Content;
 
-            loadGameLinkLabel = new LinkLabel { text = Constants._SELECTGAME };
-            mainMenuLinkLabel = new LinkLabel { text = Constants._MAINMENU };
+            loadGameLinkLabel = new LinkLabel { text = Constants.SELECT_CHARACTER };
+            mainMenuLinkLabel = new LinkLabel { text = Constants.MAIN_MENU };
 
             loadGameLinkLabel.size = loadGameLinkLabel.spriteFont.MeasureString(loadGameLinkLabel.text);
             loadGameLinkLabel.position = new Vector2((int) (Game1.systemOptions.resolutionWidth - loadGameLinkLabel.size.X) >> 1,
@@ -49,8 +49,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 (Game1.systemOptions.resolutionHeight >> 1) + 110);
 
             for (int i = 0; i < 10; i++)
-                loadGameListBox.Items.Add("Game number: " + (i + 1));
-            loadGameListBox.Items.Add("Back");
+                loadGameListBox.Items.Add(Constants.MAKE_CHOICE + (i + 1));
+            loadGameListBox.Items.Add(Constants.BACK);
 
             loadGameLinkLabel.selected += loadGameLinkLabelSelected;
             mainMenuLinkLabel.selected += exitLinkLabel_Selected;
@@ -98,7 +98,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             switch (loadGameListBox.SelectedItem)
             {
-                case "Back":
+                case Constants.BACK:
                     loadGameListBox.HasFocus = false;
                     loadGameLinkLabel.HasFocus = true;
                     break;
@@ -120,15 +120,15 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
         private void CreatePlayer()
         {
-            Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
+            Dictionary<Constants.Direction, Animation> animations = new Dictionary<Constants.Direction, Animation>();
             Animation animation = new Animation(3, 32, 32, 0, 0);
-            animations.Add(AnimationKey.Down, animation);
+            animations.Add(Constants.Direction.Down, animation);
             animation = new Animation(3, 32, 32, 0, 32);
-            animations.Add(AnimationKey.Left, animation);
+            animations.Add(Constants.Direction.Left, animation);
             animation = new Animation(3, 32, 32, 0, 64);
-            animations.Add(AnimationKey.Right, animation);
+            animations.Add(Constants.Direction.Right, animation);
             animation = new Animation(3, 32, 32, 0, 96);
-            animations.Add(AnimationKey.Up, animation);
+            animations.Add(Constants.Direction.Up, animation);
             AnimatedSprite sprite =
                 new AnimatedSprite(gameReference.Content.Load<Texture2D>(@"Graphics\Sprites\malefighter"), animations);
             //GamePlayScreen.player = new Player(gameReference, sprite);

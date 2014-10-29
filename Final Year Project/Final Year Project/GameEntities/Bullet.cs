@@ -1,17 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.GameData;
 
-namespace Multiplayer_Software_Game_Engineering.Components
+namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
-    enum BulletDirection
-    {
-        Down = 0,
-        Left = 1,
-        Right = 2,
-        Up = 3
-    }
-
     public enum BulletLife
     {
         Alive,
@@ -21,7 +14,7 @@ namespace Multiplayer_Software_Game_Engineering.Components
     public class Bullet : Sprite
     {
         private Vector2 motion;
-        private BulletDirection spriteFacing;
+        private Constants.Direction spriteFacing;
         public BulletLife bulletLife;
 
         public Bullet(Texture2D sprite, Vector2 position, string spriteFacing, Vector2 motion)
@@ -31,7 +24,7 @@ namespace Multiplayer_Software_Game_Engineering.Components
             speed = 7.0f;
             rotation = 0.0f;
             this.motion = motion;
-            this.spriteFacing = (BulletDirection) Enum.Parse(typeof(BulletDirection), spriteFacing, true);
+            this.spriteFacing = (Constants.Direction)Enum.Parse(typeof(Constants.Direction), spriteFacing, true);
             bulletLife = BulletLife.Alive;
             boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
@@ -46,21 +39,21 @@ namespace Multiplayer_Software_Game_Engineering.Components
 
             if (motion == Vector2.Zero)
             {
-                if (spriteFacing == BulletDirection.Down)
+                if (spriteFacing == Constants.Direction.Down)
                 {
                     motion.Y = 1;
                     rotation = 1.57f;
                 }
-                if (spriteFacing == BulletDirection.Left)
+                if (spriteFacing == Constants.Direction.Left)
                 {
                     motion.X = -1;
                     rotation = MathHelper.Pi;
                 }
-                if (spriteFacing == BulletDirection.Right)
+                if (spriteFacing == Constants.Direction.Right)
                 {
                     motion.X = 1;
                 }
-                if (spriteFacing == BulletDirection.Up)
+                if (spriteFacing == Constants.Direction.Up)
                 {
                     motion.Y = -1;
                     rotation = -1.57f;

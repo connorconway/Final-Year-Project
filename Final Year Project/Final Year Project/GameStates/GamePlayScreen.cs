@@ -1,43 +1,45 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Sockets;
-using Multiplayer_Software_Game_Engineering.Components;
+using System.Windows.Forms;
+using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.Networking;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
+using TextBox = Multiplayer_Software_Game_Engineering.GameEntities.TextBox;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class GamePlayScreen : BaseGameState
     {
-        #region Variables
         private Engine engine = new Engine(32, 32);
-        public static World world { get; set; }
+        public static World world { private get; set; }
         private bool secondPlayerAnimating;
-        private int playerKills = 0;    
-        #endregion
+        private int playerKills;    
 
-        #region Constructor(s)
-        public GamePlayScreen(Game game, GameStateManager stateManager)
-            : base(game, stateManager)
+        public GamePlayScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
             world = new World(game, gameReference.screenRectangle);
-
         }
-        #endregion
 
-        #region Override Methods
         public override void Initialize()
         {
-            client = new TcpClient {NoDelay = true};
-            client.Connect(NetworkConstants.hostname, NetworkConstants.port);
-
-            readBuffer = new byte[NetworkConstants.bufferSize];
-
-            client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
+            try
+            {
+                client = new TcpClient { NoDelay = true };
+                client.Connect(NetworkConstants.hostname, NetworkConstants.port);
+                readBuffer = new byte[NetworkConstants.bufferSize];
+                client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Constants.ERROR_CONNECTION + NetworkConstants.port));
+            }
 
             readStream = new MemoryStream();
             reader = new BinaryReader(readStream);
@@ -56,8 +58,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             base.Initialize();
 
             textBox = new TextBox(textBoxSprite, new Vector2(player1.animatedSprite.position.X + 400, player1.animatedSprite.position.Y + 200), fontSprite,
-                "Kill the enemy player \nPress [space] to shoot \nPress [w a s d] to move \n\nPress [Enter] to close textbox", 1.0f);
-            textBox.decreaseAlpha = true;
+                Constants.INFO_CONTROLS, 1.0f)
+            {decreaseAlpha = true};
 
             scoreTextBox = new TextBox(textBoxSprite, new Vector2(0, 0), fontSprite,
                  "Kills: " + playerKills, 0.4f);
@@ -66,18 +68,12 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             scoreTextBox.decreaseAlpha = false;
         }
 
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
         public override void Update(GameTime gameTime)
         {
             if (player2 == null && textBox.decreaseAlpha == false && textBox.textBoxExists == TextBox.TextBoxExists.Transparent)
             {
                 textBox.setPosition(new Vector2(textBox.position.X - 255, textBox.Position.Y + 55));
-                textBox.setText(
-                            "\n\nWaiting for a player to join room");
+                textBox.setText(Constants.INFO_WAITING);
                 textBox.decreaseAlpha = true;
                 waitingForPlayer = true;
             }
@@ -111,8 +107,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         bullet.boundingBox = new Rectangle(0, 0, 0, 0);
                         player1.playerHealth.currentHealth -= 8;
 
-                        textBox.setText(
-                            "You have taken damage \nProtect yourself! \n\nPress [Enter] to close textbox");
+                        textBox.setText(Constants.INFO_DAMAGED);
                         textBox.decreaseAlpha = true;
                     }
                 }
@@ -169,7 +164,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                     SendData(GetDataFromMemoryStream(writeStream));
                     writer.Flush();
                     playerKills += 1;
-                    scoreTextBox.setText("Kills: " + playerKills);
+                    scoreTextBox.setText(string.Format("Kills: {0}", playerKills));
                     scoreTextBox.decreaseAlpha = true;
                 }
             }
@@ -201,7 +196,5 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             base.Draw(gameTime);
             gameReference.spriteBatch.End();
         }
-
-        #endregion
     }
 }

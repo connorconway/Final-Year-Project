@@ -48,10 +48,10 @@ namespace Multiplayer_Software_Game_Engineering.Handlers
         {
             currScrollValue = mouseState.ScrollWheelValue;
             if (prevScrollValue < currScrollValue)
-                return 1;
+                return 1;                                               // Scroll Up
             if (prevScrollValue > currScrollValue)
-                return -1;
-            return 0;
+                return -1;                                              // Scroll Down
+            return 0;                                                   // Do Not Scroll
         }
 
         public static bool KeyReleased(Keys key)

@@ -6,40 +6,22 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 {
    public class GameStateManager : GameComponent
     {
-        #region Variables
         public event EventHandler onStateChange;
-        Stack<GameState> gameStates = new Stack<GameState>();
-        const int startDrawOrder = 5000;
-        const int drawOrderIncrement = 100;
-        int drawOrder;
-        #endregion
+        private readonly Stack<GameState> gameStates = new Stack<GameState>();
+        private const int startDrawOrder = 5000;
+        private const int drawOrderIncrement = 100;
+        private int drawOrder;
 
-        #region Getters/Setters
         public GameState CurrentState
         {
             get { return gameStates.Peek(); }
         }
-        #endregion
 
-        #region Constructor(s)
         public GameStateManager(Game game) : base(game)
         {
             drawOrder = startDrawOrder;
         }
-        #endregion
 
-        #region Override Methods
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-        #endregion
-
-        #region General Methods
         public void PopState()
         {
             if (gameStates.Count > 0)
@@ -85,6 +67,5 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             if (onStateChange != null)
                 onStateChange(this, null);
         }
-        #endregion
     }
 }

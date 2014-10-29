@@ -1,16 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Multiplayer_Software_Game_Engineering.Components
+namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
-    public enum AnimationKey
-    {
-        Down,
-        Left,
-        Right,
-        Up
-    }
-
     public class Animation
     {
         private readonly Rectangle[] frames;

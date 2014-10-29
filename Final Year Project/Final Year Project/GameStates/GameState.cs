@@ -5,24 +5,19 @@ using System.Linq;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
-    public abstract partial class GameState : DrawableGameComponent
+    public abstract class GameState : DrawableGameComponent
     {
-        #region Variables
-        List<GameComponent> childComponents { get; set; }
-        GameState tag { get; set; }
-        protected GameStateManager stateManager;
-        #endregion
+        protected readonly GameStateManager    stateManager;
+        private            List<GameComponent> childComponents { get; set; }
+        private            GameState           gameState       { get; set; }
 
-        #region Constructor(s)
         protected GameState(Game game, GameStateManager stateManager) : base(game)
         {
             this.stateManager = stateManager;
-            childComponents = new List<GameComponent>();
-            tag = this;
+            childComponents   = new List<GameComponent>();
+            gameState = this;
         }
-        #endregion
 
-        #region Override Methods
         public override void Update(GameTime gameTime)
         {
             foreach (GameComponent component in childComponents.Where(component => component.Enabled))
@@ -41,40 +36,38 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             base.Draw(gameTime);
         }
 
-        #endregion
-
-        #region General Methods
-        internal protected virtual void StateChange(object sender, EventArgs e)
+        internal protected void StateChange(object sender, EventArgs e)
         {
-            if (stateManager.CurrentState == tag)
+            if (stateManager.CurrentState == gameState)
                 Show();
             else
                 Hide();
         }
 
-        protected virtual void Show()
+        private void Show()
         {
             Visible = true;
             Enabled = true;
             foreach (GameComponent component in childComponents)
             {
                 component.Enabled = true;
-                if (component is DrawableGameComponent)
-                    ((DrawableGameComponent)component).Visible = true;
+                var gameComponent = component as DrawableGameComponent;
+                if (gameComponent != null)
+                    gameComponent.Visible = true;
             }
         }
 
-        protected virtual void Hide()
+        private void Hide()
         {
             Visible = false;
             Enabled = false;
             foreach (GameComponent component in childComponents)
             {
                 component.Enabled = false;
-                if (component is DrawableGameComponent)
-                    ((DrawableGameComponent)component).Visible = false;
+                var gameComponent = component as DrawableGameComponent;
+                if (gameComponent != null)
+                    gameComponent.Visible = false;
             }
         }
-        #endregion
     }
 }

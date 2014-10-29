@@ -4,32 +4,21 @@ using Multiplayer_Software_Game_Engineering.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.GameData;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class PauseScreen : BaseGameState
     {
-        #region Variables
         private PictureBox arrowImageLeft;
         private PictureBox arrowImageRight;
         private LinkLabel continueGame;
         private LinkLabel gameControls;
         private LinkLabel mainMenu;
         private float maxItemWidth;
-        #endregion
 
-        #region Constructor(S)
-        public PauseScreen(Game game, GameStateManager stateManager)
-            : base(game, stateManager)
+        public PauseScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
-        }
-
-        #endregion
-
-        #region Override Methods
-        public override void Initialize()
-        {
-            base.Initialize();
         }
         
         protected override void LoadContent()
@@ -63,7 +52,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             gameControls.size = gameControls.spriteFont.MeasureString(gameControls.text);
             gameControls.selected += MenuItemSelected;
 
-            mainMenu = new LinkLabel { text = "Return To Main Menu" };
+            mainMenu = new LinkLabel { text = Constants.MAIN_MENU };
             mainMenu.size = mainMenu.spriteFont.MeasureString(mainMenu.text);
             mainMenu.selected += MenuItemSelected;
 
@@ -107,9 +96,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             controlManager.Draw(gameReference.spriteBatch);
             gameReference.spriteBatch.End();
         }
-        #endregion
 
-        #region General Methods
         void ControlManagerFocusChanged(object sender, EventArgs e)
         {
             Control control = sender as Control;
@@ -139,6 +126,5 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 stateManager.PushState(gameReference.startMenuScreen);
             }
         }
-        #endregion
     }
 }

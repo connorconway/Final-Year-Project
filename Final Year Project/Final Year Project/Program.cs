@@ -1,6 +1,5 @@
 namespace Multiplayer_Software_Game_Engineering
 {
-#if WINDOWS || XBOX
     public static class Program
     {
         static void Main(string[] args)
@@ -11,5 +10,4 @@ namespace Multiplayer_Software_Game_Engineering
             }
         }
     }
-#endif
 }

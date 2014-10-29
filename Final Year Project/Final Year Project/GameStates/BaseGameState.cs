@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using Multiplayer_Software_Game_Engineering.Components;
 using Multiplayer_Software_Game_Engineering.Controls;
+using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -153,16 +154,16 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         {
                             if (player2 == null)
                             {
-                                var animations = new Dictionary<AnimationKey, Animation>();
+                                var animations = new Dictionary<Constants.Direction, Animation>();
                                 var animation  = new Animation(3, 32, 32, 0, 0);
 
-                                animations.Add(AnimationKey.Down, animation);
+                                animations.Add(Constants.Direction.Down, animation);
                                 animation = new Animation(3, 32, 32, 0, 32);
-                                animations.Add(AnimationKey.Left, animation);
+                                animations.Add(Constants.Direction.Left, animation);
                                 animation = new Animation(3, 32, 32, 0, 64);
-                                animations.Add(AnimationKey.Right, animation);
+                                animations.Add(Constants.Direction.Right, animation);
                                 animation = new Animation(3, 32, 32, 0, 96);
-                                animations.Add(AnimationKey.Up, animation);
+                                animations.Add(Constants.Direction.Up, animation);
 
                                 var sprite = new AnimatedSprite(Game.Content.Load<Texture2D>(@"Graphics\Sprites\" + textTexture), animations);
 
@@ -195,7 +196,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         }
                         catch (Exception e)
                         {
-                            Console.Write("An error has occured: " + e);
+                            Console.Write(Constants.ERROR_GENERIC + e);
                         }
                         break;
                     case Protocol.Disconnected:
@@ -214,22 +215,24 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         if (player2 != null)
                         {
                             motion = new Vector2(posX, posY);
-                        
-                            if (motion.Y == -1)
+
+                            const double tolerance = 0.005;
+
+                            if (Math.Abs(motion.Y - (-1)) < tolerance)
                             {
-                                player2.animatedSprite.currentAnimation = AnimationKey.Up;
+                                player2.animatedSprite.currentAnimation = Constants.Direction.Up;
                             }
-                            else if (motion.Y == 1)
+                            else if (Math.Abs(motion.Y - 1) < tolerance)
                             {
-                                player2.animatedSprite.currentAnimation = AnimationKey.Down;
+                                player2.animatedSprite.currentAnimation = Constants.Direction.Down;
                             }
-                            if (motion.X == -1)
+                            if (Math.Abs(motion.X - (-1)) < tolerance)
                             {
-                                player2.animatedSprite.currentAnimation = AnimationKey.Left;
+                                player2.animatedSprite.currentAnimation = Constants.Direction.Left;
                             }
-                            else if (motion.X == 1)
+                            else if (Math.Abs(motion.X - 1) < tolerance)
                             {
-                                player2.animatedSprite.currentAnimation = AnimationKey.Right;
+                                player2.animatedSprite.currentAnimation = Constants.Direction.Right;
                             }
                         
                             player2.animatedSprite.isAnimating = animating;
@@ -274,7 +277,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             }
         }
 
-        protected byte[] GetDataFromMemoryStream(MemoryStream ms)
+        protected static byte[] GetDataFromMemoryStream(MemoryStream ms)
         {
             byte[] result;
 

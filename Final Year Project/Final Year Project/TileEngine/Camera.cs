@@ -1,5 +1,5 @@
-﻿using Multiplayer_Software_Game_Engineering.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Multiplayer_Software_Game_Engineering.GameEntities;
 
 namespace Multiplayer_Software_Game_Engineering.TileEngine
 {

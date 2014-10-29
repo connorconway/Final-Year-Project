@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
+using Multiplayer_Software_Game_Engineering.GameData;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class StartMenuScreen : BaseGameState
     {
-        #region Variables
         PictureBox arrowImageLeft;
         PictureBox arrowImageRight;
         LinkLabel startGame;
@@ -17,19 +17,9 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         LinkLabel gameSettings;
         LinkLabel exitGame;
         float maxItemWidth;
-        #endregion
 
-        #region Constructor(s)
-        public StartMenuScreen(Game game, GameStateManager stateManager)
-            : base(game, stateManager)
+        public StartMenuScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
-        }
-        #endregion
-
-        #region Override Methods
-        public override void Initialize()
-        {
-            base.Initialize();
         }
 
         protected override void LoadContent()
@@ -54,19 +44,19 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                     arrowTexture.Width,
                     arrowTexture.Height));
 
-            startGame = new LinkLabel { text = "Create New Character" };
+            startGame = new LinkLabel { text = Constants.NEW_CHARACTER };
             startGame.size = startGame.spriteFont.MeasureString(startGame.text);
             startGame.selected += MenuItemSelected;
 
-            loadGame = new LinkLabel {text = "Load Character"};
+            loadGame = new LinkLabel {text = Constants.LOAD_CHARACTER};
             loadGame.size = loadGame.spriteFont.MeasureString(loadGame.text);
             loadGame.selected += MenuItemSelected;
 
-            gameSettings = new LinkLabel { text = "Game Settings" };
+            gameSettings = new LinkLabel { text = Constants.GAME_SETTINGS };
             gameSettings.size = gameSettings.spriteFont.MeasureString(gameSettings.text);
             gameSettings.selected += MenuItemSelected;
 
-            exitGame = new LinkLabel {text = "Quit Game"};
+            exitGame = new LinkLabel { text = Constants.QUIT_GAME };
             exitGame.size = exitGame.spriteFont.MeasureString(exitGame.text);
             exitGame.selected += MenuItemSelected;
 
@@ -111,9 +101,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             controlManager.Draw(gameReference.spriteBatch);
             gameReference.spriteBatch.End();
         }
-        #endregion
 
-        #region General Methods
         void ControlManagerFocusChanged(object sender, EventArgs e)
         {
             Control control = sender as Control;
@@ -144,6 +132,5 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             }
 
         }
-        #endregion
     }
 }

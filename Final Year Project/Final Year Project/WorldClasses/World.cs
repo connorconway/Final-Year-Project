@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Multiplayer_Software_Game_Engineering.Properties;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +8,7 @@ namespace Multiplayer_Software_Game_Engineering.WorldClasses
 {
     public class World : DrawableGameComponent
     {
-        private         Rectangle   screenRectangle     { get; set; }
+        private         Rectangle   screenRectangle     { [UsedImplicitly] get; set; }
         public static   List<Level> levels;
         public          int         currentLevel        { private get; set; }
 

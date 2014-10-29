@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using Multiplayer_Software_Game_Engineering.Components;
 using Multiplayer_Software_Game_Engineering.Controls;
+using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.Networking;
 using Microsoft.Xna.Framework;
@@ -64,13 +65,13 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 controlManager.Add(linklabel);
             }
 
-            LinkLabel linkLabel1 = new LinkLabel { text = "Create New Lobby" };
+            LinkLabel linkLabel1 = new LinkLabel { text = Constants.CREATE_LOBBY};
             linkLabel1.size = linkLabel1.spriteFont.MeasureString(linkLabel1.text);
             linkLabel1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
                 Game1.systemOptions.resolutionHeight / 2);
             linkLabel1.selected += linkLabel1_Selected;
 
-            LinkLabel linkLabel2 = new LinkLabel { text = "Back to Character Creation" };
+            LinkLabel linkLabel2 = new LinkLabel { text = Constants.BACK };
             linkLabel2.size = linkLabel2.spriteFont.MeasureString(linkLabel2.text);
             linkLabel2.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
                 linkLabel1.position.Y + 75);

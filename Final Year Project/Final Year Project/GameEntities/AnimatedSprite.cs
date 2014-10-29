@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
-using Multiplayer_Software_Game_Engineering.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.TileEngine;
 
-namespace Multiplayer_Software_Game_Engineering.Components
+namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
     public class AnimatedSprite : Sprite
     {
-        private readonly Dictionary<AnimationKey, Animation> animations;
-        public           AnimationKey                        currentAnimation { get; set; }
-        public           bool                                isAnimating      { get; set; }
+        private readonly Dictionary<Constants.Direction, Animation> animations;
+        public           Constants.Direction                        currentAnimation { get; set; }
+        public           bool                                       isAnimating      { get; set; }
 
         public int Width
         {
@@ -21,10 +22,10 @@ namespace Multiplayer_Software_Game_Engineering.Components
             get { return animations[currentAnimation].frameHeight; }
         }
 
-        public AnimatedSprite(Texture2D sprite, Dictionary<AnimationKey, Animation> animation)
+        public AnimatedSprite(Texture2D sprite, Dictionary<Constants.Direction, Animation> animation)
         {
             this.sprite = sprite;
-            animations  = new Dictionary<AnimationKey, Animation>();
+            animations  = new Dictionary<Constants.Direction, Animation>();
 
             foreach (var key in animation.Keys)
                 animations.Add(key, (Animation)animation[key].Clone());

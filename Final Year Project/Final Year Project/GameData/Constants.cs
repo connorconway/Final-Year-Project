@@ -1,22 +1,39 @@
 ﻿namespace Multiplayer_Software_Game_Engineering.GameData
 {
-    internal static class Constants
+    public static class Constants
     {
-        public const string _serviceOptionsPath =
+        public const string _serviceOptionsPath = 
             @"C:\Users\Connor\Source\Repos\Final-Year-Project\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
           //  @"E:\Documents\Visual Studio 2013\Projects\PRG\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
 
-        public const string _NEWGAME            = "Begin Story";
-        public const string _LOADGAME           = "Load Story";
-        public const string _SELECTGAME         = "Select Story";
-        public const string _CONTINUEGAME       = "Continue Story";
-        public const string _QUITGAME           = "End Story";
-        public const string _SETTINGS           = "Story Settings";
-        public const string _CONTROLS           = "Game Controls";
-        public const string _TITLESCREEN        = "Return To Title Screen";
-        public const string _MAINMENU           = "Return To Main Menu";
-        public const string _BACK               = "Back";
-        public const string _ACCEPTCHARACTER    = "Accept This Character";
-        public const string _ACCEPTCHANGES      = "Accept These Changes";
+        public const string WHO_WILL_FIGHT      = "Who Will You Fight As?";
+        public const string CREATE_LOBBY        = "Create New Lobby";
+        public const string JOIN_LOBBY          = "Join Existing Lobby";
+        public const string BACK                = "Back";
+        public const string GAME_OVER           = "Game Over - You Lose!";
+        public const string QUIT_GAME           = "Quit Game";
+        public const string NEW_CHARACTER       = "Create New Character";
+        public const string LOAD_CHARACTER      = "Load Character";
+        public const string SELECT_CHARACTER    = "Select Character";
+        public const string MAKE_CHOICE         = "Character Number: ";
+        public const string MAIN_MENU           = "Return To Main Menu";
+        public const string ACCEPT_CHANGES      = "Accept These Changes";
+        public const string DISMISS_CHANGES     = "Dismiss These Changes";
+        public const string GAME_SETTINGS       = "Game Settings";
+
+        public const string ERROR_CONNECTION    = "Error: Client could not connect \nEnsure the server is running and the firewall is not blocking port ";
+        public const string ERROR_GENERIC       = "An Error Has Occured: ";
+        
+        public const string INFO_CONTROLS       = "Kill the enemy player \nPress [space] to shoot \nPress [w a s d] to move \n\nPress [Enter] to close textbox";
+        public const string INFO_WAITING        = "\n\nWaiting for a player to join room";
+        public const string INFO_DAMAGED        = "You have taken damage \nProtect yourself! \n\nPress [Enter] to close textbox";
+
+        public enum Direction
+        {
+            Down,
+            Left,
+            Right,
+            Up
+        }
     }
 }

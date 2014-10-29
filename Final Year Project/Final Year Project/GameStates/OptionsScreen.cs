@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.IO;
 using System.Xml.Serialization;
 using Multiplayer_Software_Game_Engineering.Controls;
 using Multiplayer_Software_Game_Engineering.GameData;
@@ -12,7 +10,6 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class OptionsScreen : BaseGameState
     {
-        #region Varibales
         private LeftRightSelector selectFullScreen;
         private LeftRightSelector selectDifficulty;
         private LeftRightSelector selectSoundLevel;
@@ -23,9 +20,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         readonly String[] soundLevelItems = { "On", "Quiet", "Off" };
         readonly String[] musicLevelItems = { "On", "Quiet", "Off" };
         readonly String[] resolutionItems = { "1280x900", "1366x876", "1920x1080", "2560x1080" };
-        #endregion
 
-        #region Getter(s) and Setter(s)
         public string SelectFullScreen
         {
             get { return selectFullScreen.SelectedItem; }
@@ -50,19 +45,9 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             get { return selectResolution.SelectedItem; }
         }
-        #endregion
 
-        #region Contructor(s)
-        public OptionsScreen(Game game, GameStateManager stateManager)
-            : base(game, stateManager)
+        public OptionsScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
-        }
-        #endregion
-
-        #region Override Methods
-        public override void Initialize()
-        {
-            base.Initialize();
         }
 
         protected override void LoadContent()
@@ -86,9 +71,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             controlManager.Draw(gameReference.spriteBatch);
             gameReference.spriteBatch.End();
         }
-        #endregion
 
-        #region General Methods
         private void CreateControls()
         {
             Texture2D leftTexture = Game.Content.Load<Texture2D>(@"Graphics\GUI\leftarrowUp");
@@ -126,7 +109,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
             LinkLabel linkLabel1 = new LinkLabel
             {
-                text = "Accept these changes"
+                text = Constants.ACCEPT_CHANGES
             };
             linkLabel1.size = linkLabel1.spriteFont.MeasureString(linkLabel1.text);
             linkLabel1.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel1.size.X) >> 1,
@@ -135,7 +118,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
             LinkLabel linkLabel2 = new LinkLabel
             {
-                text = "Dismiss these changes"
+                text = Constants.DISMISS_CHANGES
             };
             linkLabel2.size = linkLabel2.spriteFont.MeasureString(linkLabel2.text);
             linkLabel2.position = new Vector2((int)(Game1.systemOptions.resolutionWidth - linkLabel2.size.X) >> 1,
@@ -179,6 +162,5 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             stateManager.PopState();
         }
-        #endregion
     }
 }

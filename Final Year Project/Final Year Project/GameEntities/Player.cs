@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Multiplayer_Software_Game_Engineering.Components
+namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
     public class Player
     {
@@ -74,25 +75,25 @@ namespace Multiplayer_Software_Game_Engineering.Components
             if (InputHandler.KeyDown(Keys.W) ||
             InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
-                animatedSprite.currentAnimation = AnimationKey.Up;
+                animatedSprite.currentAnimation = Constants.Direction.Up;
                 motion.Y = -1;
             }
             else if (InputHandler.KeyDown(Keys.S) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
             {
-                animatedSprite.currentAnimation = AnimationKey.Down;
+                animatedSprite.currentAnimation = Constants.Direction.Down;
                 motion.Y = 1;
             }
             if (InputHandler.KeyDown(Keys.A) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickLeft, PlayerIndex.One))
             {
-                animatedSprite.currentAnimation = AnimationKey.Left;
+                animatedSprite.currentAnimation = Constants.Direction.Left;
                 motion.X = -1;
             }
             if (InputHandler.KeyDown(Keys.D) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
-                animatedSprite.currentAnimation = AnimationKey.Right;
+                animatedSprite.currentAnimation = Constants.Direction.Right;
                 motion.X = 1;
             }
 
