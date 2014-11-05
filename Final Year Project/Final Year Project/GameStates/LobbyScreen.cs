@@ -86,7 +86,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         public override void Update(GameTime gameTime)
         {
 
-            if (player1 != null && player1.getHost())
+            if (player1 != null && player1.isHost)
             {
                 hosts.Add(player1);
             }
@@ -125,7 +125,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         private void linkLabel1_Selected(object sender, EventArgs e)
         {
             InputHandler.Flush();
-            player1.setHost(true);
+            player1.isHost = true;
             stateManager.PushState(gameReference.gamePlayScreen);
         }
 

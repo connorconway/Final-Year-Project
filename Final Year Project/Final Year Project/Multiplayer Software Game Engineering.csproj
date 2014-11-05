@@ -103,6 +103,7 @@
     <Compile Include="Networking\NetworkConstants.cs" />
     <Compile Include="Networking\NetworkProtocols.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

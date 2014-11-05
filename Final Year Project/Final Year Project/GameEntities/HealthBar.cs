@@ -5,7 +5,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
     public class HealthBar : Sprite
     {
-        private Color color;
+        private readonly Color color;
         public int currentHealth;
 
         public HealthBar(Texture2D sprite, Vector2 position, Color color)

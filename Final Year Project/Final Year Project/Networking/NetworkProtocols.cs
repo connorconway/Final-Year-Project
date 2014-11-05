@@ -6,6 +6,7 @@
         Connected     = 2,
         PlayerMoved   = 3,
         BulletCreated = 4,
-        GameOver      = 5
+        GameOver      = 5,
+        SyncGame      = 6
     }
 }

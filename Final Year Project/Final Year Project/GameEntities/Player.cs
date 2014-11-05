@@ -11,23 +11,18 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
     public class Player
     {
-        #region Variables
         public Camera camera { get; private set; }
         Game1 gameReference;
-        public AnimatedSprite animatedSprite { get; set; }
+        public AnimatedSprite animatedSprite { get; private set; }
         public Vector2 motion;
-        public List<Bullet> bullets;
+        public readonly List<Bullet> bullets;
 
-        public Texture2D bulletSprite;
-        private TimeSpan bulletTimer;
-        private float shotSeconds;
+        public readonly Texture2D bulletSprite;
         public Boolean createBullet;
         public Vector2 playerOrigin;
-        public HealthBar playerHealth;
-        private bool isHost;
-        #endregion
+        public readonly HealthBar playerHealth;
+        public bool isHost { get; set; }
 
-        #region Constructor(s)
         public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite, Texture2D healthBarSprite, Color color)
         {
             Random rand = new Random();
@@ -36,22 +31,19 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             camera = new Camera(this.gameReference.screenRectangle);
             this.animatedSprite = animatedSprite;
             bullets = new List<Bullet>(10);
-            shotSeconds = 5;
-            bulletTimer = TimeSpan.FromSeconds(shotSeconds);
             this.bulletSprite = bulletSprite;
             playerHealth = new HealthBar(healthBarSprite, animatedSprite.Position, color);
             animatedSprite.position.X = rand.Next(50, 400); 
             animatedSprite.position.Y = rand.Next(50, 400);
             isHost = false;
         }
-        #endregion
 
-        #region General Methods
-        public void UpdateHealthBar(GameTime gameTime)
+        public void UpdateHealthBar()
         {
             playerHealth.position.X = animatedSprite.Position.X - animatedSprite.Width / 2;
             playerHealth.position.Y = animatedSprite.Position.Y - 10;
         }
+
         public void Update(GameTime gameTime)
         {
             createBullet = false;
@@ -121,7 +113,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
                 bullet.Update(gameTime);
             }
 
-            UpdateHealthBar(gameTime);
+            UpdateHealthBar();
 
             playerHealth.Update(gameTime);
         }
@@ -135,15 +127,5 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             }
             playerHealth.Draw(gameTime, spriteBatch);
         }
-
-        public bool getHost()
-        {
-            return isHost;
-        }
-        public void setHost(bool host)
-        {
-            isHost = host;
-        }
-        #endregion
     }
 }

@@ -204,7 +204,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             InputHandler.Flush();
             CreatePlayer();
             CreateWorld();
-            player1.setHost(true);
+            player1.isHost = true;
             stateManager.PushState(gameReference.gamePlayScreen);
         }
 

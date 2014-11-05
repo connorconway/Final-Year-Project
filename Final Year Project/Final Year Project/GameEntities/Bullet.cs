@@ -13,8 +13,8 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
 
     public class Bullet : Sprite
     {
-        private Vector2 motion;
-        private Constants.Direction spriteFacing;
+        private new Vector2 motion;
+        private readonly Constants.Direction spriteFacing;
         public BulletLife bulletLife;
 
         public Bullet(Texture2D sprite, Vector2 position, string spriteFacing, Vector2 motion)

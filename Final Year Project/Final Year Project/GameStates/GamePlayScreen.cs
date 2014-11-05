@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
+using System.Timers;
 using System.Windows.Forms;
 using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.GameEntities;
@@ -17,14 +19,20 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class GamePlayScreen : BaseGameState
     {
-        private Engine engine = new Engine(32, 32);
-        public static World world { private get; set; }
-        private bool secondPlayerAnimating;
-        private int playerKills;    
+        private          System.Timers.Timer syncTimer; 
+        public  static   World  world                  { private get; set; }
+        private          Engine engine                 = new Engine(32, 32);
+        private          bool   secondPlayerAnimating;
+        private          int    playerKills;    
+        private          bool   shownHelp = false;
 
         public GamePlayScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
-            world = new World(game, gameReference.screenRectangle);
+                  world         = new World(game, gameReference.screenRectangle);
+            syncTimer     = new System.Timers.Timer();
+            syncTimer.Elapsed  += SyncGames;
+            syncTimer.Interval  = 20000;
+            syncTimer.Enabled   = true;
         }
 
         public override void Initialize()
@@ -78,38 +86,32 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 waitingForPlayer = true;
             }
             if (InputHandler.KeyReleased(Keys.P))
-            {
                 stateManager.PushState(gameReference.pauseScreen);
-            }
             if (InputHandler.KeyReleased(Keys.Enter) && waitingForPlayer == false)
-            {
                 textBox.decreaseAlpha = false;
-            }
 
             world.Update(gameTime);
 
             if (player2 != null)
             {
-                foreach (Bullet bullet in player1.bullets)
+                foreach (Bullet bullet in player1.bullets.Where(bullet => bullet.boundingBox.Intersects(player2.animatedSprite.boundingBox)))
                 {
-                    if (bullet.boundingBox.Intersects(player2.animatedSprite.boundingBox))
-                    {
-                        bullet.bulletLife = BulletLife.Dead;
-                        bullet.boundingBox = new Rectangle(0,0,0,0);
-                        player2.playerHealth.currentHealth -= 8;
-                    }
+                    bullet.bulletLife                   = BulletLife.Dead;
+                    bullet.boundingBox                  = new Rectangle(0,0,0,0);
+                    player2.playerHealth.currentHealth -= 8;
                 }
-                foreach (Bullet bullet in player2.bullets)
+                foreach (Bullet bullet in player2.bullets.Where(bullet => bullet.boundingBox.Intersects(player1.animatedSprite.boundingBox)))
                 {
-                    if (bullet.boundingBox.Intersects(player1.animatedSprite.boundingBox))
-                    {
-                        bullet.bulletLife = BulletLife.Dead;
-                        bullet.boundingBox = new Rectangle(0, 0, 0, 0);
-                        player1.playerHealth.currentHealth -= 8;
+                    bullet.bulletLife                   = BulletLife.Dead;
+                    bullet.boundingBox                  = new Rectangle(0, 0, 0, 0);
+                    player1.playerHealth.currentHealth -= 8;
 
+                    if (shownHelp == false)
+                    {
                         textBox.setText(Constants.INFO_DAMAGED);
-                        textBox.decreaseAlpha = true;
+                        shownHelp = true;
                     }
+                    textBox.decreaseAlpha = true;
                 }
             }
 
@@ -152,11 +154,9 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             if (player2 != null)
             {
                 player2.animatedSprite.Update(gameTime);
-                player2.UpdateHealthBar(gameTime);
+                player2.UpdateHealthBar();
                 foreach (Bullet bullet in player2.bullets)
-                {
                     bullet.Update(gameTime);
-                }
                 if (player2.playerHealth.currentHealth <= 0)
                 {
                     writeStream.Position = 0;
@@ -175,6 +175,17 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             scoreTextBox.setPosition(new Vector2(player1.camera.position.X + Game1.systemOptions.resolutionWidth - (textBoxSprite.Width * 0.4f), player1.camera.position.Y));
 
             base.Update(gameTime);
+        }
+
+        private void SyncGames(object source, ElapsedEventArgs e)
+        {
+            writeStream.Position = 0;
+            writer.Write((byte)Protocol.SyncGame);
+            writer.Write(player1.animatedSprite.position.X);
+            writer.Write(player1.animatedSprite.position.Y);
+            writer.Write(player1.playerHealth.currentHealth);
+            SendData(GetDataFromMemoryStream(writeStream));
+            writer.Flush();
         }
 
         public override void Draw(GameTime gameTime)

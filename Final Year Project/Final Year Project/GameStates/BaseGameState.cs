@@ -188,7 +188,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                                 writeStream.Position = 0;
                                 writer.Write((byte)Protocol.Connected);
                                 writer.Write(player1.animatedSprite.textTexture);
-                                writer.Write(player1.animatedSprite.Position.X);
+                                writer.Write(player1.animatedSprite.Position.X); 
                                 writer.Write(player1.animatedSprite.Position.Y);
                                 SendData(GetDataFromMemoryStream(writeStream));
                                 writer.Flush();
@@ -239,8 +239,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                             player2.motion.Normalize();
                             player2.animatedSprite.Position += motion * player2.animatedSprite.Speed;
                             player2.animatedSprite.LockToMap();
-                        }
-                                        
+                        }                     
                         break;
                     case Protocol.BulletCreated:
                         posX = reader.ReadSingle();
@@ -268,6 +267,20 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         SendData(GetDataFromMemoryStream(writeStream));
                         writer.Flush();
                         stateManager.PushState(gameReference.gameLoseScreen);
+                        break;
+                    case Protocol.SyncGame:
+                        posX = reader.ReadSingle();
+                        posY = reader.ReadSingle();
+                        int playerHealth = reader.ReadInt32();
+                        id = reader.ReadByte();
+                        ip = reader.ReadString();
+
+                        if (player2 != null)
+                        {
+                            player2.animatedSprite.position = new Vector2(posX, posY);
+                            player2.playerHealth.currentHealth = playerHealth;
+                        }
+
                         break;
                 }
             }
