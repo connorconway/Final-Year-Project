@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.Control" Collapsed="true">
+    <Position X="5.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACEAAAAAgAAgKCAIAQAAAAFACCIAAQACgAAAAA=</HashCode>
+      <FileName>Controls\Control.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.ControlManager" Collapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAgAAABgAKACAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Controls\ControlManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.Label" Collapsed="true">
+    <Position X="3.25" Y="19.25" Width="1.5" />
+    <InheritanceLine Type="Multiplayer_Software_Game_Engineering.Controls.Control" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="17.062" />
+        <Point X="6.5" Y="19.625" />
+        <Point X="4.75" Y="19.625" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Label.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.LeftRightSelector" Collapsed="true">
+    <Position X="3.25" Y="18.25" Width="1.5" />
+    <InheritanceLine Type="Multiplayer_Software_Game_Engineering.Controls.Control" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="17.062" />
+        <Point X="6.5" Y="18.594" />
+        <Point X="4.75" Y="18.594" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAACAGgAAAAgAQAAAIQAAACAABJAAAAQSAAA=</HashCode>
+      <FileName>Controls\LeftRightSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.LinkLabel" Collapsed="true">
+    <Position X="3.25" Y="20.25" Width="1.5" />
+    <InheritanceLine Type="Multiplayer_Software_Game_Engineering.Controls.Control" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="17.062" />
+        <Point X="6.5" Y="20.562" />
+        <Point X="4.75" Y="20.562" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAgAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Controls\LinkLabel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.ListBox" Collapsed="true">
+    <Position X="3.25" Y="21.25" Width="1.5" />
+    <InheritanceLine Type="Multiplayer_Software_Game_Engineering.Controls.Control" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="17.062" />
+        <Point X="6.5" Y="21.562" />
+        <Point X="4.75" Y="21.562" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAACgEAAAgAQBAAAAAEAAABBJQAAAQSIAA=</HashCode>
+      <FileName>Controls\ListBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Controls.PictureBox" Collapsed="true">
+    <Position X="3.25" Y="17.25" Width="1.5" />
+    <InheritanceLine Type="Multiplayer_Software_Game_Engineering.Controls.Control" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="17.062" />
+        <Point X="6.5" Y="17.625" />
+        <Point X="4.75" Y="17.625" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAgAAAAAAAAAAAEAAAgAAAAAQAAAAAgA=</HashCode>
+      <FileName>Controls\PictureBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Game1" Collapsed="true">
+    <Position X="23.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIUAAdAAAAACAwAAAAgAAAAAAAEAAAAAAAAAAAAKAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Program" Collapsed="true">
+    <Position X="28.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameData.Constants" Collapsed="true">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Multiplayer_Software_Game_Engineering.GameData.Constants.Direction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>GameData\Constants.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAAAAAABAAAABAACJAAABAGEQABAAABMCAAQAEAMAAA=</HashCode>
+      <FileName>GameData\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameData.SystemOptions" Collapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAACAAAAAAAAAAAAGAACAAAAgAA=</HashCode>
+      <FileName>GameData\SystemOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.AnimatedSprite">
+    <Position X="14.5" Y="4.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABAAAAgAAAAAAAEAAAAAAEgAAAAAAIAAAQAA=</HashCode>
+      <FileName>GameEntities\AnimatedSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.Animation" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAgAAABAAAAAAAAABAAAAAQAEgAAAAAQAAABA=</HashCode>
+      <FileName>GameEntities\Animation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.Bullet">
+    <Position X="18" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAEAAAAAAQAA=</HashCode>
+      <FileName>GameEntities\Bullet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="bulletLife" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.HealthBar">
+    <Position X="20.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAEAACAAAAAAAAAAAA=</HashCode>
+      <FileName>GameEntities\HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.Player">
+    <Position X="23" Y="4.25" Width="2.5" />
+    <AssociationLine Name="animatedSprite" Type="Multiplayer_Software_Game_Engineering.GameEntities.AnimatedSprite" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="24.25" Y="7.603" />
+        <Point X="24.25" Y="9.046" />
+        <Point X="15.875" Y="9.046" />
+        <Point X="15.875" Y="8.04" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAQEBAAAAoAAAgABAAAAAFAAgAAgAAAAABAAAAAAAAA=</HashCode>
+      <FileName>GameEntities\Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameReference" />
+      <Field Name="playerHealth" />
+      <Property Name="animatedSprite" />
+      <Property Name="camera" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.Sprite">
+    <Position X="16.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAACAIUABABAAASAgAAQAAAAEAAA=</HashCode>
+      <FileName>GameEntities\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameEntities.TextBox">
+    <Position X="12" Y="4.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Multiplayer_Software_Game_Engineering.GameEntities.TextBox.TextBoxExists">
+        <TypeIdentifier>
+          <NewMemberFileName>GameEntities\TextBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIYAAAAAAECACgAACIAAAACCgAAAAACIAQAAAAAAAhA=</HashCode>
+      <FileName>GameEntities\TextBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.BaseGameState" Collapsed="true">
+    <Position X="8.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0IQEBAIAIMoEAAICAAAAAIACAAAAEAiAQUQBBAAQAAQ=</HashCode>
+      <FileName>GameStates\BaseGameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.CharacterCreationScreen" Collapsed="true">
+    <Position X="0.75" Y="15.25" Width="2" />
+    <AssociationLine Name="selectClass" Type="Multiplayer_Software_Game_Engineering.Controls.LeftRightSelector" FixedFromPoint="true">
+      <Path>
+        <Point X="1.25" Y="15.941" />
+        <Point X="1.25" Y="18.596" />
+        <Point X="3.25" Y="18.596" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AKQAEAEAAAAAAgCAAACAQAAQACQAgAAAACAAAAAAAKQ=</HashCode>
+      <FileName>GameStates\CharacterCreationScreen.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="characterImage" />
+      <Field Name="selectClass" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameLoseScreen" Collapsed="true">
+    <Position X="3.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAgAAAAAAAAAAACQAAAAAAAAAAAAAACQ=</HashCode>
+      <FileName>GameStates\GameoverScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GamePlayScreen" Collapsed="true">
+    <Position X="5.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAgAAAAAwAAAAAAAAAAAACAAAIAAAAAAARAAAI=</HashCode>
+      <FileName>GameStates\GamePlayScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameState" Collapsed="true">
+    <Position X="8.5" Y="11.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAACAgAAEAAAAAAAAAAEAAAAAAAgAAAAACQ=</HashCode>
+      <FileName>GameStates\GameState.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="stateManager" />
+      <Property Name="gameState" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameStateManager" Collapsed="true">
+    <Position X="5.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAQBABAAAADACAAAAAAAAAQBAAAIAAACAA=</HashCode>
+      <FileName>GameStates\GameStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.LoadGameScreen" Collapsed="true">
+    <Position X="8" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAEKACAAAgAAQAABAACAAAAAAACAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\LoadGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.LobbyScreen" Collapsed="true">
+    <Position X="10.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEABAAAwAAAACAAAAAAEQEAAAAAAAAAACAACQ=</HashCode>
+      <FileName>GameStates\LobbyScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.OptionsScreen" Collapsed="true">
+    <Position X="12.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAUAAAEAAAAAQggACQAQAAAAAi0AAAAAAAAAAAAACCQ=</HashCode>
+      <FileName>GameStates\OptionsScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.PauseScreen" Collapsed="true">
+    <Position X="14.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAACAAgAAQAoAAAAAAGAAEAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\PauseScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.StartMenuScreen" Collapsed="true">
+    <Position X="17" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAQAAAACAAgAAQDoAAAAAAEAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\StartMenuScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Handlers.InputHandler" Collapsed="true">
+    <Position X="28.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACZAABAAAAAAgAAQAAAEAAAAAAAAAAAAACAiAhBIAAA=</HashCode>
+      <FileName>Handlers\InputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Networking.NetworkConstants" Collapsed="true">
+    <Position X="33.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIIAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Networking\NetworkConstants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.Properties.Settings1" Collapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.TileEngine.Camera" Collapsed="true">
+    <Position X="21" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAEAAAIBAEAAAAAQAABAAAAAQAAAQ=</HashCode>
+      <FileName>TileEngine\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.TileEngine.MapLayer" Collapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAEAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TileEngine\MapLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.TileEngine.Tile" Collapsed="true">
+    <Position X="33.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TileEngine\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.TileEngine.TileMap" Collapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAgAAABAAAAAAABAAAAAAAAAAEAAAEBA=</HashCode>
+      <FileName>TileEngine\TileMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.TileEngine.TileSet" Collapsed="true">
+    <Position X="28.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAgAgAgABAAAAAAAAE=</HashCode>
+      <FileName>TileEngine\TileSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.WorldClasses.Level" Collapsed="true">
+    <Position X="30" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>WorldClasses\Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Multiplayer_Software_Game_Engineering.GameEntities.BulletLife">
+    <Position X="18.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAACAAAAAA=</HashCode>
+      <FileName>GameEntities\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Multiplayer_Software_Game_Engineering.Networking.Protocol" Collapsed="true">
+    <Position X="28.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAgBAAAA=</HashCode>
+      <FileName>Networking\NetworkProtocols.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Multiplayer_Software_Game_Engineering.Networking.ConnectionEvent" Collapsed="true">
+    <Position X="26.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Networking\Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Multiplayer_Software_Game_Engineering.Networking.DataReceivedEvent" Collapsed="true">
+    <Position X="28.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Networking\Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

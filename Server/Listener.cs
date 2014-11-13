@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Server
 {
-    public class Listener
+    public class Listener : IListener
     {
         public  event    ConnectionEvent userAdded;
         private readonly TcpListener     listener;
@@ -12,7 +12,7 @@ namespace Server
 
         public Listener(int port)
         {
-            usedUserID = new bool[Properties.Settings.Default.MaxNumberOfClients];
+            usedUserID = new bool[Properties.NetworkSettings.Default.MaxNumberOfClients];
             listener   = new TcpListener(IPAddress.Any, port);
         }
 
@@ -34,10 +34,10 @@ namespace Server
 
         private void AcceptClient(IAsyncResult ar)
         {
-            TcpClient client = listener.EndAcceptTcpClient(ar);
-            int       id     = -1;
+            var client = listener.EndAcceptTcpClient(ar);
+            var id     = -1;
 
-            for (byte i = 0; i < usedUserID.Length; i++)
+            for (var i = 0; i < usedUserID.Length; i++)
             {
                 if (usedUserID[i])
                     continue;
@@ -54,7 +54,7 @@ namespace Server
             usedUserID[id]   = true;
             Client newClient = new Client(client, (byte)id);
 
-            newClient.UserDisconnected += client_UserDisconnected;
+            newClient.UserDisconnected += UserDisconnected;
 
             if (userAdded != null)
                 userAdded(this, newClient);
@@ -62,9 +62,9 @@ namespace Server
             ListenForNewClient();
         }
 
-        void client_UserDisconnected(object sender, Client user)
+        public void UserDisconnected(object sender, Client user)
         {
-            usedUserID[user.ID] = false;
+            usedUserID[user.clientID] = false;
         }
     }
 }

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="5048335f-95d2-497b-b711-4b0a9960de77" name="ActivityDiagram" linkedPackageId="70e764eb-dc0a-4bef-af21-271eab74720b" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="8361f5e6-3fe2-430d-a801-8212845e49d9">
+      <elementDefinition Id="4176989c-276d-4894-95ff-90ba08759b59" />
+      <body>This section continues to loop until a players HP has dropped to 0</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="fa906f95-3195-4323-b90e-67e12d2f1774" LastKnownName="Send response back to all clients" />
+        <opaqueActionMoniker Id="5f5219c9-662d-4e8d-8425-40ae60341f69" LastKnownName="Await response" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="d6ad1684-b4b2-483d-83b4-4bd3c4b8717f">
+      <profileInstance Id="9b14d316-ddc1-447b-b7b2-23ee0fd871db" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="93b2bc2a-d451-455c-b2ca-929c4cc4d99e">
+      <profileInstance Id="a00feaf3-679a-4d28-b115-f44e9d3b516f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="96ef2beb-fa75-4330-85d8-b7b58f78044b" name="ActivityDiagram" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="af31dca4-416b-4fea-ad45-dd217d0a8ded" />
+        <nodes>
+          <initialNode Id="9dfa7b1d-8e6b-49b1-aa4f-c3f6c184a8aa" name="Initial1" isLeaf="false">
+            <elementDefinition Id="c10cb207-5947-4b20-80d6-33b31c23c709" />
+            <flowNodeTargets>
+              <controlFlow Id="17e10082-f69f-492d-b040-e48deddea6ac" isLeaf="false">
+                <opaqueActionMoniker Id="82e5cce4-d262-4a63-95ef-c2c7910416ef" LastKnownName="Create character" />
+                <elementDefinition Id="f80ebdb1-28ca-4977-b7b6-33de00bd20a9" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="82e5cce4-d262-4a63-95ef-c2c7910416ef" name="Create character" isLeaf="false">
+            <elementDefinition Id="b6d8a8a5-e30d-4752-8575-50036b44af16" />
+            <flowNodeTargets>
+              <controlFlow Id="4700a9ca-6517-4600-a66d-dbc798f9c2d7" isLeaf="false">
+                <opaqueActionMoniker Id="f0f65bc4-b58a-46d4-b7a9-0d1296bfc248" LastKnownName="Connect to server" />
+                <elementDefinition Id="c83d7682-5a4c-46bd-8185-9c6d9a845d0f" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="f0f65bc4-b58a-46d4-b7a9-0d1296bfc248" name="Connect to server" isLeaf="false">
+            <elementDefinition Id="80c2b713-167a-4a39-8b5b-885cf770cfe7" />
+            <flowNodeTargets>
+              <controlFlow Id="7d953e0c-06a2-44b9-b844-de64c1648d04" isLeaf="false">
+                <opaqueActionMoniker Id="0a69d5cc-e07d-4f17-9d37-31ada71d4a0a" LastKnownName="Verify client connected" />
+                <elementDefinition Id="d98faf76-08b5-46f1-8485-cae9620d6782" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="0a69d5cc-e07d-4f17-9d37-31ada71d4a0a" name="Verify client connected" isLeaf="false">
+            <elementDefinition Id="b58c9bae-1c1b-47f3-b988-de842e5ceb3a" />
+            <flowNodeTargets>
+              <controlFlow Id="c621f106-e7dd-4a91-8368-3753a9a7012c" isLeaf="false">
+                <decisionNodeMoniker Id="9cc004a3-d4dc-495b-aa26-3feb0597d59c" LastKnownName="Decision1" />
+                <elementDefinition Id="5d2cf033-f6b2-4f9c-95ae-bf2765cbfc15" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="9cc004a3-d4dc-495b-aa26-3feb0597d59c" name="Decision1" isLeaf="false">
+            <elementDefinition Id="21873bf0-fc05-4494-a43f-c9fe8320afdf" />
+            <flowNodeTargets>
+              <controlFlow Id="9af3b232-d296-4531-bd02-0420734ce060" guard="No Connection" isLeaf="false">
+                <opaqueActionMoniker Id="6e98bc4b-967b-4648-9c4c-184eb4757eb0" LastKnownName="Start Game Single-Player" />
+                <elementDefinition Id="318cc37b-ef30-4fcf-ac41-5446dfa726d9" />
+              </controlFlow>
+              <controlFlow Id="7dffcccc-c117-4a32-a56f-4a2a55168fb6" guard="Connection Established" isLeaf="false">
+                <opaqueActionMoniker Id="bf7583dc-7d45-4670-831b-7bec4eb4f0dd" LastKnownName="Create new lobby / Join existing lobby" />
+                <elementDefinition Id="8aec054e-ed48-4bcf-8760-b31e41cc9c79" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="6e98bc4b-967b-4648-9c4c-184eb4757eb0" name="Start Game Single-Player" isLeaf="false">
+            <elementDefinition Id="54cb0bf8-ffdc-4544-8565-57459c8d0837" />
+            <flowNodeTargets>
+              <controlFlow Id="94dd0084-7140-40d0-aded-6126fc153174" isLeaf="false">
+                <activityFinalNodeMoniker Id="d6b15ebb-b746-4ac2-823d-267c9f64219b" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="2f2ddca3-d9cd-4093-8e4c-b3c5ce2f282d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="bf7583dc-7d45-4670-831b-7bec4eb4f0dd" name="Create new lobby / Join existing lobby" isLeaf="false">
+            <elementDefinition Id="b2994863-58f2-430b-b9f2-fd3a5ed29de0" />
+            <flowNodeTargets>
+              <controlFlow Id="31ae8a33-dfa7-4acb-b1c8-6cfab68f658a" isLeaf="false">
+                <opaqueActionMoniker Id="677dcd59-1800-417f-bc26-362f29042f1c" LastKnownName="Send room data to the server" />
+                <elementDefinition Id="4fdfb258-a33f-4153-ae17-06775103a263" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="d6b15ebb-b746-4ac2-823d-267c9f64219b" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="61373ffb-49a2-4109-8d66-ffb0142b1b59" />
+          </activityFinalNode>
+          <opaqueAction Id="677dcd59-1800-417f-bc26-362f29042f1c" name="Send room data to the server" isLeaf="false">
+            <elementDefinition Id="8cf984b5-ca1a-4f47-b261-61bf12215a7b" />
+            <flowNodeTargets>
+              <controlFlow Id="6f8d04fc-3c40-46d4-b5ba-f934241af8ed" isLeaf="false">
+                <opaqueActionMoniker Id="4179ad62-2e8d-47a6-9147-1d7c2badde22" LastKnownName="Decide rooms and send data back to all connected clients" />
+                <elementDefinition Id="dd5482b1-4cf6-4f4c-b9c6-b2b547785c73" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4179ad62-2e8d-47a6-9147-1d7c2badde22" name="Decide rooms and send data back to all connected clients" isLeaf="false">
+            <elementDefinition Id="aa7a26a6-72af-4460-aa13-8f44ae31e6b7" />
+            <flowNodeTargets>
+              <controlFlow Id="cdd0ca99-0483-4a5d-907a-0052a17ae6d2" isLeaf="false">
+                <opaqueActionMoniker Id="5f5219c9-662d-4e8d-8425-40ae60341f69" LastKnownName="Await response" />
+                <elementDefinition Id="4ed47c73-35cf-45b4-a0a8-243d2960f6b7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="5f5219c9-662d-4e8d-8425-40ae60341f69" name="Await response" isLeaf="false">
+            <elementDefinition Id="10cb424f-d92f-40e9-9479-90d05be94746" />
+            <flowNodeTargets>
+              <controlFlow Id="574ab6b5-b7d7-4e32-ae1b-74c3ed2e89d9" isLeaf="false">
+                <decisionNodeMoniker Id="67271e01-9cc1-4c5c-aabb-e13bf24b12e5" LastKnownName="Decision2" />
+                <elementDefinition Id="bca7dc7f-da49-44de-900c-dc0d0c58a8c0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="67271e01-9cc1-4c5c-aabb-e13bf24b12e5" name="Decision2" isLeaf="false">
+            <elementDefinition Id="51335796-67a4-489a-b818-339150308ae1" />
+            <flowNodeTargets>
+              <controlFlow Id="e7a9d4f4-2eef-4f81-8ce6-0e89388e0e91" isLeaf="false">
+                <opaqueActionMoniker Id="2e66fd2e-6fc9-45a3-ad12-0dcf32b16850" LastKnownName="Move player" />
+                <elementDefinition Id="1bd8e131-e4ff-49f5-84fe-890fe83258c4" />
+              </controlFlow>
+              <controlFlow Id="4c3e15c0-113a-4425-9c27-6553a3619a24" isLeaf="false">
+                <opaqueActionMoniker Id="5ab11d4e-4804-48aa-8c7c-fb00db0f3859" LastKnownName="Shoot" />
+                <elementDefinition Id="43fd4aa4-0762-4b66-ad17-8c4f960b8c47" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="2e66fd2e-6fc9-45a3-ad12-0dcf32b16850" name="Move player" isLeaf="false">
+            <elementDefinition Id="f3211caa-e67f-45c0-9390-515a4327b802" />
+            <flowNodeTargets>
+              <controlFlow Id="3aa0a71e-0216-4277-904c-ce2d0e5808e2" isLeaf="false">
+                <opaqueActionMoniker Id="1f09b564-0e91-4ba5-ac03-6d06cf6d5262" LastKnownName="Send move byte protocol" />
+                <elementDefinition Id="229a4f6e-cb14-49c1-895d-54f21dd5306e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="1f09b564-0e91-4ba5-ac03-6d06cf6d5262" name="Send move byte protocol" isLeaf="false">
+            <elementDefinition Id="8d6f2a10-53e4-4eb4-a0f9-a600173f7b77" />
+            <flowNodeTargets>
+              <controlFlow Id="315ba975-49cd-4d3e-86cc-0d0a489d4dd1" isLeaf="false">
+                <joinNodeMoniker Id="0140a963-05ba-4dac-aad7-401ac5bbfc45" LastKnownName="Join1" />
+                <elementDefinition Id="937dddb2-a8be-4aa2-a5b8-5a0126d84d84" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="5ab11d4e-4804-48aa-8c7c-fb00db0f3859" name="Shoot" isLeaf="false">
+            <elementDefinition Id="422e473b-203d-4119-bc03-3137521ec624" />
+            <flowNodeTargets>
+              <controlFlow Id="4144e574-0b94-42f2-b675-df2cbcab35d5" isLeaf="false">
+                <opaqueActionMoniker Id="f8e7a597-4f58-4fae-95b9-393441f10933" LastKnownName="Send create bullet byte protocol" />
+                <elementDefinition Id="bfaf1e7f-3eed-4fca-821e-07f192920f9c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="f8e7a597-4f58-4fae-95b9-393441f10933" name="Send create bullet byte protocol" isLeaf="false">
+            <elementDefinition Id="58c29b24-9a1f-4419-b9e6-4006f21a0be6" />
+            <flowNodeTargets>
+              <controlFlow Id="415e3d0c-1489-488e-a5b3-c0fa5cbbb83b" isLeaf="false">
+                <joinNodeMoniker Id="0140a963-05ba-4dac-aad7-401ac5bbfc45" LastKnownName="Join1" />
+                <elementDefinition Id="0f33f3f6-ca9a-4a83-82e5-3da1acf9795d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <joinNode Id="0140a963-05ba-4dac-aad7-401ac5bbfc45" name="Join1" isLeaf="false">
+            <elementDefinition Id="7b930f82-2f04-46e2-8d45-55efcac1603b" />
+            <flowNodeTargets>
+              <controlFlow Id="74742965-a880-4987-bde0-8a6a92f1818e" isLeaf="false">
+                <opaqueActionMoniker Id="fa906f95-3195-4323-b90e-67e12d2f1774" LastKnownName="Send response back to all clients" />
+                <elementDefinition Id="bee2c7a0-7113-4134-94f9-b23a11d7a384" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <opaqueAction Id="fa906f95-3195-4323-b90e-67e12d2f1774" name="Send response back to all clients" isLeaf="false">
+            <elementDefinition Id="8dd51b2c-d984-43df-b1da-f94be511255f" />
+            <flowNodeTargets>
+              <controlFlow Id="7d04c954-6a3f-45a0-8e70-564be729e5ef" isLeaf="false">
+                <decisionNodeMoniker Id="cbcb4f88-dd83-4250-901a-942cb1f385e9" LastKnownName="Decision3" />
+                <elementDefinition Id="62832959-49a7-447d-bc6b-8aa8d00be7e2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="3e7688b8-571f-4495-b1b3-fad64f415c41" name="Display Game Over Screen" isLeaf="false">
+            <elementDefinition Id="a4aa20db-5e83-4bc9-936b-aadc9400f362" />
+            <flowNodeTargets>
+              <controlFlow Id="67d68ca9-bf30-4b57-9241-193cdfef36ba" isLeaf="false">
+                <activityFinalNodeMoniker Id="7591a296-c184-4a75-ab63-ea822263ffad" LastKnownName="ActivityFinal2" />
+                <elementDefinition Id="e45ab2bf-63d5-453e-a4d7-3a20eb486d52" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="7591a296-c184-4a75-ab63-ea822263ffad" name="ActivityFinal2" isLeaf="false">
+            <elementDefinition Id="27bc11de-b983-46bf-a96c-bacb995c34d1" />
+          </activityFinalNode>
+          <decisionNode Id="cbcb4f88-dd83-4250-901a-942cb1f385e9" name="Decision3" isLeaf="false">
+            <elementDefinition Id="7dd4f7e0-5ab1-4d53-a773-b16a595cdce5" />
+            <flowNodeTargets>
+              <controlFlow Id="b689841f-7f63-4eb6-aae6-b963ca93c46d" guard="HP has dropped to 0" isLeaf="false">
+                <opaqueActionMoniker Id="3e7688b8-571f-4495-b1b3-fad64f415c41" LastKnownName="Display Game Over Screen" />
+                <elementDefinition Id="124cab1c-3c0c-41bd-a8ce-ee5e87b5c2e0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="70e764eb-dc0a-4bef-af21-271eab74720b" name="Multiplayer Game Software Engineering Diagrams">
+    <elementDefinition Id="0021c233-63d1-4b2c-91d6-4904163942fb" />
+  </package>
+</activityRootModel>

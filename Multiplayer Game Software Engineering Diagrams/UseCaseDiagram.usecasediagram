@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="c8065fde-fbe3-4bf9-8f48-50acf73d246e" name="UMLUseCaseDiagram1" linkedPackageId="dc6066bb-8bb1-41f7-a523-d0a7d712c004" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="b65802b1-af0f-4438-84bd-51aee4f0ce0c">
+      <profileInstance Id="946895d2-a642-47e4-b49c-1a9a9d22389b" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="33f351c6-c365-42b6-a7b9-8bd011f1454f">
+      <profileInstance Id="97f8ad46-a604-4c7e-8139-9b8a27664c60" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="b0ef667e-bf15-4d05-a903-afb07bc0fcaf" name="Actor using Server" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="090875cb-ac53-4466-ae0c-a1ff9e21e318" />
+        <targetEnds>
+          <association Id="cb0ae8ca-bb07-4af4-84fb-ab4d73ab17d4" isDerived="false" sourceEndRoleName="Actor using Server" targetEndRoleName="Start Server" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="58a7b06b-35cb-4a20-b94f-3a0d66f3f20c" LastKnownName="Start Server" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="13f94b19-7ec8-4bba-99ce-4a89e3ee14cc" name="Actor using Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c1eea103-1f89-4a3c-a3cb-8d7085fe358b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8e92daee-d8f8-4bde-80e1-d32b6cf519a2" name="Start Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="183663c7-b003-42d5-ab7c-697d99a39f65" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="07f199a3-ae3e-467b-a3fb-ee9426b995ad" />
+          </association>
+          <association Id="f33147fc-40fe-4c6d-b6ee-3b9ff7299e79" isDerived="false" sourceEndRoleName="Actor using Server" targetEndRoleName="Shut Down Server" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="69d2beef-fb69-4125-8e6c-fd33c8afa0f5" LastKnownName="Shut Down Server" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b48cc885-2a7e-4fa6-9d2c-63bfcf043737" name="Actor using Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="105ce727-63ed-43a0-a2ab-54387180fc0f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f60b2a75-4e18-44e0-9d5b-9b7c011af294" name="Shut Down Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c4f2aef5-50c3-46a4-acc0-250395aabcfa" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a753b1fd-1b4c-476c-8f78-c9d09fd19f01" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="cedff5c1-b9b3-4404-aa2b-2aabeb00ab52" name="Server" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="53f35a57-4c91-41d2-a433-04b8d70d7352" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="58a7b06b-35cb-4a20-b94f-3a0d66f3f20c" name="Start Server" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="268774ba-5695-4e66-9679-c7a9f5cc9ad1" />
+        <subjects>
+          <subsystemMoniker Id="cedff5c1-b9b3-4404-aa2b-2aabeb00ab52" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="69d2beef-fb69-4125-8e6c-fd33c8afa0f5" name="Shut Down Server" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="528a09a7-7278-47d8-bc49-cf89893f8f40" />
+        <subjects>
+          <subsystemMoniker Id="cedff5c1-b9b3-4404-aa2b-2aabeb00ab52" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <actor Id="32d0e3f5-1011-43f7-8c91-839b07011e3f" name="Actor using Client" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7bced947-5122-4dc1-8307-d4cdc7262af7" />
+        <targetEnds>
+          <association Id="eed22345-0b1c-4fa3-bcd7-b7831c2243e0" isDerived="false" sourceEndRoleName="Actor using Server" targetEndRoleName="Start Server" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d7dd786d-83b2-4729-bd5f-980e6aadca2d" LastKnownName="Create New Lobby" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="533f730a-aa28-4086-8e68-2c7567cf7da6" name="Actor using Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="88dd7f09-344a-4542-82ba-b6df15c80b30" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cd65a705-38fb-4e5f-9b18-43d40ceb09bf" name="Start Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="394b21b6-9587-486a-8b79-395b8760aa03" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="644f909e-add7-43f5-9fee-bc1340730735" />
+          </association>
+          <association Id="e85a6c51-7619-4499-bfb0-9d9575c0281e" isDerived="false" sourceEndRoleName="Actor using Server" targetEndRoleName="Shut Down Server" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="21331222-e758-407d-b773-adb82f4b798b" LastKnownName="Join Existing Lobby" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="57acaf18-c4af-4d84-af75-374372c8a195" name="Actor using Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="67c4eeab-b6c2-4022-a66f-99096cba6498" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2345d7c9-9a4b-4a2c-aff7-98c119762983" name="Shut Down Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c4493860-01c6-431a-ac35-58ae363572fe" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a3cff59e-d35e-4cb0-8d00-76561e79f448" />
+          </association>
+          <association Id="72119e6a-35ee-49d0-a5f8-bf19fc1be7d0" isDerived="false" sourceEndRoleName="Actor using Client" targetEndRoleName="Create Character" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="e7f89ea6-5ca5-40c4-9d9e-6c9cabe8dbc8" LastKnownName="Create Character" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="50a5f814-f6c6-48ae-b655-5ff368162c1f" name="Actor using Client" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f6708573-b74c-420f-821a-c5edd2a0f6d8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="698a30da-bdcc-4631-8924-780da4e98cc6" name="Create Character" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d3508971-0841-4d78-8959-3a42da3db4c7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7fb4fe6e-235c-4183-b900-17fe4498fc43" />
+          </association>
+          <association Id="6df36a5a-e4df-4c57-8d13-60a9ee629dd3" isDerived="false" sourceEndRoleName="Actor using Client" targetEndRoleName="Shoot" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="698e37b3-d971-4ff9-bbc1-a2d6e0846294" LastKnownName="Shoot" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="20d2da3a-6b39-4e76-a53c-af7090af1252" name="Actor using Client" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7cfea063-7db7-4be4-8912-98d992c3e564" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8f409d19-a599-457b-a7c9-6360013483a2" name="Shoot" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="67defe0f-a767-47dd-a8f5-9454f1f59280" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="18fbc677-5ead-4e36-a3e6-7f1277aaebbc" />
+          </association>
+          <association Id="6ee2285d-bc2b-4005-8fa9-866ce0384fab" isDerived="false" sourceEndRoleName="Actor using Client" targetEndRoleName="Send Game Moves To Server" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d657549d-b1bc-49d7-9026-95eb208c442d" LastKnownName="Send Game Moves To Server" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fe8d6d16-0b0b-4a32-a4c9-df76c0c0de12" name="Actor using Client" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a1608798-b4f0-487b-9d70-bb03db44c935" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8005445e-6f89-4686-b98f-9362251b8516" name="Send Game Moves To Server" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7755776a-626c-42a7-b514-4f1e2746f4be" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d9e7c836-2e2d-4de5-a337-31353cd6a094" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" name="Client" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3fb6c001-b739-4c18-984e-afc421bb6a27" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d7dd786d-83b2-4729-bd5f-980e6aadca2d" name="Create New Lobby" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9a933fe2-01f9-4300-9942-6e30ee08111a" />
+        <subjects>
+          <subsystemMoniker Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" LastKnownName="Client" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="21331222-e758-407d-b773-adb82f4b798b" name="Join Existing Lobby" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1e960b77-dba0-4657-a1bc-2689d3c94a00" />
+        <subjects>
+          <subsystemMoniker Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" LastKnownName="Client" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="e7f89ea6-5ca5-40c4-9d9e-6c9cabe8dbc8" name="Create Character" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="cc412b69-c059-4aa7-a05f-40c21fbdffee" />
+        <subjects>
+          <subsystemMoniker Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" LastKnownName="Client" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="698e37b3-d971-4ff9-bbc1-a2d6e0846294" name="Shoot" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ec5b35be-11dc-4c49-8b60-b94712c2f9c0" />
+        <subjects>
+          <subsystemMoniker Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" LastKnownName="Client" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="d657549d-b1bc-49d7-9026-95eb208c442d" name="Send Game Moves To Server" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2d074aa0-d289-40f2-bee4-dec6db6abbd7" />
+        <subjects>
+          <subsystemMoniker Id="fe92d68a-57ff-43d2-9fb3-6a5df4b9c864" LastKnownName="Client" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="dc6066bb-8bb1-41f7-a523-d0a7d712c004" name="Multiplayer Game Software Engineering Diagrams">
+    <elementDefinition Id="0021c233-63d1-4b2c-91d6-4904163942fb" />
+  </package>
+</useCaseModelRoot>

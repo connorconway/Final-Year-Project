@@ -13,11 +13,11 @@ namespace Server.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class NetworkSettings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static NetworkSettings defaultInstance = ((NetworkSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new NetworkSettings())));
         
-        public static Settings Default {
+        public static NetworkSettings Default {
             get {
                 return defaultInstance;
             }
@@ -29,15 +29,6 @@ namespace Server.Properties {
         public int Port {
             get {
                 return ((int)(this["Port"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2048")]
-        public int ReadBufferSize {
-            get {
-                return ((int)(this["ReadBufferSize"]));
             }
         }
         
@@ -65,24 +56,6 @@ namespace Server.Properties {
         public byte DisconnectedPlayerByteProtocol {
             get {
                 return ((byte)(this["DisconnectedPlayerByteProtocol"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SendMessageToClientsWhenAUserIsAdded {
-            get {
-                return ((bool)(this["SendMessageToClientsWhenAUserIsAdded"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool SendMessageToClientsWhenAUserIsRemoved {
-            get {
-                return ((bool)(this["SendMessageToClientsWhenAUserIsRemoved"]));
             }
         }
     }

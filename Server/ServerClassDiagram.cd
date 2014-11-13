@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Server.Client" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAhAAJgIAAAEAAACAIAAAAAIAAAAAAAABgAAAAA=</HashCode>
+      <FileName>Client.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Server.Listener">
+    <Position X="3.5" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAAABAAACAAAIAIABAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Listener.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Server.Program">
+    <Position X="9.25" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Server.Server">
+    <Position X="6.25" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQoAAAAIAAAACAAAgCIAIAAAAAQAAAAAQAEA=</HashCode>
+      <FileName>Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Server.Properties.NetworkSettings">
+    <Position X="9.25" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABQAAAAAIAAACAABAAAAAAABAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Server.IClient">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAIAAAAAEAAACAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Server.IListener">
+    <Position X="3.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAACAAAAAAABAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IListener.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Server.ConnectionEvent">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Server.DataReceivedEvent">
+    <Position X="8.25" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

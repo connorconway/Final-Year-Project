@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="a9f54953-dce0-4d21-87e7-69647f1a2f89" name="ComponentDiagram" linkedPackageId="cf997129-449e-427e-8669-cbf7dd8531a4" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="fd55475b-ef27-4297-adaa-d73aaf56cf18">
+      <profileInstance Id="167377ba-887c-42fb-b2de-a5ea175310f9" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="cc0ba7fc-346d-40b0-a42e-60e8cd7099c0">
+      <profileInstance Id="68596792-426f-4815-a1f3-65825ac7fd6e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="17a98709-03eb-425d-958a-b5b321d97de8" name="Server" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="889cea1a-b97f-438e-adbc-bd2a14273112" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="f22e1deb-b21a-4ee8-ace3-891ca896dd6c" name="Client" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9ff03b7d-afd0-43ea-a240-39448014e5e7" />
+        <suppliersInternal>
+          <dependency Id="c906573d-8db1-48ae-90ca-fe07aa41962b" name="Connects To">
+            <componentMoniker Id="17a98709-03eb-425d-958a-b5b321d97de8" LastKnownName="Server" />
+            <elementDefinition Id="3e097cfd-6db6-4c0e-b0ad-32e86211774f" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="d0669f9c-ec66-4e0d-9092-bcecdc7af98b" name="Client 2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a1d1a160-3497-4351-a9cc-ebdaba5cbe29" />
+        <suppliersInternal>
+          <dependency Id="17c4360a-fc3a-4cb4-93f7-20fc91d111fd" name="Connects To">
+            <componentMoniker Id="17a98709-03eb-425d-958a-b5b321d97de8" LastKnownName="Server" />
+            <elementDefinition Id="2653a55e-2a37-4569-97fc-2edec2396ca1" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+  </packagedElements>
+  <package Id="cf997129-449e-427e-8669-cbf7dd8531a4" name="Multiplayer Game Software Engineering Diagrams">
+    <elementDefinition Id="0021c233-63d1-4b2c-91d6-4904163942fb" />
+  </package>
+</componentModel>

@@ -1,44 +1,34 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 
 namespace Server
 {
-    public class Client
+    public class Client : IClient
     {
         public  event    DataReceivedEvent DataReceived;
         public  event    ConnectionEvent   UserDisconnected;
         private readonly TcpClient         client;
         private readonly byte[]            readBuffer;
-        public  readonly string            IP;
-        public  readonly byte              ID;
+        public  readonly string            clientIP;
+        public  readonly byte              clientID;
         private          bool              connected;
 
-        public Client(TcpClient client, byte ID)
+        public Client(TcpClient client, byte clientID)
         {
-            readBuffer     = new byte[Properties.Settings.Default.ReadBufferSize];
-            this.ID        = ID;
+            readBuffer     = new byte[2048];
+            this.clientID  = clientID;
             this.client    = client;
-            IP             = client.Client.RemoteEndPoint.ToString();
+            clientIP       = client.Client.RemoteEndPoint.ToString();
             client.NoDelay = true;
 
-            StartListening();
+            ListenForEvents();
             connected = true;
         }
 
-        private void Disconnect()
+        private void ListenForEvents()
         {
-            if (!connected)
-                return;
-            connected = false;
-            client.Close();
-
-            if (UserDisconnected != null)
-                UserDisconnected(this, this);
-        }
-
-        private void StartListening()
-        {
-            client.GetStream().BeginRead(readBuffer, 0, Properties.Settings.Default.ReadBufferSize, StreamReceived, null);
+            client.GetStream().BeginRead(readBuffer, 0, 2048, StreamReceived, null);
         }
 
         private void StreamReceived(IAsyncResult ar)
@@ -64,7 +54,7 @@ namespace Server
             for (int i = 0; i < bytesRead; i++)
                 data[i] = readBuffer[i];
 
-            StartListening();
+            ListenForEvents();
 
             if (DataReceived != null)
                 DataReceived(this, data);
@@ -81,15 +71,15 @@ namespace Server
             }
             catch (Exception e)
             {
-                Console.WriteLine("Client {0}:  {1}", IP, e);
+                Console.WriteLine("Client {0}:  {1}", clientIP, e);
             }
         }
 
-        public void SendMemoryStream(System.IO.MemoryStream ms)
+        public void SendMemoryStream(MemoryStream ms)
         {
             lock (ms)
             {
-                var bytesWritten = (int)ms.Position;
+                var bytesWritten = (int) ms.Position;
                 var result       = new byte[bytesWritten];
                 ms.Position      = 0;
 
@@ -98,9 +88,21 @@ namespace Server
             }
         }
 
+        private void Disconnect()
+        {
+            if (!connected)
+                return;
+            connected = false;
+
+            client.Close();
+
+            if (UserDisconnected != null)
+                UserDisconnected(this, this);
+        }
+
         public override string ToString()
         {
-            return IP;
+            return clientIP;
         }
     }
 }

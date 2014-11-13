@@ -10,11 +10,11 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            DisplayInformation();
+            Console.WriteLine("Listening for connections on {0}:{1}\n", LocalIPAddress(), Properties.NetworkSettings.Default.Port);
 
             try
             {
-                new Server(Properties.Settings.Default.Port);
+                new Server(Properties.NetworkSettings.Default.Port);
 
                 while (true)
                 {
@@ -27,11 +27,6 @@ namespace Server
             }
 
             Console.ReadKey();
-        }
-
-        private static void DisplayInformation()
-        {
-            Console.WriteLine("Listening for connections on {0}:{1}\n", LocalIPAddress(), Properties.Settings.Default.Port);
         }
 
         private static IPAddress LocalIPAddress()
