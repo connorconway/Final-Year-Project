@@ -60,10 +60,17 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\packages\mongocsharpdriver.1.10.0-rc1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\..\packages\mongocsharpdriver.1.10.0-rc1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
@@ -94,10 +101,12 @@
     <Compile Include="GameStates\BaseGameState.cs" />
     <Compile Include="GameStates\CharacterCreationScreen.cs" />
     <Compile Include="GameStates\GameoverScreen.cs" />
+    <Compile Include="GameStates\HighScoresScreen.cs" />
     <Compile Include="GameStates\LoadGameScreen.cs" />
     <Compile Include="GameStates\LobbyScreen.cs" />
     <Compile Include="GameStates\OptionsScreen.cs" />
     <Compile Include="GameStates\PauseScreen.cs" />
+    <Compile Include="Handlers\DatabaseHandler.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
     <Compile Include="Networking\Delegates.cs" />
     <Compile Include="Networking\NetworkConstants.cs" />
@@ -163,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings1.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>

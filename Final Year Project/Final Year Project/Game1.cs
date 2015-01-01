@@ -19,6 +19,7 @@ namespace Multiplayer_Software_Game_Engineering
         public readonly PauseScreen             pauseScreen;
         public readonly OptionsScreen           optionsScreen;
         public readonly LoadGameScreen          loadGameScreen;
+        public readonly HighScoresScreen        highScoreScreen;
         public readonly GameLoseScreen          gameLoseScreen;
         public readonly LobbyScreen             lobbyScreen;
         private         GameStateManager        stateManager;
@@ -48,6 +49,7 @@ namespace Multiplayer_Software_Game_Engineering
             loadGameScreen          = new LoadGameScreen(this, stateManager);
             gameLoseScreen          = new GameLoseScreen(this, stateManager);
             lobbyScreen             = new LobbyScreen(this, stateManager);
+            highScoreScreen         = new HighScoresScreen(this, stateManager);
 
             stateManager.ChangeState(startMenuScreen);
         }

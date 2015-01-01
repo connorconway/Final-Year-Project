@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using TextBox = Multiplayer_Software_Game_Engineering.GameEntities.TextBox;
 
+
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
     public class GamePlayScreen : BaseGameState
@@ -23,45 +24,54 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         public  static   World  world                  { private get; set; }
         private          Engine engine                 = new Engine(32, 32);
         private          bool   secondPlayerAnimating;
-        private          int    playerKills;    
+        private static   int    playerKills;    
         private          bool   shownHelp = false;
 
         public GamePlayScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
-                  world         = new World(game, gameReference.screenRectangle);
+            world         = new World(game, gameReference.screenRectangle);
             syncTimer     = new System.Timers.Timer();
             syncTimer.Elapsed  += SyncGames;
             syncTimer.Interval  = 20000;
             syncTimer.Enabled   = true;
         }
 
+        public static int getPlayerKills()
+        {
+            return playerKills;
+        }
+
         public override void Initialize()
         {
-            try
+            if (client == null)
             {
-                client = new TcpClient { NoDelay = true };
-                client.Connect(NetworkConstants.hostname, NetworkConstants.port);
-                readBuffer = new byte[NetworkConstants.bufferSize];
-                client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
+                try
+                {
+                    client = new TcpClient { NoDelay = true };
+                    client.Connect(NetworkConstants.hostname, NetworkConstants.port);
+                    readBuffer = new byte[NetworkConstants.bufferSize];
+                    client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
+
+                    readStream = new MemoryStream();
+                    reader = new BinaryReader(readStream);
+
+                    writeStream = new MemoryStream();
+                    writer = new BinaryWriter(writeStream);
+
+                    writeStream.Position = 0;
+                    writer.Write((byte)Protocol.Connected);
+                    writer.Write(player1.animatedSprite.textTexture);
+                    writer.Write(player1.animatedSprite.Position.X);
+                    writer.Write(player1.animatedSprite.Position.Y);
+                    writer.Write(player1.isHost);
+                    SendData(GetDataFromMemoryStream(writeStream));
+                    writer.Flush();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format(Constants.ERROR_CONNECTION + NetworkConstants.port));
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(Constants.ERROR_CONNECTION + NetworkConstants.port));
-            }
-
-            readStream = new MemoryStream();
-            reader = new BinaryReader(readStream);
-
-            writeStream = new MemoryStream();
-            writer = new BinaryWriter(writeStream);
-
-            writeStream.Position = 0;
-            writer.Write((byte)Protocol.Connected);
-            writer.Write(player1.animatedSprite.textTexture);
-            writer.Write(player1.animatedSprite.Position.X);
-            writer.Write(player1.animatedSprite.Position.Y);
-            SendData(GetDataFromMemoryStream(writeStream));
-            writer.Flush();
 
             base.Initialize();
 
@@ -78,10 +88,17 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            if (client.Connected == false)
+            {
+                player2 = null;
+
+            }
+
+
             if (player2 == null && textBox.decreaseAlpha == false && textBox.textBoxExists == TextBox.TextBoxExists.Transparent)
             {
                 textBox.setPosition(new Vector2(textBox.position.X - 255, textBox.Position.Y + 55));
-                textBox.setText(Constants.INFO_WAITING);
+                textBox.setText(client.Connected ? Constants.INFO_WAITING : Constants.SINGLE_PLAYER);
                 textBox.decreaseAlpha = true;
                 waitingForPlayer = true;
             }
@@ -115,7 +132,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 }
             }
 
-            if (player1.createBullet)
+            if (player1.createBullet && client.Connected)
             {
                 writeStream.Position = 0;
                 writer.Write((byte)Protocol.BulletCreated);
@@ -128,7 +145,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 writer.Flush();
             }
 
-            if (player1.motion != Vector2.Zero)
+            if (player1.motion != Vector2.Zero && client.Connected) 
             {
                 secondPlayerAnimating = true;
                 writeStream.Position = 0;
@@ -139,7 +156,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 SendData(GetDataFromMemoryStream(writeStream));
                 writer.Flush();
             }
-            else if (secondPlayerAnimating)
+            else if (secondPlayerAnimating && client.Connected)
             {
                 secondPlayerAnimating = false;
                 writeStream.Position = 0;
@@ -157,7 +174,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 player2.UpdateHealthBar();
                 foreach (Bullet bullet in player2.bullets)
                     bullet.Update(gameTime);
-                if (player2.playerHealth.currentHealth <= 0)
+                if (player2.playerHealth.currentHealth <= 0 && client.Connected)
                 {
                     writeStream.Position = 0;
                     writer.Write((byte)Protocol.GameOver);

@@ -15,6 +15,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         LinkLabel startGame;
         LinkLabel loadGame;
         LinkLabel gameSettings;
+        LinkLabel highscores;
         LinkLabel exitGame;
         float maxItemWidth;
 
@@ -56,6 +57,10 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             gameSettings.size = gameSettings.spriteFont.MeasureString(gameSettings.text);
             gameSettings.selected += MenuItemSelected;
 
+            highscores = new LinkLabel { text = Constants.HIGH_SCORES };
+            highscores.size = gameSettings.spriteFont.MeasureString(highscores.text);
+            highscores.selected += MenuItemSelected;
+
             exitGame = new LinkLabel { text = Constants.QUIT_GAME };
             exitGame.size = exitGame.spriteFont.MeasureString(exitGame.text);
             exitGame.selected += MenuItemSelected;
@@ -65,6 +70,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             controlManager.Add(startGame);
             controlManager.Add(loadGame);
             controlManager.Add(gameSettings);
+            controlManager.Add(highscores);
             controlManager.Add(exitGame);
             controlManager.NextControl();
 
@@ -125,6 +131,10 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             if (sender == gameSettings)
             {
                 stateManager.PushState(gameReference.optionsScreen);
+            }
+            if (sender == highscores)
+            {
+                stateManager.PushState(gameReference.highScoreScreen);
             }
             if (sender == exitGame)
             {

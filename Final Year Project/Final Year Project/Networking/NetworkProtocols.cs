@@ -7,6 +7,7 @@
         PlayerMoved   = 3,
         BulletCreated = 4,
         GameOver      = 5,
-        SyncGame      = 6
+        SyncGame      = 6,
+        CheckForHosts = 7
     }
 }

@@ -12,7 +12,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
     public class Player
     {
         public Camera camera { get; private set; }
-        Game1 gameReference;
+        readonly Game1 gameReference;
         public AnimatedSprite animatedSprite { get; private set; }
         public Vector2 motion;
         public readonly List<Bullet> bullets;

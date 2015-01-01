@@ -8,6 +8,7 @@ using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.Handlers;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
@@ -147,6 +148,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         var textTexture = reader.ReadString();
                         var posX        = reader.ReadSingle();
                         var posY        = reader.ReadSingle();
+                        var isHost      = reader.ReadBoolean();
                         id              = reader.ReadByte();
                         ip              = reader.ReadString();
 
@@ -179,7 +181,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
                                 player2 = new Player(gameReference, sprite, spriteToUse, healthBarSprite, Color.Red)
                                 {
-                                    animatedSprite = {Position = new Vector2(posX, posY)}
+                                    animatedSprite = { Position = new Vector2(posX, posY) },
+                                    isHost = isHost
                                 };
 
                                 waitingForPlayer      = false;
@@ -190,6 +193,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                                 writer.Write(player1.animatedSprite.textTexture);
                                 writer.Write(player1.animatedSprite.Position.X); 
                                 writer.Write(player1.animatedSprite.Position.Y);
+                                writer.Write(player1.isHost);
                                 SendData(GetDataFromMemoryStream(writeStream));
                                 writer.Flush();
                             }
@@ -267,6 +271,10 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         SendData(GetDataFromMemoryStream(writeStream));
                         writer.Flush();
                         stateManager.PushState(gameReference.gameLoseScreen);
+
+                        var name = Microsoft.VisualBasic.Interaction.InputBox("What is your name?", "High Score Board Entry", "", 100, 100 );
+                        DataBaseHandler.InputData("Multiplayer_Game_Data", "HighScores3", name, GamePlayScreen.getPlayerKills().ToString());
+
                         break;
                     case Protocol.SyncGame:
                         posX = reader.ReadSingle();
@@ -280,8 +288,14 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                             player2.animatedSprite.position = new Vector2(posX, posY);
                             player2.playerHealth.currentHealth = playerHealth;
                         }
+                        break;
+                    case Protocol.CheckForHosts:
+                        isHost = reader.ReadBoolean();
+                        id = reader.ReadByte();
+                        ip = reader.ReadString();
 
                         break;
+
                 }
             }
             catch (Exception e)

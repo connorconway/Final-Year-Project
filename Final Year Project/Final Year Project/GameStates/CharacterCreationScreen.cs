@@ -203,8 +203,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             InputHandler.Flush();
             CreatePlayer();
-            CreateWorld();
             player1.isHost = true;
+            CreateWorld();
             stateManager.PushState(gameReference.gamePlayScreen);
         }
 
@@ -212,6 +212,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             InputHandler.Flush();
             CreatePlayer();
+            player1.isHost = false;
             stateManager.PushState(gameReference.lobbyScreen);
         }
 
