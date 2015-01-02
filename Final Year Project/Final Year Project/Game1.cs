@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Serialization;
 using Multiplayer_Software_Game_Engineering.GameData;
 using Microsoft.Xna.Framework;
@@ -5,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.GameStates;
+using System.Xml;
+
 
 namespace Multiplayer_Software_Game_Engineering
 {
@@ -26,8 +29,9 @@ namespace Multiplayer_Software_Game_Engineering
 
         public Game1()
         {
-            FileHandler.writeToFile(systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
-            systemOptions = FileHandler.readFromFile(Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)));
+           
+            FileHandler.writeToFile(systemOptions, @"Content\Data\system_variables.xml", new XmlSerializer(typeof(SystemOptions)));
+            systemOptions = FileHandler.readFromFile(@"Content\Data\system_variables.xml", new XmlSerializer(typeof(SystemOptions)));
 
             new GraphicsDeviceManager(this)
             {
@@ -56,7 +60,7 @@ namespace Multiplayer_Software_Game_Engineering
 
         protected override void Initialize()
         {
-            Content.RootDirectory = "Content"; 
+            Content.RootDirectory = "Content";
             base.Initialize();
         }
 

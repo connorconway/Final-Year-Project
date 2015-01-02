@@ -154,7 +154,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             Game1.systemOptions.resolutionWidth = Convert.ToInt32(resolutionItems[selectResolution.SelectedIndex].Substring(0, 4));
             Game1.systemOptions.fullScreen = Boolean.Parse(fullScreenItems[selectFullScreen.SelectedIndex]);
 
-            FileHandler.writeToFile(Game1.systemOptions, Constants._serviceOptionsPath, new XmlSerializer(typeof(SystemOptions)), true);
+            FileHandler.writeToFile(Game1.systemOptions, @"Content\Data\system_variables.xml", new XmlSerializer(typeof(SystemOptions)), true);
             stateManager.PopState();
         }
 

@@ -12,6 +12,7 @@ namespace Multiplayer_Software_Game_Engineering.Handlers
 
         public static void writeToFile(SystemOptions options, String path, XmlSerializer type)
         {
+
             if (File.Exists(path))
                 return;
 
