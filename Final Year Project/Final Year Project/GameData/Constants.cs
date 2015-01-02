@@ -2,10 +2,6 @@
 {
     public static class Constants
     {
-        public const string _serviceOptionsPath = 
-            @"C:\Users\Connor\Source\Repos\Final-Year-Project\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
-          //  @"E:\Documents\Visual Studio 2013\Projects\PRG\Final Year Project\Final Year ProjectContent\Data\system_variables.xml";
-
 
         public const string WHO_WILL_FIGHT      = "Who Will You Fight As?";
         public const string CREATE_LOBBY        = "Create New Lobby";
