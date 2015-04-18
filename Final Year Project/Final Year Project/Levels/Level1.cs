@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -11,6 +12,7 @@ using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.GameStates;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.Networking;
+using Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Automata;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
@@ -199,6 +201,12 @@ namespace Multiplayer_Software_Game_Engineering.Levels
             }
 
             player1.Update(gameTime, roommap);
+
+            if (player1.completedLevel)
+            {
+                NextLevel();
+            }
+
             textBox.Update(gameTime);
             playerHUD.Update(gameTime);
             scoreTextBox.Update(gameTime);
@@ -206,6 +214,44 @@ namespace Multiplayer_Software_Game_Engineering.Levels
             playerHUD.setPosition(new Vector2(player1.camera.position.X + Game1.systemOptions.resolutionWidth / 2.0f- ((HUDSprite.Width*1.3f) / 2.0f ), player1.camera.position.Y + Game1.systemOptions.resolutionHeight - (HUDSprite.Height*1.3f)));
 
             base.Update(gameTime);
+        }
+
+        private void NextLevel()
+        {
+            stateManager.PopState();
+
+            CreateCelluarAutomataMap();
+
+            stateManager.PushState(gameReference.Level2);
+
+        }
+
+        private void CreateCelluarAutomataMap()
+        {
+            MapHelper cellularMap = new MapHelper();
+            int[,] map2 = cellularMap.Map;
+            Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
+            TileSet tileSet1 = new TileSet(tilesetTexture, 16, 16, 10, 28);
+            List<TileSet> tilesets = new List<TileSet> { tileSet1 };
+
+            foreach (int m in map2)
+            {
+
+                        Tile tile = new Tile(5, 0, Constants.TileState.PASSABLE);
+                        roommap.SetTile(m, m, tile);
+                    }
+
+            
+            List<MapLayer> mapLayers = new List<MapLayer> { roommap };
+
+            map = new TileMap(tilesets, mapLayers);
+            Level level = new Level(map);
+            World.levels.Add(level);
+            world.currentLevel = 1;
+
+            Level2.world = world;
+
+
         }
 
         private void SyncGames(object source, ElapsedEventArgs e)
