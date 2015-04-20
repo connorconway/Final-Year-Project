@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Net.Configuration;
 using Multiplayer_Software_Game_Engineering.Controls;
 using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.GameEntities;
@@ -8,6 +10,8 @@ using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.Levels;
+using Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
@@ -18,7 +22,10 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         private PictureBox characterImage;
         private Texture2D[,] characterImages;
         private readonly String[] genderItems = {"Male", "Female"};
-        private readonly String[] classItems = {"Fighter", "Wizard", "Rogue", "Priest"};
+        private readonly String[] classItems = { "Fighter", "Wizard", "Rogue", "Priest" };
+        Random random = new Random();
+        private List<Leaf> leaves = new List<Leaf>();
+
 
         public string SelectGender { get { return selectGender.SelectedItem; } }
 
@@ -148,50 +155,134 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
             player1 = new Player(gameReference, sprite, spriteToUse, healthBarSprite, Color.Green);
             player1.animatedSprite.textTexture = selectGender.SelectedItem + selectClass.SelectedItem;
+            player1.type = selectClass.SelectedItem;
+            player1.gender = selectGender.SelectedItem;
+            player1.level = 1;
+            player1.gold = 0;
+        }
+
+        private void CreateLeaves(int mapWidth, int mapHeight )
+        {
+
+            const int maxLeafSize = 20;
+
+            Leaf root = new Leaf(0, 0, mapWidth, mapHeight);
+            leaves.Add(root);
+
+            Boolean didSplit = true;
+            while (didSplit)
+            {
+                didSplit = false;
+                foreach (var l in leaves.ToArray())
+                {
+                    if (l.leftChild == null && l.rightChild == null) // if this Leaf is not already split...
+                    {
+                        // if this Leaf is too big, or 75% chance...
+                        if (l.width > maxLeafSize || l.height > maxLeafSize || random.NextDouble() > 0.25)
+                        {
+                            if (l.split()) // split the Leaf!
+                            {
+                                // if we did split, push the child leafs to the Vector so we can loop into them next
+                                leaves.Add(l.leftChild);
+                                leaves.Add(l.rightChild);
+                                didSplit = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // next, iterate through each Leaf and create a room in each one.
+            root.createRooms();
         }
 
         private void CreateWorld()
         {
-            Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\tileSet_1");
+            Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
             TileSet tileSet1 = new TileSet(tilesetTexture, 16, 16, 10, 28);
+            List<TileSet> tilesets = new List<TileSet> {tileSet1};
 
-            tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\tileSet_2");
-            TileSet tileSet2 = new TileSet(tilesetTexture, 16, 16, 10, 28);
+            CreateLeaves(80, 80);
 
-            List<TileSet> tilesets = new List<TileSet> {tileSet1, tileSet2};
+            roommap = new MapLayer(80, 80);
 
-            MapLayer mapLayer = new MapLayer(100, 100);
+            bool createSign = true;
 
-            for (int y = 0; y < mapLayer.height; y++)
+            foreach (Leaf leaf in leaves)
             {
-                for (int x = 0; x < mapLayer.width; x++)
+                for (int i = 0; i < leaf.room.Width; i++)
                 {
-                    Tile tile = new Tile(33, 0);
-                    mapLayer.SetTile(x, y, tile);
+                    for (int j = 0; j < leaf.room.Height; j++)
+                    {
+                        int x = leaf.room.X;
+                        int y = leaf.room.Y;
+                        Tile tile = new Tile(5, 0, Constants.TileState.PASSABLE);
+                        roommap.SetTile(x + i, y + j, tile);
+                    }
+                }        
+
+                if (leaf.halls != null )
+                {
+                    foreach (var hall in leaf.halls)
+                    {
+                        for (int i = 0; i < hall.Width; i++)
+                        {
+                            for (int j = 0; j < hall.Height; j++)
+                            {
+                                int x = hall.X;
+                                int y = hall.Y;
+                                Tile tile = new Tile(253, 0, Constants.TileState.PASSABLE);
+                                roommap.SetTile(x + i, y + j, tile);
+                            }
+                        }
+                    }
                 }
             }
 
-            MapLayer splatter = new MapLayer(100, 100);
-            Random random = new Random();
-            for (int i = 0; i < 70; i++)
+            bool sign = true;           
+            for (int j = 0; j < 80; j++)
             {
-                int x = random.Next(0, 90);
-                int y = random.Next(0, 70);
-                int[] choices = { 53, 34, 120, 229, 34, 34, 34, 229, 34, 34, 34, 34, 229, 34, 120, 53, 229, 229, 34, 229, 34, 34, 34, 34, 229, 229, 34 };
-                int index = choices[random.Next(choices.Length)];
-                Tile tile = new Tile(index, 0);
-                splatter.SetTile(x, y, tile);
+                for (int i = 0; i < 80; i++)
+                {
+                    if (sign)
+                    {
+                        if (roommap.isPassable(i, j) == 1)
+                        {
+                            Tile Signtile = new Tile(90, 0, Constants.TileState.SIGN);
+                            roommap.SetTile(i, j, Signtile);
+                            player1.animatedSprite.position.X = (i+2)*32;
+                            player1.animatedSprite.position.Y = (j)*32;
+                            sign = false;
+                            break;
+                        }
+                    }
+                }
             }
 
-            List<MapLayer> mapLayers = new List<MapLayer> {mapLayer, splatter};
+            bool exitLevel = true;
+            while (exitLevel)
+            {
+                int xTile = random.Next(20, 80);
+                int yTile = random.Next(20, 80);
 
-            TileMap map = new TileMap(tilesets, mapLayers);
+                if (roommap.isPassable(xTile, yTile) == 1)
+                {
+                    Tile stairs = new Tile(146, 0, Constants.TileState.STAIRS);
+                    roommap.SetTile(xTile, yTile, stairs);
+                    exitLevel = false;
+                }
+            }    
+            
+            List<MapLayer> mapLayers = new List<MapLayer> { roommap };
+
+            map = new TileMap(tilesets, mapLayers);
             Level level = new Level(map);
             World world = new World(gameReference, gameReference.screenRectangle);
             World.levels.Add(level);
             world.currentLevel = 0;
 
-            GamePlayScreen.world = world;
+            Level1.world = world;
+
         }
 
         private void selectionChanged(object sender, EventArgs e)
@@ -205,7 +296,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             CreatePlayer();
             player1.isHost = true;
             CreateWorld();
-            stateManager.PushState(gameReference.gamePlayScreen);
+            stateManager.PushState(gameReference.Level1);
         }
 
         private void joinLobby_Selected(object sender, EventArgs e)

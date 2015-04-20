@@ -16,12 +16,13 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
         public AnimatedSprite animatedSprite { get; private set; }
         public Vector2 motion;
         public readonly List<Bullet> bullets;
-
         public readonly Texture2D bulletSprite;
         public Boolean createBullet;
         public Vector2 playerOrigin;
         public readonly HealthBar playerHealth;
         public bool isHost { get; set; }
+        public int level, exp, gold;
+        public string type, gender;
 
         public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite, Texture2D healthBarSprite, Color color)
         {
@@ -44,7 +45,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             playerHealth.position.Y = animatedSprite.Position.Y - 10;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, MapLayer tilemap)
         {
             createBullet = false;
             playerOrigin = new Vector2(animatedSprite.Position.X + animatedSprite.Width / 2, animatedSprite.Position.Y + animatedSprite.Height / 2);
@@ -68,25 +69,29 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Up;
-                motion.Y = -1;
+                if (checkIfCanWalkOnTile(tilemap, 0, -3))
+                    motion.Y = -9;
             }
             else if (InputHandler.KeyDown(Keys.S) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Down;
-                motion.Y = 1;
+                if (checkIfCanWalkOnTile(tilemap, 0, 3))
+                    motion.Y = 9;
             }
             if (InputHandler.KeyDown(Keys.A) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickLeft, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Left;
-                motion.X = -1;
+                if (checkIfCanWalkOnTile(tilemap, -3, 0))
+                    motion.X = -9;
             }
             if (InputHandler.KeyDown(Keys.D) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Right;
-                motion.X = 1;
+                if (checkIfCanWalkOnTile(tilemap, 3, 0))
+                    motion.X = 9;
             }
 
             if (motion != Vector2.Zero)
@@ -110,7 +115,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
 
             foreach (Bullet bullet in bullets)
             {
-                bullet.Update(gameTime);
+                bullet.Update(gameTime, tilemap);
             }
 
             UpdateHealthBar();
@@ -118,14 +123,26 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             playerHealth.Update(gameTime);
         }
 
+        public Boolean checkIfCanWalkOnTile(MapLayer tilemap, int xDirection, int yDirection)
+        {
+            int result = tilemap.isPassable((int) ((animatedSprite.position.X+16+xDirection)/32), (int) ((animatedSprite.position.Y+32+yDirection)/32));
+            if (result == 1) //PASSABLE
+                return true;
+            if (result == 2) //STAIRS
+                //TODO: MOVE ON TO LEVEL 2
+                return true;
+
+            return false;       
+        }
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             animatedSprite.Draw(spriteBatch);
             foreach (Bullet bullet in bullets)
             {
-                bullet.Draw(gameTime, spriteBatch);
+                if (bullet.bulletLife == BulletLife.Alive)
+                   bullet.Draw(gameTime, spriteBatch);
             }
-            playerHealth.Draw(gameTime, spriteBatch);
         }
     }
 }

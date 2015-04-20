@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Multiplayer_Software_Game_Engineering.GameData;
+using Multiplayer_Software_Game_Engineering.TileEngine;
 
 namespace Multiplayer_Software_Game_Engineering.GameEntities
 {
@@ -29,7 +30,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             boundingBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, MapLayer tileMap)
         {
             if (bulletLife != BulletLife.Alive)
                 return;
@@ -96,6 +97,16 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
                 motion.Normalize();
                 position += motion * Speed;
             }
+
+            checkIfHitObject(tileMap, (int)position.X , (int)position.Y );
+
+        }
+
+        public void checkIfHitObject(MapLayer tilemap, int xDirection, int yDirection)
+        {
+            int result = tilemap.isPassable((xDirection) / 32, (yDirection+(sprite.Height)) / 32);
+            if (result == 0)
+                bulletLife = BulletLife.Dead;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

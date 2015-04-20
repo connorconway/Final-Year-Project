@@ -21,24 +21,23 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             currentHealth = (int)MathHelper.Clamp(currentHealth, 0, 100);
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 HUDpos)
         {
 
             spriteBatch.Draw(sprite,
-                new Rectangle((int)position.X, (int)position.Y, sprite.Width / 5, 44 / 5),
-                new Rectangle(0, 45, sprite.Width, 44),
-                Color.Gray * 0.4f);
+               new Rectangle((int)HUDpos.X+120, (int)HUDpos.Y+55, sprite.Width / 3 + 19, 11),
+               new Rectangle(0, 45, sprite.Width, 44),
+               Color.Gray * 0.4f);
 
             spriteBatch.Draw(sprite,
-                 new Rectangle((int)position.X, (int)position.Y, (int)(sprite.Width * ((double)currentHealth / 100)) / 5, 44 / 5),
+                 new Rectangle((int)HUDpos.X+120, (int)HUDpos.Y+55, (int)(sprite.Width  * ((double)currentHealth / 100)) / 3 + 19, 11),
                  new Rectangle(0, 45, sprite.Width, 44),
                  color * 0.4f);
 
             spriteBatch.Draw(sprite,
-                new Rectangle((int)position.X, (int)position.Y, sprite.Width / 5, 44 / 5),
+                new Rectangle((int)HUDpos.X+120, (int)HUDpos.Y+55, sprite.Width  / 3 + 19, 11),
                 new Rectangle(0, 0, sprite.Width, 44),
                 Color.White * 0.7f);
-
         }
     }
 }

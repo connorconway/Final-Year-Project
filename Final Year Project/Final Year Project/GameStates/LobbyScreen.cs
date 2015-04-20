@@ -134,13 +134,13 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             InputHandler.Flush();
             player1.isHost = true;
-            stateManager.PushState(gameReference.gamePlayScreen);
+            stateManager.PushState(gameReference.Level1);
         }
 
         private void joinLobby_Selected(object sender, EventArgs e)
         {
             InputHandler.Flush();
-            stateManager.PushState(gameReference.gamePlayScreen);
+            stateManager.PushState(gameReference.Level1);
         }
 
         private void linkLabel2_Selected(object sender, EventArgs e)

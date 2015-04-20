@@ -8,6 +8,7 @@ using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.Levels;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
@@ -106,7 +107,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                     loadGameLinkLabel.HasFocus = true;
                     loadGameListBox.HasFocus = false;
                     controlManager.AcceptInput = true;
-                    stateManager.ChangeState(gameReference.gamePlayScreen);
+                    stateManager.ChangeState(gameReference.Level1);
                     CreatePlayer();
                     CreateWorld();
                     break;
@@ -131,7 +132,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             animations.Add(Constants.Direction.Up, animation);
             AnimatedSprite sprite =
                 new AnimatedSprite(gameReference.Content.Load<Texture2D>(@"Graphics\Sprites\malefighter"), animations);
-            //GamePlayScreen.player = new Player(gameReference, sprite);
+            //Level1.player = new Player(gameReference, sprite);
         }
 
         private void CreateWorld()
@@ -147,7 +148,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             {
                 for (int x = 0; x < layer.width; x++)
                 {
-                    Tile tile = new Tile(0, 0);
+                    Tile tile = new Tile(0, 0, Constants.TileState.IMPASSABLE);
                     layer.SetTile(x, y, tile);
                 }
             }
@@ -160,20 +161,20 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 int x = random.Next(0, 100);
                 int y = random.Next(0, 100);
                 int index = random.Next(2, 14);
-                Tile tile = new Tile(index, 0);
+                Tile tile = new Tile(index, 0, Constants.TileState.IMPASSABLE);
                 splatter.SetTile(x, y, tile);
             }
 
-            splatter.SetTile(1, 0, new Tile(0, 1));
-            splatter.SetTile(2, 0, new Tile(2, 1));
-            splatter.SetTile(3, 0, new Tile(0, 1));
+            splatter.SetTile(1, 0, new Tile(0, 1, Constants.TileState.IMPASSABLE));
+            splatter.SetTile(2, 0, new Tile(2, 1, Constants.TileState.IMPASSABLE));
+            splatter.SetTile(3, 0, new Tile(0, 1, Constants.TileState.IMPASSABLE));
             List<MapLayer> mapLayers = new List<MapLayer> {layer, splatter};
             TileMap map = new TileMap(tilesets, mapLayers);
             Level level = new Level(map);
             World world = new World(gameReference, gameReference.screenRectangle);
             World.levels.Add(level);
             world.currentLevel = 0;
-            GamePlayScreen.world = world;
+            Level1.world = world;
         }
         #endregion
     }

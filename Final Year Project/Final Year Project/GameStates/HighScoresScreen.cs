@@ -1,24 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Multiplayer_Software_Game_Engineering.Controls;
 using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.GameEntities;
 using Multiplayer_Software_Game_Engineering.Handlers;
-using LinkLabel = Multiplayer_Software_Game_Engineering.Controls.LinkLabel;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Options;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Driver;
-using MongoDB.Driver.Wrappers;
-using Label = Multiplayer_Software_Game_Engineering.Controls.Label;
-
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
@@ -126,13 +113,13 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         {
             InputHandler.Flush();
             player1.isHost = true;
-            stateManager.PushState(gameReference.gamePlayScreen);
+            stateManager.PushState(gameReference.Level1);
         }
 
         private void joinLobby_Selected(object sender, EventArgs e)
         {
             InputHandler.Flush();
-            stateManager.PushState(gameReference.gamePlayScreen);
+            stateManager.PushState(gameReference.Level1);
         }
 
         private void linkLabel2_Selected(object sender, EventArgs e)

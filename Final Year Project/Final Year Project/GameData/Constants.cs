@@ -34,5 +34,13 @@
             Right,
             Up
         }
+
+        public enum TileState
+        {
+            PASSABLE,
+            IMPASSABLE,
+            SIGN,
+            STAIRS
+        }
     }
 }

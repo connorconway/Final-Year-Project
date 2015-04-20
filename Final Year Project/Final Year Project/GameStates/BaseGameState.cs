@@ -9,6 +9,8 @@ using Multiplayer_Software_Game_Engineering.Networking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.Levels;
+using Multiplayer_Software_Game_Engineering.TileEngine;
 
 namespace Multiplayer_Software_Game_Engineering.GameStates
 {
@@ -41,11 +43,19 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         protected          Texture2D      healthBulletSprite;
         protected          Texture2D      healthBarSprite;
         protected          Texture2D      textBoxSprite;
+        protected          Texture2D      HUDSprite;
         protected          SpriteFont     fontSprite;
+        protected          SpriteFont     HUDFont;
 
         protected static   TextBox        textBox;
         protected static   TextBox        scoreTextBox;
+        protected static   TextBox        textBoxHelp;
+        protected static   HUD            playerHUD;
         protected          bool           waitingForPlayer;
+
+        protected static MapLayer mapLayer;
+        protected static MapLayer roommap;
+        protected static TileMap map;
 
         protected BaseGameState(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
@@ -67,7 +77,9 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             shurikenBulletSprite   = Content.Load<Texture2D>(@"Graphics/Sprites/shurikenBullet");
             healthBarSprite        = Content.Load<Texture2D>(@"Graphics/Sprites/healthBarOutline");
             textBoxSprite          = Content.Load<Texture2D>(@"Graphics/GUI/textBox");
+            HUDSprite              = Content.Load<Texture2D>(@"Graphics/GUI/Mini-HUD");
             fontSprite             = Content.Load<SpriteFont>(@"Fonts/ControlFont");
+            HUDFont                = Content.Load<SpriteFont>(@"Fonts/HUDFont");
 
             controlManager = new ControlManager(fontSprite);
             base.LoadContent();
@@ -273,7 +285,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                         stateManager.PushState(gameReference.gameLoseScreen);
 
                         var name = Microsoft.VisualBasic.Interaction.InputBox("What is your name?", "High Score Board Entry", "", 100, 100 );
-                        DataBaseHandler.InputData("Multiplayer_Game_Data", "HighScores3", name, GamePlayScreen.getPlayerKills().ToString());
+                        DataBaseHandler.InputData("Multiplayer_Game_Data", "HighScores3", name, Level1.getPlayerKills().ToString());
 
                         break;
                     case Protocol.SyncGame:
@@ -285,7 +297,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
                         if (player2 != null)
                         {
-                            player2.animatedSprite.position = new Vector2(posX, posY);
+                            //player2.animatedSprite.position = new Vector2(posX, posY);
                             player2.playerHealth.currentHealth = playerHealth;
                         }
                         break;

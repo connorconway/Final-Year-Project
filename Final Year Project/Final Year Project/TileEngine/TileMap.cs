@@ -22,6 +22,11 @@ namespace Multiplayer_Software_Game_Engineering.TileEngine
             get { return mapHeight * Engine.tileHeight; }
         }
 
+        public MapLayer MapLayer
+        {
+            get { return mapLayers[1]; }
+        }
+
         public TileMap(List<TileSet> tileSets, List<MapLayer> mapLayers)
         {
             this.tileSets  = tileSets;

@@ -1,0 +1,30 @@
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Fonts\ControlFont.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\leftarrowUp.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\rightarrowUp.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\StopBar.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Tiles\tileSet_1.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Tiles\tileSet_2.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalefighter.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalepriest.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalerogue.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalewizard.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malefighter.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malepriest.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malerogue.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malewizard.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\listBoxImage.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\listBoxImage2.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Menus\titlescreen3.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Menus\border.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Final Year Project.exe
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Final Year Project.pdb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\obj\x86\Debug\Final Year Project.csprojResolveAssemblyReference.cache
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\obj\x86\Debug\Final Year Project.exe
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\obj\x86\Debug\Final Year Project.pdb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\normalbullet.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\healthBarOutline.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\textBox.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\fireballbullet.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\shurikenbullet.xnb
+C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\healthbullet.xnb

@@ -1,13 +1,11 @@
-using System;
 using System.Xml.Serialization;
-using Multiplayer_Software_Game_Engineering.GameData;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.GameStates;
-using System.Xml;
-
+using Multiplayer_Software_Game_Engineering.Handlers;
+using Multiplayer_Software_Game_Engineering.Levels;
 
 namespace Multiplayer_Software_Game_Engineering
 {
@@ -17,7 +15,7 @@ namespace Multiplayer_Software_Game_Engineering
         public          SpriteBatch             spriteBatch;
         public readonly StartMenuScreen         startMenuScreen;
         public          Rectangle               screenRectangle              { get; private set; }
-        public readonly GamePlayScreen          gamePlayScreen;
+        public readonly Level1          Level1;
         public readonly CharacterCreationScreen characterCreationScreen;
         public readonly PauseScreen             pauseScreen;
         public readonly OptionsScreen           optionsScreen;
@@ -46,7 +44,7 @@ namespace Multiplayer_Software_Game_Engineering
 
             screenRectangle         = new Rectangle(0, 0, systemOptions.resolutionWidth, systemOptions.resolutionHeight);
             startMenuScreen         = new StartMenuScreen(this, stateManager);
-            gamePlayScreen          = new GamePlayScreen(this, stateManager);
+            Level1          = new Level1(this, stateManager);
             characterCreationScreen = new CharacterCreationScreen(this, stateManager);
             pauseScreen             = new PauseScreen(this, stateManager);
             optionsScreen           = new OptionsScreen(this, stateManager);

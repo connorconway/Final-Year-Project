@@ -78,7 +78,6 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
         private void exitGame_selected(object sender, EventArgs e)
         {
-
             gameReference.Exit();
         }
     }

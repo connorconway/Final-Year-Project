@@ -9,7 +9,7 @@ namespace Multiplayer_Software_Game_Engineering.WorldClasses
     public class World : DrawableGameComponent
     {
         private         Rectangle   screenRectangle     { [UsedImplicitly] get; set; }
-        public static   List<Level> levels;
+        public static   List<Level> levels              { get; set; }           
         public          int         currentLevel        { private get; set; }
 
         public World(Game game, Rectangle screenRectangle) : base(game)

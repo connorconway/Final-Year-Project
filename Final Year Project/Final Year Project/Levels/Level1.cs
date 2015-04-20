@@ -4,21 +4,24 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Timers;
 using System.Windows.Forms;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Multiplayer_Software_Game_Engineering.GameData;
 using Multiplayer_Software_Game_Engineering.GameEntities;
+using Multiplayer_Software_Game_Engineering.GameStates;
 using Multiplayer_Software_Game_Engineering.Handlers;
 using Multiplayer_Software_Game_Engineering.Networking;
 using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using TextBox = Multiplayer_Software_Game_Engineering.GameEntities.TextBox;
+using HUD = Multiplayer_Software_Game_Engineering.GameEntities.HUD;
 
 
-namespace Multiplayer_Software_Game_Engineering.GameStates
+namespace Multiplayer_Software_Game_Engineering.Levels
 {
-    public class GamePlayScreen : BaseGameState
+    public class Level1 : BaseGameState
     {
         private          System.Timers.Timer syncTimer; 
         public  static   World  world                  { private get; set; }
@@ -26,8 +29,10 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         private          bool   secondPlayerAnimating;
         private static   int    playerKills;    
         private          bool   shownHelp = false;
+        private Texture2D characterImage;
 
-        public GamePlayScreen(Game game, GameStateManager stateManager) : base(game, stateManager)
+
+        public Level1(Game game, GameStateManager stateManager) : base(game, stateManager)
         {
             world         = new World(game, gameReference.screenRectangle);
             syncTimer     = new System.Timers.Timer();
@@ -77,6 +82,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
             textBox = new TextBox(textBoxSprite, new Vector2(player1.animatedSprite.position.X + 400, player1.animatedSprite.position.Y + 200), fontSprite,
                 Constants.INFO_CONTROLS, 1.0f)
+
             {decreaseAlpha = true};
 
             scoreTextBox = new TextBox(textBoxSprite, new Vector2(0, 0), fontSprite,
@@ -84,6 +90,13 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             scoreTextBox.setOpacity(0.7f);
             scoreTextBox.setAlphaTimeSubtract(0.0f);
             scoreTextBox.decreaseAlpha = false;
+
+            playerHUD = new HUD(HUDSprite,
+                new Vector2(Game1.systemOptions.resolutionWidth / 2.0f - (HUDSprite.Width*1.3f) / 2.0f, Game1.systemOptions.resolutionHeight - HUDSprite.Height),
+                HUDFont, player1.level, player1.exp, player1.gold, player1.type, 1.3f);
+
+            characterImage = Game.Content.Load<Texture2D>(@"Graphics\Sprites\" + player1.gender + player1.type);
+
         }
 
         public override void Update(GameTime gameTime)
@@ -91,9 +104,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             if (client.Connected == false)
             {
                 player2 = null;
-
             }
-
 
             if (player2 == null && textBox.decreaseAlpha == false && textBox.textBoxExists == TextBox.TextBoxExists.Transparent)
             {
@@ -173,7 +184,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 player2.animatedSprite.Update(gameTime);
                 player2.UpdateHealthBar();
                 foreach (Bullet bullet in player2.bullets)
-                    bullet.Update(gameTime);
+                    bullet.Update(gameTime, roommap);
                 if (player2.playerHealth.currentHealth <= 0 && client.Connected)
                 {
                     writeStream.Position = 0;
@@ -183,13 +194,16 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                     playerKills += 1;
                     scoreTextBox.setText(string.Format("Kills: {0}", playerKills));
                     scoreTextBox.decreaseAlpha = true;
+                    scoreTextBox.decreaseAlpha = true;
                 }
             }
 
-            player1.Update(gameTime);
+            player1.Update(gameTime, roommap);
             textBox.Update(gameTime);
+            playerHUD.Update(gameTime);
             scoreTextBox.Update(gameTime);
             scoreTextBox.setPosition(new Vector2(player1.camera.position.X + Game1.systemOptions.resolutionWidth - (textBoxSprite.Width * 0.4f), player1.camera.position.Y));
+            playerHUD.setPosition(new Vector2(player1.camera.position.X + Game1.systemOptions.resolutionWidth / 2.0f- ((HUDSprite.Width*1.3f) / 2.0f ), player1.camera.position.Y + Game1.systemOptions.resolutionHeight - (HUDSprite.Height*1.3f)));
 
             base.Update(gameTime);
         }
@@ -214,11 +228,12 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
             if (player1 != null)
                 player1.Draw(gameTime, gameReference.spriteBatch);
-
+            
             if (player2 != null)
                 player2.Draw(gameTime, gameReference.spriteBatch);
 
-            textBox.Draw(gameTime, gameReference.spriteBatch);
+           // textBox.Draw(gameTime, gameReference.spriteBatch);
+            playerHUD.Draw(gameTime, gameReference.spriteBatch, characterImage, player1.playerHealth);
             scoreTextBox.Draw(gameTime, gameReference.spriteBatch);
 
             base.Draw(gameTime);

@@ -1,29 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Options;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using MongoDB.Driver.Wrappers;
 
 namespace Multiplayer_Software_Game_Engineering.Handlers
 {
     class DataBaseHandler
     {
+        private const string connectionString = "mongodb://ec2-54-154-20-112.eu-west-1.compute.amazonaws.com:27017";
+
+
         public static void CreateCollection(String database, String collection)
         {
             try
             {
-                MongoClient client = new MongoClient(); // connect to localhost
+                MongoClient client = new MongoClient(connectionString); 
                 MongoServer server = client.GetServer();
                 server.Connect();
                 MongoDatabase test = server.GetDatabase(database);
@@ -37,7 +30,7 @@ namespace Multiplayer_Software_Game_Engineering.Handlers
 
         public void DropCollection(String database, String collection)
         {
-            MongoClient client = new MongoClient(); // connect to localhost
+            MongoClient client = new MongoClient(connectionString); 
             MongoServer server = client.GetServer();
             server.Connect();
             MongoDatabase test = server.GetDatabase(database);
@@ -46,7 +39,7 @@ namespace Multiplayer_Software_Game_Engineering.Handlers
 
         public static void InputData(String database, String collection, String username, String data)
         {
-            MongoClient client = new MongoClient(); // connect to localhost
+            MongoClient client = new MongoClient(connectionString);
             MongoServer server = client.GetServer();
             MongoDatabase test = server.GetDatabase(database);
 
@@ -67,7 +60,7 @@ namespace Multiplayer_Software_Game_Engineering.Handlers
             List<Tuple<string, int>> data = new List<Tuple<string, int>>();
 
 
-            MongoClient client = new MongoClient(); // connect to localhost
+            MongoClient client = new MongoClient(connectionString); 
             MongoServer server = client.GetServer();
             MongoDatabase test = server.GetDatabase(database);
 

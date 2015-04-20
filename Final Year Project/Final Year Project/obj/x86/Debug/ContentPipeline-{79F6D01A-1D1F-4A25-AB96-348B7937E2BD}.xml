@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Fonts\ControlFont.spritefont</Source>
+      <Name>Fonts\ControlFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Fonts\ControlFont.xnb</Output>
+      <Time>2014-10-15T18:52:48.6826498+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\leftarrowUp.png</Source>
+      <Name>Graphics\GUI\leftarrowUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\leftarrowUp.xnb</Output>
+      <Time>2014-10-15T18:52:48.6866499+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\rightarrowUp.png</Source>
+      <Name>Graphics\GUI\rightarrowUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\rightarrowUp.xnb</Output>
+      <Time>2014-10-15T18:52:48.6956523+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\StopBar.png</Source>
+      <Name>Graphics\GUI\StopBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\StopBar.xnb</Output>
+      <Time>2014-10-15T18:52:48.6986501+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Tiles\tileSet_1.png</Source>
+      <Name>Graphics\Tiles\tileSet_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Tiles\tileSet_1.xnb</Output>
+      <Time>2014-10-15T18:52:48.736672+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Tiles\tileSet_2.png</Source>
+      <Name>Graphics\Tiles\tileSet_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Tiles\tileSet_2.xnb</Output>
+      <Time>2014-10-15T18:52:48.7406535+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\femalefighter.png</Source>
+      <Name>Graphics\Sprites\femalefighter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalefighter.xnb</Output>
+      <Time>2014-10-15T18:52:48.7106519+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\femalepriest.png</Source>
+      <Name>Graphics\Sprites\femalepriest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalepriest.xnb</Output>
+      <Time>2014-10-15T18:52:48.7136532+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\femalerogue.png</Source>
+      <Name>Graphics\Sprites\femalerogue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalerogue.xnb</Output>
+      <Time>2014-10-15T18:52:48.7166535+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\femalewizard.png</Source>
+      <Name>Graphics\Sprites\femalewizard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\femalewizard.xnb</Output>
+      <Time>2014-10-15T18:52:48.7196733+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\malefighter.png</Source>
+      <Name>Graphics\Sprites\malefighter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malefighter.xnb</Output>
+      <Time>2014-10-15T18:52:48.7236539+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\malepriest.png</Source>
+      <Name>Graphics\Sprites\malepriest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malepriest.xnb</Output>
+      <Time>2014-10-15T18:52:48.7266527+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\malerogue.png</Source>
+      <Name>Graphics\Sprites\malerogue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malerogue.xnb</Output>
+      <Time>2014-10-15T18:52:48.729654+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\malewizard.png</Source>
+      <Name>Graphics\Sprites\malewizard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\malewizard.xnb</Output>
+      <Time>2014-10-15T18:52:48.7336531+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\listBoxImage.png</Source>
+      <Name>Graphics\GUI\listBoxImage</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\listBoxImage.xnb</Output>
+      <Time>2014-10-15T18:52:48.6896507+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\listBoxImage2.png</Source>
+      <Name>Graphics\GUI\listBoxImage2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\listBoxImage2.xnb</Output>
+      <Time>2014-10-15T18:52:48.6926505+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Menus\titlescreen3.jpg</Source>
+      <Name>Graphics\Menus\titlescreen3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Menus\titlescreen3.xnb</Output>
+      <Time>2014-10-15T18:52:48.707653+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Menus\border.png</Source>
+      <Name>Graphics\Menus\border</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Menus\border.xnb</Output>
+      <Time>2014-10-15T18:52:48.7026732+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\normalbullet.png</Source>
+      <Name>Graphics\Sprites\normalbullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor">0, 0, 0, 255</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\normalbullet.xnb</Output>
+      <Time>2014-10-28T22:49:33.0703933+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\healthBarOutline.png</Source>
+      <Name>Graphics\Sprites\healthBarOutline</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\healthBarOutline.xnb</Output>
+      <Time>2014-10-23T19:02:19.203111+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\textBox.png</Source>
+      <Name>Graphics\GUI\textBox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\textBox.xnb</Output>
+      <Time>2014-10-23T23:06:01.2850259+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\fireballbullet.png</Source>
+      <Name>Graphics\Sprites\fireballbullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor">255, 255, 255, 255</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\fireballbullet.xnb</Output>
+      <Time>2014-10-28T22:49:33.0643926+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\shurikenbullet.png</Source>
+      <Name>Graphics\Sprites\shurikenbullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor">0, 0, 0, 255</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\shurikenbullet.xnb</Output>
+      <Time>2014-10-28T22:49:33.0733941+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Sprites\healthbullet.png</Source>
+      <Name>Graphics\Sprites\healthbullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor">0, 0, 0, 255</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Sprites\healthbullet.xnb</Output>
+      <Time>2014-10-28T22:49:33.0668928+00:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\Tiles\FYP_Tileset.png</Source>
+      <Name>Graphics\Tiles\FYP_Tileset</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\Tiles\FYP_Tileset.xnb</Output>
+      <Time>2015-04-19T03:19:08.8152799+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Graphics\GUI\Mini-HUD.png</Source>
+      <Name>Graphics\GUI\Mini-HUD</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Graphics\GUI\Mini-HUD.xnb</Output>
+      <Time>2015-04-16T04:37:22.3383919+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\HUDFont.spritefont</Source>
+      <Name>Fonts\HUDFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\Fonts\HUDFont.xnb</Output>
+      <Time>2015-04-17T17:00:47.6082514+01:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{79F6D01A-1D1F-4A25-AB96-348B7937E2BD}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year ProjectContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Connor\Source\Repos\Final-Year-Project2\Final Year Project\Final Year Project\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-04-01T22:34:39.4217176+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SystemOptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <fullScreen>true</fullScreen>
+  <difficultyLevel>MEDIUM</difficultyLevel>
+  <soundLevel>ON</soundLevel>
+  <musicLevel>ON</musicLevel>
+  <resolutionWidth>2560</resolutionWidth>
+  <resolutionHeight>1080</resolutionHeight>
+</SystemOptions>

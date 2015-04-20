@@ -5,13 +5,10 @@ namespace Multiplayer_Software_Game_Engineering.Controls
 {
     public class PictureBox : Control
     {
-        #region Variables
         public Texture2D texture { private get; set; }
         Rectangle sourceRect { get; set; }
         Rectangle destRect { get; set; }
-        #endregion
 
-        #region Constructor(s)
         public PictureBox(Texture2D texture, Rectangle destRect)
         {
             this.texture = texture;
@@ -19,7 +16,6 @@ namespace Multiplayer_Software_Game_Engineering.Controls
             spriteEffect = SpriteEffects.None;
             sourceRect = new Rectangle(0, 0, texture.Width, texture.Height);
             color = Color.White;
-            
         }
 
         public PictureBox(Texture2D texture, Rectangle destRect, Rectangle sourceRect)
@@ -30,9 +26,7 @@ namespace Multiplayer_Software_Game_Engineering.Controls
             spriteEffect = SpriteEffects.None;
             color = Color.White;
         }
-        #endregion
 
-        #region Override Methods
         public override void Update(GameTime gameTime)
         {
         }
@@ -45,9 +39,7 @@ namespace Multiplayer_Software_Game_Engineering.Controls
         public override void HandleInput(PlayerIndex playerIndex)
         {
         }
-        #endregion
 
-        #region General Methods
         public void SetPosition(Vector2 newPosition)
         {
             destRect = new Rectangle(
@@ -61,6 +53,5 @@ namespace Multiplayer_Software_Game_Engineering.Controls
         {
             this.spriteEffect = spriteEffect;
         }
-        #endregion
     }
 }

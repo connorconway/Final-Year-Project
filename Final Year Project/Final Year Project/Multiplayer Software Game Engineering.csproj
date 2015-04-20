@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -85,6 +86,7 @@
     <Compile Include="GameEntities\Animation.cs" />
     <Compile Include="GameEntities\Bullet.cs" />
     <Compile Include="GameEntities\HealthBar.cs" />
+    <Compile Include="GameEntities\HUD.cs" />
     <Compile Include="GameEntities\Player.cs" />
     <Compile Include="GameEntities\Sprite.cs" />
     <Compile Include="GameEntities\TextBox.cs" />
@@ -108,9 +110,11 @@
     <Compile Include="GameStates\PauseScreen.cs" />
     <Compile Include="Handlers\DatabaseHandler.cs" />
     <Compile Include="Handlers\FileHandler.cs" />
+    <Compile Include="Levels\Level2.cs" />
     <Compile Include="Networking\Delegates.cs" />
     <Compile Include="Networking\NetworkConstants.cs" />
     <Compile Include="Networking\NetworkProtocols.cs" />
+    <Compile Include="Procedural Classes\BSP Trees\Leaf.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
@@ -119,7 +123,7 @@
       <DependentUpon>Settings1.settings</DependentUpon>
     </Compile>
     <Compile Include="TileEngine\Camera.cs" />
-    <Compile Include="GameStates\GamePlayScreen.cs" />
+    <Compile Include="Levels\Level1.cs" />
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="GameStates\GameStateManager.cs" />
     <Compile Include="TileEngine\MapLayer.cs" />
@@ -171,7 +175,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings1.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
