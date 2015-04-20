@@ -15,7 +15,8 @@ namespace Multiplayer_Software_Game_Engineering
         public          SpriteBatch             spriteBatch;
         public readonly StartMenuScreen         startMenuScreen;
         public          Rectangle               screenRectangle              { get; private set; }
-        public readonly Level1          Level1;
+        public readonly Level1                  Level1;
+        public readonly Level2                  Level2;
         public readonly CharacterCreationScreen characterCreationScreen;
         public readonly PauseScreen             pauseScreen;
         public readonly OptionsScreen           optionsScreen;
@@ -44,7 +45,8 @@ namespace Multiplayer_Software_Game_Engineering
 
             screenRectangle         = new Rectangle(0, 0, systemOptions.resolutionWidth, systemOptions.resolutionHeight);
             startMenuScreen         = new StartMenuScreen(this, stateManager);
-            Level1          = new Level1(this, stateManager);
+            Level1                  = new Level1(this, stateManager);
+            Level2                  = new Level2(this, stateManager);
             characterCreationScreen = new CharacterCreationScreen(this, stateManager);
             pauseScreen             = new PauseScreen(this, stateManager);
             optionsScreen           = new OptionsScreen(this, stateManager);

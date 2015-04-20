@@ -23,6 +23,7 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
         public bool isHost { get; set; }
         public int level, exp, gold;
         public string type, gender;
+        public bool completedLevel = false;
 
         public Player(Game gameReference, AnimatedSprite animatedSprite, Texture2D bulletSprite, Texture2D healthBarSprite, Color color)
         {
@@ -69,30 +70,48 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Up;
-                if (checkIfCanWalkOnTile(tilemap, 0, -3))
+                if (checkIfCanWalkOnTile(tilemap, 0, -3) == 2)
+                {
+                    completedLevel = true;
+                }
+                if (checkIfCanWalkOnTile(tilemap, 0, -3) == 1)
                     motion.Y = -9;
             }
             else if (InputHandler.KeyDown(Keys.S) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickDown, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Down;
-                if (checkIfCanWalkOnTile(tilemap, 0, 3))
+                if (checkIfCanWalkOnTile(tilemap, 0, 3) == 2)
+                {
+                    completedLevel = true;
+                }
+                if (checkIfCanWalkOnTile(tilemap, 0, 3) == 1)
                     motion.Y = 9;
             }
             if (InputHandler.KeyDown(Keys.A) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickLeft, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Left;
-                if (checkIfCanWalkOnTile(tilemap, -3, 0))
+                if (checkIfCanWalkOnTile(tilemap, -3, 0) == 2)
+                {
+                    completedLevel = true;
+                }
+                if (checkIfCanWalkOnTile(tilemap, -3, 0) == 1)
                     motion.X = -9;
             }
             if (InputHandler.KeyDown(Keys.D) ||
                         InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
                 animatedSprite.currentAnimation = Constants.Direction.Right;
-                if (checkIfCanWalkOnTile(tilemap, 3, 0))
+                if (checkIfCanWalkOnTile(tilemap, 3, 0) == 2)
+                {
+                    completedLevel = true;
+                }
+                if (checkIfCanWalkOnTile(tilemap, 3, 0) == 1)
                     motion.X = 9;
             }
+
+            
 
             if (motion != Vector2.Zero)
             {
@@ -123,16 +142,15 @@ namespace Multiplayer_Software_Game_Engineering.GameEntities
             playerHealth.Update(gameTime);
         }
 
-        public Boolean checkIfCanWalkOnTile(MapLayer tilemap, int xDirection, int yDirection)
+        public int checkIfCanWalkOnTile(MapLayer tilemap, int xDirection, int yDirection)
         {
             int result = tilemap.isPassable((int) ((animatedSprite.position.X+16+xDirection)/32), (int) ((animatedSprite.position.Y+32+yDirection)/32));
             if (result == 1) //PASSABLE
-                return true;
+                return 1;
             if (result == 2) //STAIRS
-                //TODO: MOVE ON TO LEVEL 2
-                return true;
+                return 2;
 
-            return false;       
+            return 0;       
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
