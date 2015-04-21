@@ -15,8 +15,8 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Auto
  
 	public MapHelper()
 	{
-		MapWidth = 40;
-		MapHeight = 21;
+		MapWidth = 80;
+		MapHeight = 80;
 		PercentAreWalls = 40;
  
 		RandomFillMap();
@@ -24,7 +24,6 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Auto
  
 	public void MakeCaverns()
 	{
-		// By initilizing column in the outter loop, its only created ONCE
 		for(int column=0, row=0; row <= MapHeight-1; row++)
 		{
 			for(column = 0; column <= MapWidth-1; column++)
@@ -37,8 +36,7 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Auto
 	public int PlaceWallLogic(int x,int y)
 	{
 		int numWalls = GetAdjacentWalls(x,y,1,1);
- 
- 
+
 		if(Map[x,y]==1)
 		{
 			if( numWalls >= 4 )
@@ -49,8 +47,7 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Auto
 			{
 				return 0;
 			}
- 
-		}
+ 		}
 		else
 		{
 			if(numWalls>=5)

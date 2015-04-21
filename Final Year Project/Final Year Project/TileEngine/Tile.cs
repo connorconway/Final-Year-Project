@@ -8,11 +8,11 @@ namespace Multiplayer_Software_Game_Engineering.TileEngine
         public int tileSet   { get; private set; }
         public Constants.TileState tileState { get; private set; }
 
-        public Tile(int tileIndex, int tileSet, Constants.TileState tileState)
+        public Tile(int tileIndex, int tileSet, object tileState)
         {
             this.tileIndex = tileIndex;
             this.tileSet   = tileSet;
-            this.tileState = tileState;
+            this.tileState = (Constants.TileState) tileState;
         }
     }
 }

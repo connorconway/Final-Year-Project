@@ -194,11 +194,12 @@ namespace Multiplayer_Software_Game_Engineering.Levels
                     SendData(GetDataFromMemoryStream(writeStream));
                     writer.Flush();
                     playerKills += 1;
-                    scoreTextBox.setText(string.Format("Kills: {0}", playerKills));
-                    scoreTextBox.decreaseAlpha = true;
-                    scoreTextBox.decreaseAlpha = true;
                 }
             }
+
+            scoreTextBox.setText(string.Format(" BSP Trees"));
+            scoreTextBox.decreaseAlpha = true;
+            scoreTextBox.decreaseAlpha = true;
 
             player1.Update(gameTime, roommap);
 
@@ -230,16 +231,22 @@ namespace Multiplayer_Software_Game_Engineering.Levels
         {
             MapHelper cellularMap = new MapHelper();
             int[,] map2 = cellularMap.Map;
+            roommap = new MapLayer(80, 80);
             Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
             TileSet tileSet1 = new TileSet(tilesetTexture, 16, 16, 10, 28);
             List<TileSet> tilesets = new List<TileSet> { tileSet1 };
 
-            foreach (int m in map2)
+            for (int i = 0; i < map2.GetLength(0); i++)
             {
-
-                        Tile tile = new Tile(5, 0, Constants.TileState.PASSABLE);
-                        roommap.SetTile(m, m, tile);
-                    }
+                for (int j = 0; j < map2.GetLength(1); j++)
+                {
+                    int x = i;
+                    int y = j;
+                    int value = (int) map2.GetValue(i, j);
+                    Tile tile = new Tile(value == 1 ? 174 : 173, 0, value == 1 ? Constants.TileState.IMPASSABLE : Constants.TileState.PASSABLE);
+                    roommap.SetTile(x, y, tile);
+                }
+            }        
 
             
             List<MapLayer> mapLayers = new List<MapLayer> { roommap };
@@ -250,8 +257,6 @@ namespace Multiplayer_Software_Game_Engineering.Levels
             world.currentLevel = 1;
 
             Level2.world = world;
-
-
         }
 
         private void SyncGames(object source, ElapsedEventArgs e)
@@ -278,7 +283,7 @@ namespace Multiplayer_Software_Game_Engineering.Levels
             if (player2 != null)
                 player2.Draw(gameTime, gameReference.spriteBatch);
 
-           // textBox.Draw(gameTime, gameReference.spriteBatch);
+            //textBox.Draw(gameTime, gameReference.spriteBatch);
             playerHUD.Draw(gameTime, gameReference.spriteBatch, characterImage, player1.playerHealth);
             scoreTextBox.Draw(gameTime, gameReference.spriteBatch);
 

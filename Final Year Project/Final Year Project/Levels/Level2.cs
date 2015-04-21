@@ -54,7 +54,35 @@ namespace Multiplayer_Software_Game_Engineering.Levels
 
         public override void Initialize()
         {
-            
+            if (client == null)
+            {
+                try
+                {
+                    client = new TcpClient { NoDelay = true };
+                    client.Connect(NetworkConstants.hostname, NetworkConstants.port);
+                    readBuffer = new byte[NetworkConstants.bufferSize];
+                    client.GetStream().BeginRead(readBuffer, 0, NetworkConstants.bufferSize, StreamReceived, null);
+
+                    readStream = new MemoryStream();
+                    reader = new BinaryReader(readStream);
+
+                    writeStream = new MemoryStream();
+                    writer = new BinaryWriter(writeStream);
+
+                    writeStream.Position = 0;
+                    writer.Write((byte)Protocol.Connected);
+                    writer.Write(player1.animatedSprite.textTexture);
+                    writer.Write(player1.animatedSprite.Position.X);
+                    writer.Write(player1.animatedSprite.Position.Y);
+                    writer.Write(player1.isHost);
+                    SendData(GetDataFromMemoryStream(writeStream));
+                    writer.Flush();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format(Constants.ERROR_CONNECTION + NetworkConstants.port));
+                }
+            }
 
             base.Initialize();
 
@@ -168,11 +196,12 @@ namespace Multiplayer_Software_Game_Engineering.Levels
                     SendData(GetDataFromMemoryStream(writeStream));
                     writer.Flush();
                     playerKills += 1;
-                    scoreTextBox.setText(string.Format("Kills: {0}", playerKills));
-                    scoreTextBox.decreaseAlpha = true;
-                    scoreTextBox.decreaseAlpha = true;
                 }
             }
+
+            scoreTextBox.setText(string.Format("  Cellular \n  Automata"));
+            scoreTextBox.decreaseAlpha = true;
+            scoreTextBox.decreaseAlpha = true;
 
             player1.Update(gameTime, roommap);
 

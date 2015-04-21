@@ -268,7 +268,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 if (roommap.isPassable(xTile, yTile) == 1)
                 {
                     Tile stairs = new Tile(146, 0, Constants.TileState.STAIRS);
-                    roommap.SetTile(xTile, yTile, stairs);
+                    roommap.SetTile((int)player1.animatedSprite.position.X / 32, (int)player1.animatedSprite.position.X/32 , stairs);
                     exitLevel = false;
                 }
             }    
