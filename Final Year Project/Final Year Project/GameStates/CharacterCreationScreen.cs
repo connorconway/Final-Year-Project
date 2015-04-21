@@ -23,7 +23,6 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         private Texture2D[,] characterImages;
         private readonly String[] genderItems = {"Male", "Female"};
         private readonly String[] classItems = { "Fighter", "Wizard", "Rogue", "Priest" };
-        Random random = new Random();
         private List<Leaf> leaves = new List<Leaf>();
 
 
@@ -268,7 +267,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 if (roommap.isPassable(xTile, yTile) == 1)
                 {
                     Tile stairs = new Tile(146, 0, Constants.TileState.STAIRS);
-                    roommap.SetTile((int)player1.animatedSprite.position.X / 32, (int)player1.animatedSprite.position.X/32 , stairs);
+                    roommap.SetTile(xTile, yTile , stairs);
                     exitLevel = false;
                 }
             }    

@@ -230,6 +230,10 @@ namespace Multiplayer_Software_Game_Engineering.Levels
         private void CreateCelluarAutomataMap()
         {
             MapHelper cellularMap = new MapHelper();
+            cellularMap.MakeCaverns();
+            cellularMap.MakeCaverns();
+            cellularMap.MakeCaverns();
+            cellularMap.MakeCaverns();
             int[,] map2 = cellularMap.Map;
             roommap = new MapLayer(80, 80);
             Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
@@ -246,8 +250,41 @@ namespace Multiplayer_Software_Game_Engineering.Levels
                     Tile tile = new Tile(value == 1 ? 174 : 173, 0, value == 1 ? Constants.TileState.IMPASSABLE : Constants.TileState.PASSABLE);
                     roommap.SetTile(x, y, tile);
                 }
-            }        
+            }
 
+            bool sign = true;           
+            for (int j = 0; j < 80; j++)
+            {
+                for (int i = 0; i < 80; i++)
+                {
+                    if (sign)
+                    {
+                        if ((roommap.isPassable(i, j) == 1) && (roommap.isPassable(i+1, j)) == 1)
+                        {
+                            Tile Signtile = new Tile(62, 0, Constants.TileState.SIGN);
+                            roommap.SetTile(i, j, Signtile);
+                            player1.animatedSprite.position.X = (i+1) * 32;
+                            player1.animatedSprite.position.Y = (j)   * 32;
+                            sign = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            bool exitLevel = true;
+            while (exitLevel)
+            {
+                int xTile = random.Next(20, 80);
+                int yTile = random.Next(20, 80);
+
+                if (roommap.isPassable(xTile, yTile) == 1)
+                {
+                    Tile stairs = new Tile(147, 0, Constants.TileState.STAIRS);
+                    roommap.SetTile(xTile, yTile, stairs);
+                    exitLevel = false;
+                }
+            }    
             
             List<MapLayer> mapLayers = new List<MapLayer> { roommap };
 

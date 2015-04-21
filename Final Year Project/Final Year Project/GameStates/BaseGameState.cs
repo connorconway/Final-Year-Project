@@ -53,6 +53,8 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
         protected static   HUD            playerHUD;
         protected          bool           waitingForPlayer;
 
+        protected Random random = new Random();
+
         protected static MapLayer mapLayer;
         protected static MapLayer roommap;
         protected static TileMap map;

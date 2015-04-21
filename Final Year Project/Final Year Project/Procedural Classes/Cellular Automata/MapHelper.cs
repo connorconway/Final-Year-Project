@@ -17,7 +17,7 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Auto
 	{
 		MapWidth = 80;
 		MapHeight = 80;
-		PercentAreWalls = 40;
+		PercentAreWalls = 45;
  
 		RandomFillMap();
 	}
