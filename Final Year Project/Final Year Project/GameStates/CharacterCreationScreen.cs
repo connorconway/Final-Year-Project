@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Configuration;
 using Multiplayer_Software_Game_Engineering.Controls;
 using Multiplayer_Software_Game_Engineering.GameData;
@@ -10,6 +11,7 @@ using Multiplayer_Software_Game_Engineering.TileEngine;
 using Multiplayer_Software_Game_Engineering.WorldClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MongoDB.Driver.Linq;
 using Multiplayer_Software_Game_Engineering.Levels;
 using Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees;
 
@@ -162,9 +164,6 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
 
         private void CreateLeaves(int mapWidth, int mapHeight )
         {
-
-            const int maxLeafSize = 20;
-
             Leaf root = new Leaf(0, 0, mapWidth, mapHeight);
             leaves.Add(root);
 
@@ -174,16 +173,16 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 didSplit = false;
                 foreach (var l in leaves.ToArray())
                 {
-                    if (l.leftChild == null && l.rightChild == null) // if this Leaf is not already split...
+                    if (l.leftRoom == null && l.rightRoom == null) // if this Leaf is not already split...
                     {
                         // if this Leaf is too big, or 75% chance...
-                        if (l.width > maxLeafSize || l.height > maxLeafSize || random.NextDouble() > 0.25)
+                        if (l.width > Leaf.getMaxLeafSize() || l.height > Leaf.getMaxLeafSize() || random.NextDouble() > 0.25)
                         {
-                            if (l.split()) // split the Leaf!
+                            if (l.SplitLeaf()) // split the Leaf!
                             {
                                 // if we did split, push the child leafs to the Vector so we can loop into them next
-                                leaves.Add(l.leftChild);
-                                leaves.Add(l.rightChild);
+                                leaves.Add(l.leftRoom);
+                                leaves.Add(l.rightRoom);
                                 didSplit = true;
                             }
                         }
@@ -192,7 +191,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             }
 
             // next, iterate through each Leaf and create a room in each one.
-            root.createRooms();
+            root.GenerateRooms();
         }
 
         private void CreateWorld()
@@ -200,29 +199,31 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
             Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
             TileSet tileSet1 = new TileSet(tilesetTexture, 16, 16, 10, 28);
             List<TileSet> tilesets = new List<TileSet> {tileSet1};
-
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             CreateLeaves(80, 80);
-
+            sw.Stop();
+            Console.WriteLine(sw.Elapsed);
             roommap = new MapLayer(80, 80);
 
             bool createSign = true;
 
-            foreach (Leaf leaf in leaves)
+            foreach (var leaf in leaves)
             {
-                for (int i = 0; i < leaf.room.Width; i++)
+                for (var i = 0; i < leaf.currentRoom.Width; i++)
                 {
-                    for (int j = 0; j < leaf.room.Height; j++)
+                    for (var j = 0; j < leaf.currentRoom.Height; j++)
                     {
-                        int x = leaf.room.X;
-                        int y = leaf.room.Y;
-                        Tile tile = new Tile(5, 0, Constants.TileState.PASSABLE);
+                        var x = leaf.currentRoom.X;
+                        var y = leaf.currentRoom.Y;
+                        var tile = new Tile(5, 0, Constants.TileState.PASSABLE);
                         roommap.SetTile(x + i, y + j, tile);
                     }
                 }        
 
-                if (leaf.halls != null )
+                if (leaf.pathways != null )
                 {
-                    foreach (var hall in leaf.halls)
+                    foreach (var hall in leaf.pathways)
                     {
                         for (int i = 0; i < hall.Width; i++)
                         {
@@ -267,7 +268,7 @@ namespace Multiplayer_Software_Game_Engineering.GameStates
                 if (roommap.isPassable(xTile, yTile) == 1)
                 {
                     Tile stairs = new Tile(146, 0, Constants.TileState.STAIRS);
-                    roommap.SetTile(xTile, yTile , stairs);
+                    roommap.SetTile(xTile, yTile, stairs);
                     exitLevel = false;
                 }
             }    

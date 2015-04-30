@@ -6,7 +6,6 @@ namespace Multiplayer_Software_Game_Engineering.TileEngine
     public class Camera
     {
         public      Vector2       position;
-        private     float         speed                 { get; set; }
         public      float         zoom                  { get; private set; }
         public      Rectangle     viewportRectangle     { get; private set; }
 
@@ -17,7 +16,6 @@ namespace Multiplayer_Software_Game_Engineering.TileEngine
 
         public Camera(Rectangle viewportRectangle)
         {
-            speed                   = 4f;
             zoom                    = 1f;
             this.viewportRectangle  = viewportRectangle;
         }

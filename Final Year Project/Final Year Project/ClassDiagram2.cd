@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.BaseGameState" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0KQEFAIAIMoEAAICABAAAIACAAAAEAiAQUQBBAIQCAQ=</HashCode>
+      <FileName>GameStates\BaseGameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.CharacterCreationScreen">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKQAEAEAAAAAEgCAAACAQAAQACQAgAABACAAAAAAAKQ=</HashCode>
+      <FileName>GameStates\CharacterCreationScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameLoseScreen">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAgAAAAAAAAAAACQAAAAAAAAAAAAAACQ=</HashCode>
+      <FileName>GameStates\GameoverScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameState" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAACAgAAEAAAAAAAAAAEAAAAAAAgAAAAACQ=</HashCode>
+      <FileName>GameStates\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.GameStateManager" Collapsed="true">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAQBABAAAADACAAAAAAAAAQBAAAIAAACAA=</HashCode>
+      <FileName>GameStates\GameStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.HighScoresScreen">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAJAAEIBAAAwAAAACAAAAAAAQEAAAAAAAAAAAAAgQ=</HashCode>
+      <FileName>GameStates\HighScoresScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.LoadGameScreen">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAEKACAAAgAAQAABAACAAAAAAACAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\LoadGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.LobbyScreen">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEIBAAAwAAAACAAAAAAEQEAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\LobbyScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.OptionsScreen">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAUAAAEAAAAAQggACQAQAAAAAi0AAAAAAAAAAAAACCQ=</HashCode>
+      <FileName>GameStates\OptionsScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.PauseScreen">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAACAAgAAQAoAAAAAAGAAEAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\PauseScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Multiplayer_Software_Game_Engineering.GameStates.StartMenuScreen">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAQAAAACAAgAAQDoABAAAAEAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameStates\StartMenuScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

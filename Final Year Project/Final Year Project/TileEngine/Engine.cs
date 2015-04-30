@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.Xna.Framework;
 
 namespace Multiplayer_Software_Game_Engineering.TileEngine
 {
@@ -19,3 +21,4 @@ namespace Multiplayer_Software_Game_Engineering.TileEngine
         }
     }
 }
+

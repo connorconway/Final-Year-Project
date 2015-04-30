@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -220,9 +221,11 @@ namespace Multiplayer_Software_Game_Engineering.Levels
         private void NextLevel()
         {
             stateManager.PopState();
-
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             CreateCelluarAutomataMap();
-
+            sw.Stop();
+            Console.WriteLine(sw.Elapsed);
             stateManager.PushState(gameReference.Level2);
 
         }
@@ -230,25 +233,24 @@ namespace Multiplayer_Software_Game_Engineering.Levels
         private void CreateCelluarAutomataMap()
         {
             MapHelper cellularMap = new MapHelper();
-            cellularMap.MakeCaverns();
-            cellularMap.MakeCaverns();
-            cellularMap.MakeCaverns();
-            cellularMap.MakeCaverns();
-            int[,] map2 = cellularMap.Map;
-            roommap = new MapLayer(80, 80);
+            cellularMap.FillWithRules();
+            cellularMap.FillWithRules();
+            cellularMap.FillWithRules();
+            cellularMap.FillWithRules();
+            int[,] map2 = cellularMap.tileInts; //The 2D Array of Integers returned by the algorithm
+            roommap = new MapLayer(3000, 3000);
             Texture2D tilesetTexture = Game.Content.Load<Texture2D>(@"Graphics\Tiles\FYP_Tileset");
             TileSet tileSet1 = new TileSet(tilesetTexture, 16, 16, 10, 28);
             List<TileSet> tilesets = new List<TileSet> { tileSet1 };
 
-            for (int i = 0; i < map2.GetLength(0); i++)
+            for (var i = 0; i < map2.GetLength(0); i++)
             {
-                for (int j = 0; j < map2.GetLength(1); j++)
+                for (var j = 0; j < map2.GetLength(1); j++)
                 {
-                    int x = i;
-                    int y = j;
-                    int value = (int) map2.GetValue(i, j);
-                    Tile tile = new Tile(value == 1 ? 174 : 173, 0, value == 1 ? Constants.TileState.IMPASSABLE : Constants.TileState.PASSABLE);
-                    roommap.SetTile(x, y, tile);
+
+                    var value = (int) map2.GetValue(i, j);
+                    var tile = new Tile(value == 1 ? 174 : 173, 0, value == 1 ? Constants.TileState.IMPASSABLE : Constants.TileState.PASSABLE);
+                    roommap.SetTile(i, j, tile);
                 }
             }
 

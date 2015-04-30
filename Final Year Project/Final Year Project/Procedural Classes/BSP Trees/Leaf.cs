@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Win32;
 using Microsoft.Xna.Framework;
 
 namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees
 {
-    internal class Leaf
+    class Leaf
     {
         private const int minLeafSize = 6;
-        public int x, y, width, height; // the position and size of this Leaf
+        private const int maxLeafSize = 20;
+        private readonly int x, y; 
+        public readonly int width, height;
+        public Rectangle currentRoom;
+        public Leaf leftRoom, rightRoom;
+        public List<Rectangle> pathways;
+        readonly Random rand = new Random();
 
-        public Leaf leftChild; // the Leaf's left child Leaf
-        public Leaf rightChild; // the Leaf's right child Leaf
-        public Rectangle room; // the room that is inside this Leaf
-        public List<Rectangle> halls; // hallways to connect this Leaf to other Leafs
-        Random rand = new Random();
+        public static int getMaxLeafSize()
+        {
+            return maxLeafSize;
+        }
 
         public Leaf(int x, int y, int width, int height)
         {
@@ -25,116 +28,93 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees
             this.height = height;
         }
 
-        public Boolean split()
+        /**
+         * Split this current leaf into 2 child leaves if possible
+         */
+        public Boolean SplitLeaf()
         {
-            // begin splitting the leaf into two children
-            if (leftChild != null || rightChild != null)
-                return false; 
+            if (leftRoom != null || rightRoom != null)
+                return false;                                                     // This leaf already has a left and right room
 
-            // determine direction of split
-            // if the width is >25% larger than height, split vertically
-            // if the height is >25% larger than the width, split horizontally
-            // otherwise split randomly
+            Boolean splitHorizontally;                                            // Should the leaf be split vertically or horizontally
 
+            if (height > width && (float)width / height >= .20)                   // If the leaf height is 20% larger than the leaf width, split horizontally
+                splitHorizontally = true;
+            else if (width > height && (float)height / width >= .20)              // If the leaf width is 20% larger than the leaf height, split vertically
+                splitHorizontally = false;
+            else
+                splitHorizontally = rand.NextDouble() > .5;                       // Split the leaf in a random direction
+ 
+            var maxSize = (splitHorizontally ? height : width) - minLeafSize;     // The maximum height or width of the new room
 
-            Boolean splitH = rand.NextDouble() > 0.5;
-            if (width > height && height/width >= 0.05)
-                splitH = false;
-            else if (height > width && width/height >= 0.05)
-                splitH = true;
+            if (maxSize <= minLeafSize)
+                return false;                                                     // The room is already too small to split into further rooms
 
-            int max = (splitH ? height : width) - minLeafSize; // determine the maximum height or width
-            if (max <= minLeafSize)
-                return false; // the area is too small to split any more...
+            var randomPoint = rand.Next(minLeafSize, maxSize);                    // A random point on the leaf to start the split                    
 
-            int split = rand.Next(minLeafSize, max); // determine where we're going to split
+            leftRoom  = splitHorizontally ? new Leaf(x, y, width, randomPoint)                        : new Leaf(x, y, randomPoint, height);
+            rightRoom = splitHorizontally ? new Leaf(x, y + randomPoint, width, height - randomPoint) : new Leaf(x + randomPoint, y, width - randomPoint, height);
 
-            // create our left and right children based on the direction of the split
-            if (splitH)
+            return true; 
+        }
+
+        /**
+         * Create the rooms, and pathways between the rooms, for this leaf and all child leaves
+         */
+        public void GenerateRooms()
+        {
+            if (leftRoom != null || rightRoom != null)
             {
-                leftChild = new Leaf(x, y, width, split);
-                rightChild = new Leaf(x, y + split, width, height - split);
+                if (leftRoom != null)
+                    leftRoom.GenerateRooms();
+                if (rightRoom != null)
+                    rightRoom.GenerateRooms();
+                if (leftRoom != null && rightRoom != null)
+                    CreatePathway(leftRoom.GetRoom(), rightRoom.GetRoom());
             }
             else
             {
-                leftChild = new Leaf(x, y, split, height);
-                rightChild = new Leaf(x + split, y, width - split, height);
-            }
-            return true; // split successful!
-        }
+                var roomSize = new Point(rand.Next(3, width - 2),              rand.Next(3, height - 2));                   // Randomly generate the size of the room within the leaf
+                var roomPos  = new Point(rand.Next(1, width - roomSize.X - 1), rand.Next(1, height - roomSize.Y - 1));      // Randomly generate the position of the room within the leaf
 
-        public void createRooms()
-        {
-            // this function generates all the rooms and hallways for this Leaf and all of its children.
-            if (leftChild != null || rightChild != null)
-            {
-                if (leftChild != null)
-                {
-                    leftChild.createRooms();
-                }
-                if (rightChild != null)
-                {
-                    rightChild.createRooms();
-                }
-                if (leftChild != null && rightChild != null)
-                {
-                    createHall(leftChild.getRoom(), rightChild.getRoom());
-                }
-            }
-            else
-            {
-                Point roomSize, roomPos;
-                roomSize = new Point(rand.Next(3, width - 2), rand.Next(3, height - 2));
-                roomPos = new Point(rand.Next(1, width - roomSize.X - 1),
-                    rand.Next(1, height - roomSize.Y - 1));
-
-               
-
-
-                room = new Rectangle(x + roomPos.Y, y + roomPos.Y, roomSize.X, roomSize.Y);
-
-                
-
+                currentRoom  = new Rectangle(x + roomPos.Y, y + roomPos.Y, roomSize.X, roomSize.Y);                         // Create a rectangle defining the current room
             }
         }
 
-        public Rectangle getRoom()
+        /**
+         * Return a rectangle defining the room of the leaf
+         */
+        private Rectangle GetRoom()
         {
-            if (!room.IsEmpty)
-                return room;
+            if (!currentRoom.IsEmpty)
+                return currentRoom;                                                                                         // Return the current room if the current leaf has a room (It hasn't been split)
             
-            Rectangle lRoom = new Rectangle();
-            Rectangle rRoom = new Rectangle();
-            if (leftChild != null)
-            {
-                lRoom = leftChild.getRoom();
-            }
-            if (rightChild != null)
-            {
-                rRoom = rightChild.getRoom();
-            }
-            if (lRoom.IsEmpty && rRoom.IsEmpty)
+            var roomLeft  = new Rectangle();
+            var roomRight = new Rectangle();
+
+            if (leftRoom != null)
+                roomLeft = leftRoom.GetRoom();
+            if (rightRoom != null)
+                roomRight = rightRoom.GetRoom();
+            if (roomLeft.IsEmpty && roomRight.IsEmpty)
                 return new Rectangle();
-            else if (rRoom.IsEmpty)
-                return lRoom;
-            else if (lRoom.IsEmpty)
-                return rRoom;
-            else if (rand.NextDouble() > .5)
-                return lRoom;
-            else
-                return rRoom;
+            if (roomRight.IsEmpty)
+                return roomLeft;
+            if (roomLeft.IsEmpty)
+                return roomRight;
+
+            return rand.NextDouble() > .5 ? roomLeft : roomRight;
         }
 
-        public void createHall(Rectangle l, Rectangle r)
+        private void CreatePathway(Rectangle leftRect, Rectangle rightRect)
         {
+            pathways = new List<Rectangle>();
  
-            halls = new List<Rectangle>();
+            var point1 = new Point(rand.Next(leftRect.Left + 1,  leftRect.Right - 2),  rand.Next(leftRect.Top + 1,  leftRect.Bottom - 2));
+            var point2 = new Point(rand.Next(rightRect.Left + 1, rightRect.Right - 2), rand.Next(rightRect.Top + 1, rightRect.Bottom - 2));
  
-            Point point1 = new Point(rand.Next(l.Left + 1, l.Right - 2), rand.Next(l.Top + 1, l.Bottom - 2));
-            Point point2 = new Point(rand.Next(r.Left + 1, r.Right - 2), rand.Next(r.Top + 1, r.Bottom - 2));
- 
-            int w = point2.X - point1.X;
-            int h = point2.Y - point1.Y;
+            var w = point2.X - point1.X;
+            var h = point2.Y - point1.Y;
  
             if (w < 0)
             {
@@ -142,31 +122,31 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees
                 {
                     if (Math.Abs(rand.NextDouble() * 0.5) > 0.2)
                     {
-                        halls.Add(new Rectangle(point2.X, point1.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point2.X, point1.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
                     }
                     else
                     {
-                        halls.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point1.X, point2.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point1.X, point2.Y, 1, Math.Abs(h)));
                     }
                 }
                 else if (h > 0)
                 {
                     if (Math.Abs(rand.NextDouble() * 0.5) > 0.2)
                     {
-                        halls.Add(new Rectangle(point2.X, point1.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point2.X, point1.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point2.X, point1.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point2.X, point1.Y, 1, Math.Abs(h)));
                     }
                     else
                     {
-                        halls.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
                     }
                 }
                 else // if (h == 0)
                 {
-                    halls.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
+                    pathways.Add(new Rectangle(point2.X, point2.Y, Math.Abs(w), 1));
                 }
             }
             else if (w > 0)
@@ -175,45 +155,44 @@ namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.BSP_Trees
                 {
                     if (Math.Abs(rand.NextDouble() * 0.5) > 0.2)
                     {
-                        halls.Add(new Rectangle(point1.X, point2.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point1.X, point2.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point1.X, point2.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point1.X, point2.Y, 1, Math.Abs(h)));
                     }
                     else
                     {
-                        halls.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
                     }
                 }
                 else if (h > 0)
                 {
                     if (Math.Abs(rand.NextDouble() * 0.5) > 0.2)
                     {
-                        halls.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point2.X, point1.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point2.X, point1.Y, 1, Math.Abs(h)));
                     }
                     else
                     {
-                        halls.Add(new Rectangle(point1.X, point2.Y, Math.Abs(w), 1));
-                        halls.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
+                        pathways.Add(new Rectangle(point1.X, point2.Y, Math.Abs(w), 1));
+                        pathways.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
                     }
                 }
                 else // if (h == 0)
                 {
-                    halls.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
+                    pathways.Add(new Rectangle(point1.X, point1.Y, Math.Abs(w), 1));
                 }
             }
             else // if (w == 0)
             {
                 if (h < 0)
                 {
-                    halls.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
+                    pathways.Add(new Rectangle(point2.X, point2.Y, 1, Math.Abs(h)));
                 }
                 else if (h > 0)
                 {
-                    halls.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
+                    pathways.Add(new Rectangle(point1.X, point1.Y, 1, Math.Abs(h)));
                 }
             }
         }
     }
 }
-

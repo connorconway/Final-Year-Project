@@ -1,225 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Multiplayer_Software_Game_Engineering.Procedural_Classes.Cellular_Automata
 {
-    class MapHelper
+    internal class MapHelper
     {
-        Random rand = new Random();
- 
-	public int[,] Map;
- 
-	public int MapWidth		    { get; set; }
-	public int MapHeight		{ get; set; }
-	public int PercentAreWalls	{ get; set; }
- 
-	public MapHelper()
-	{
-		MapWidth = 80;
-		MapHeight = 80;
-		PercentAreWalls = 45;
- 
-		RandomFillMap();
-	}
- 
-	public void MakeCaverns()
-	{
-		for(int column=0, row=0; row <= MapHeight-1; row++)
-		{
-			for(column = 0; column <= MapWidth-1; column++)
-			{
-				Map[column,row] = PlaceWallLogic(column,row);
-			}
-		}
-	}
- 
-	public int PlaceWallLogic(int x,int y)
-	{
-		int numWalls = GetAdjacentWalls(x,y,1,1);
+        private readonly Random rand = new Random();
 
-		if(Map[x,y]==1)
-		{
-			if( numWalls >= 4 )
-			{
-				return 1;
-			}
-			if(numWalls<2)
-			{
-				return 0;
-			}
- 		}
-		else
-		{
-			if(numWalls>=5)
-			{
-				return 1;
-			}
-		}
-		return 0;
-	}
- 
-	public int GetAdjacentWalls(int x,int y,int scopeX,int scopeY)
-	{
-		int startX = x - scopeX;
-		int startY = y - scopeY;
-		int endX = x + scopeX;
-		int endY = y + scopeY;
- 
-		int iX = startX;
-		int iY = startY;
- 
-		int wallCounter = 0;
- 
-		for(iY = startY; iY <= endY; iY++) {
-			for(iX = startX; iX <= endX; iX++)
-			{
-				if(!(iX==x && iY==y))
-				{
-					if(IsWall(iX,iY))
-					{
-						wallCounter += 1;
-					}
-				}
-			}
-		}
-		return wallCounter;
-	}
- 
-	bool IsWall(int x,int y)
-	{
-		// Consider out-of-bound a wall
-		if( IsOutOfBounds(x,y) )
-		{
-			return true;
-		}
- 
-		if( Map[x,y]==1	 )
-		{
-			return true;
-		}
- 
-		if( Map[x,y]==0	 )
-		{
-			return false;
-		}
-		return false;
-	}
- 
-	bool IsOutOfBounds(int x, int y)
-	{
-		if( x<0 || y<0 )
-		{
-			return true;
-		}
-		else if( x>MapWidth-1 || y>MapHeight-1 )
-		{
-			return true;
-		}
-		return false;
-	}
- 
-	public void PrintMap()
-	{
-		Console.Clear();
-		Console.Write(MapToString());
-	}
- 
-	string MapToString()
-	{
-		string returnString = string.Join(" ", // Seperator between each element
-		                                  "Width:",
-		                                  MapWidth.ToString(),
-		                                  "\tHeight:",
-		                                  MapHeight.ToString(),
-		                                  "\t% Walls:",
-		                                  PercentAreWalls.ToString(),
-		                                  Environment.NewLine
-		                                 );
- 
-		List<string> mapSymbols = new List<string>();
-		mapSymbols.Add(".");
-		mapSymbols.Add("#");
-		mapSymbols.Add("+");
- 
-		for(int column=0,row=0; row < MapHeight; row++ ) {
-			for( column = 0; column < MapWidth; column++ )
-			{
-				returnString += mapSymbols[Map[column,row]];
-			}
-			returnString += Environment.NewLine;
-		}
-		return returnString;
-	}
- 
-	public void BlankMap()
-	{
-		for(int column=0,row=0; row < MapHeight; row++) {
-			for(column = 0; column < MapWidth; column++) {
-				Map[column,row] = 0;
-			}
-		}
-	}
- 
-	public void RandomFillMap()
-	{
-		// New, empty map
-		Map = new int[MapWidth,MapHeight];
- 
-		int mapMiddle = 0; // Temp variable
-		for(int column=0,row=0; row < MapHeight; row++) {
-			for(column = 0; column < MapWidth; column++)
-			{
-				// If coordinants lie on the the edge of the map (creates a border)
-				if(column == 0)
-				{
-					Map[column,row] = 1;
-				}
-				else if (row == 0)
-				{
-					Map[column,row] = 1;
-				}
-				else if (column == MapWidth-1)
-				{
-					Map[column,row] = 1;
-				}
-				else if (row == MapHeight-1)
-				{
-					Map[column,row] = 1;
-				}
-				// Else, fill with a wall a random percent of the time
-				else
-				{
-					mapMiddle = (MapHeight / 2);
- 
-					if(row == mapMiddle)
-					{
-						Map[column,row] = 0;
-					}
-					else
-					{
-						Map[column,row] = RandomPercent(PercentAreWalls);
-					}
-				}
-			}
-		}
-	}
- 
-	int RandomPercent(int percent)
-	{
-		if(percent>=rand.Next(1,101))
-		{
-			return 1;
-		}
-		return 0;
-	}
- 
-	public MapHelper(int mapWidth, int mapHeight, int[,] map, int percentWalls=40)
-	{
-		this.MapWidth = mapWidth;
-		this.MapHeight = mapHeight;
-		this.PercentAreWalls = percentWalls;
-		this.Map = new int[this.MapWidth,this.MapHeight];
-		this.Map = map;
-	}
+        private readonly int mapWidth, mapHeight;
+        private int walls { get; set; }                                                 // The percentage of the map that will contain impassable tiles
+        public int[,] tileInts;                                                         // A 2D Array of ints to store the tile number for the map
+
+        public MapHelper()
+        {
+            mapWidth = 3000;
+            mapHeight = 3000;
+            walls = 45;
+
+            RandomFillMap();
+        }
+
+        private void RandomFillMap()
+        {
+            tileInts = new int[mapWidth, mapHeight];
+
+            for (var i = 0; i < mapHeight; i++)
+            {
+                for (var j = 0; j < mapWidth; j++)
+                {
+                    if (j == 0 || i == 0 || j == mapWidth - 1 || i == mapHeight - 1)    // Impassable tiles for spaces that lie on the edge of the map
+                        tileInts[j, i] = 1;
+                    else
+                    {
+                        tileInts[j, i] = walls >= rand.Next(1, 101) ? 1 : 0;            // Chance of either a passable or impassable tile dependant on the percentage of walls defined
+                    }
+                }
+            }
+        }
+
+        public void FillWithRules()
+        {
+            for (var i = 0; i <= mapHeight - 1; i++)
+                for (var j = 0; j <= mapWidth - 1; j++)
+                    tileInts[j, i] = PlaceWallLogic(j, i);
+        }
+
+        private int PlaceWallLogic(int x, int y)
+        {
+            var numWalls = GetAdjacentWalls(x, y, 1, 1);
+
+            if (tileInts[x, y] == 1)
+                return numWalls >= 4 ? 1 : 0;
+
+            return numWalls >= 5 ? 1 : 0;
+        }
+
+        private int GetAdjacentWalls(int x, int y, int scopeX, int scopeY)
+        {
+            var startX = x - scopeX;
+            var startY = y - scopeY;
+            var endX   = x + scopeX;
+            var endY   = y + scopeY;
+
+            var wallCounter = 0;
+
+            for (var i = startY; i <= endY; i++)
+            {
+                for (var j = startX; j <= endX; j++)
+                {
+                    if (j == x && i == y)
+                        continue;
+                    if (IsWall(j, i))
+                        wallCounter += 1;
+                }
+            }
+
+            return wallCounter;
+        }
+
+        private bool IsWall(int x, int y)
+        {
+            if (IsOutOfBounds(x, y))
+                return true;
+
+            switch (tileInts[x, y])
+            {
+                case 1:
+                    return true;
+                case 0:
+                    return false;
+            }
+
+            return false;
+        }
+
+        private bool IsOutOfBounds(int x, int y)
+        {
+            if (x < 0 || y < 0)
+                return true;
+            return x > mapWidth - 1 || y > mapHeight - 1;
+        }
     }
 }
